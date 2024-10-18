@@ -1,1 +1,130 @@
-/* You can add global styles to this file, and also import other style files */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+@import "styles/variables";
+@import "styles/typography";
+
+html {
+  /* background-color: #020002; */
+  background-image: url("/assets/backgrounds/bg-home.png");
+  background-size: cover;
+  background-repeat: repeat;
+  background-position: center 1%;
+  font-family: "Helvetica", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+button,
+h1,
+h2,
+h3,
+h4,
+li,
+p,
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+@layer base {
+  html {
+    @apply bg-gray-100;
+  }
+  body {
+    @apply font-normal text-base text-gray-0;
+  }
+
+  h1 {
+    @apply text-h1 font-bold text-gray-0;
+  }
+
+  h2 {
+    @apply text-h2 font-normal;
+  }
+
+  h3 {
+    @apply text-h3 font-normal;
+  }
+
+  h4 {
+    @apply text-h4 font-normal;
+  }
+
+  h5 {
+    @apply text-h5 font-normal;
+  }
+
+  h6 {
+    @apply text-h6 font-normal;
+  }
+
+  p {
+    @apply text-main;
+  }
+
+  .small-text {
+    @apply text-sm;
+  }
+
+  .secondary-text {
+    @apply text-gray-60;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply py-2 px-4 rounded;
+  }
+
+  .btn-primary {
+    @apply bg-primary-100 text-white;
+  }
+}
+
+@layer utilities {
+  .text-shadow {
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+}
+
+input {
+  border-radius: 100px;
+  border: 1px solid var(--Gray-40, #ced4da);
+  background: var(--Gray-70, #0d0d0d);
+  padding: 16px 24px;
+}
+
+.decorator {
+  width: 177px;
+  height: 18px;
+  background: var(--primary-100, #018f51);
+}
+
+.dot {
+  display: inline-block;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background-color: var(--gray-50, #adb5bd);
+  vertical-align: middle;
+  margin: 0 8px;
+}
