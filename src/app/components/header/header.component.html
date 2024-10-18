@@ -1,0 +1,178 @@
+<div class="px-11 py-6 bg-gray-100">
+  <div class="container mx-auto max-w-[1200px] px-4">
+    <div class="flex justify-between items-center h-16">
+      <!-- Logo -->
+      <div class="flex-shrink-0 z-50 bg-gray-100">
+        <button [routerLink]="['/']">
+          <app-icon name="logo" size="logo"></app-icon>
+        </button>
+      </div>
+
+      <!-- Desktop menu -->
+      <nav class="hidden md:flex-1 md:flex md:justify-center">
+        <div
+          class="inline-flex p-6 items-start gap-7 rounded-full bg-gray-100 backdrop-blur-2xl"
+        >
+          <a
+            [routerLink]="['/about']"
+            routerLinkActive="router-link-active"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            >About us</a
+          >
+          <div class="relative group">
+            <a
+              class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+              (click)="toggleServicesSubmenu()"
+              >Services
+              <app-icon
+                [name]="isServicesSubmenuOpen ? 'chevron-up' : 'chevron-down'"
+                size="medium"
+                [color]="isServicesSubmenuOpen ? 'primary' : 'secondary'"
+              ></app-icon
+            ></a>
+            <div class="absolute left-0 top-full pt-2 w-max">
+              <div
+                [class.hidden]="!isServicesSubmenuOpen"
+                class="transition duration-150 ease-in-out"
+              >
+                <div
+                  class="bg-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden"
+                >
+                  <div class="py-1">
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap"
+                      >Automotive Software Development</a
+                    >
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap"
+                      >Fintech Software Development</a
+                    >
+                    <a
+                      href="#"
+                      class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap"
+                      >Neobank Solution</a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <a
+            routerLink="/expertise"
+            routerLinkActive="router-link-active"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            >Expertise</a
+          >
+          <a
+            routerLink="/cases"
+            routerLinkActive="router-link-active"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            >Cases</a
+          >
+          <a
+            routerLink="/blog"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            >Blog</a
+          >
+          <a
+            routerLink="/contacts"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            >Contacts</a
+          >
+          <ng-container *ngIf="user$ | async as user">
+            <a
+              (click)="onLogout()"
+              class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+              >Log out</a
+            >
+          </ng-container>
+        </div>
+      </nav>
+
+      <!-- Mobile burger button -->
+      <div class="md:hidden z-50">
+        <button
+          (click)="toggleMobileMenu()"
+          class="text-gray-0 hover:text-primary-100 focus:outline-none"
+        >
+          @if (isMobileMenuOpen) {
+          <app-icon name="close" size="medium" color="secondary"></app-icon>
+          } @else {
+          <app-icon name="burger" size="medium" color="secondary"></app-icon>
+          }
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile menu -->
+  <div
+    [class.hidden]="!isMobileMenuOpen"
+    class="fixed inset-0 bg-gray-100 z-40 md:hidden flex flex-col justify-center items-center"
+  >
+    <div class="w-full px-11 space-y-8">
+      <a
+        [routerLink]="['/about']"
+        routerLinkActive="router-link-active"
+        class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+        >About us</a
+      >
+      <div>
+        <button
+          (click)="toggleMobileServicesSubmenu()"
+          class="flex items-start w-full text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+        >
+          Services
+          <app-icon
+            [name]="isMobileServicesSubmenuOpen ? 'chevron-up' : 'chevron-down'"
+            size="medium"
+          ></app-icon>
+        </button>
+        <div
+          [class.hidden]="!isMobileServicesSubmenuOpen"
+          class="mt-2 ml-6 space-y-2"
+        >
+          <a
+            href="#"
+            class="block text-main text-gray-0 hover:text-primary-100 py-1"
+            >Automotive Software Development</a
+          >
+          <a
+            href="#"
+            class="block text-main text-gray-0 hover:text-primary-100 py-1"
+            >Fintech Software Development</a
+          >
+          <a
+            href="#"
+            class="block text-main text-gray-0 hover:text-primary-100 py-1"
+            >Neobank Solution</a
+          >
+        </div>
+      </div>
+      <a
+        routerLink="/expertise"
+        routerLinkActive="router-link-active"
+        class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+        >Expertise</a
+      >
+      <a
+        routerLink="/cases"
+        routerLinkActive="router-link-active"
+        class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+        >Cases</a
+      >
+      <ng-container *ngIf="user$ | async as user">
+        <a
+          (click)="onLogout()"
+          class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+          >Log out</a
+        >
+      </ng-container>
+      <div class="pt-4 text-center" routerLink="/contacts">
+        <app-button type="green">Contact us</app-button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,125 @@
+<div class="px-11 py-6 bg-gray-100">
+  <div class="container mx-auto max-w-[1200px] px-4">
+    <!-- Upper section -->
+    <div class="flex justify-between items-center mb-12">
+      <h2 class="text-gray-0 text-h3 font-normal">Get in touch</h2>
+      <app-arrow-button (click)="onUpperButtonClick()"></app-arrow-button>
+    </div>
+
+    <!-- Middle section -->
+    <div class="flex justify-between items-start">
+      <!-- Left middle part -->
+      <div class="flex flex-col items-start gap-8 max-w-[580px]">
+        <h6 class="text-gray-40 text-[32px] font-bold leading-[117.333%]">
+          Subscribe to stay in touch.
+        </h6>
+        <div class="flex items-center w-full">
+          <input
+            type="email"
+            placeholder="Your email address"
+            class="w-[379px]"
+            name="email"
+            autocomplete="email"
+          />
+          <app-arrow-button
+            (onClick)="onSubscribe()"
+            class="ml-4"
+          ></app-arrow-button>
+        </div>
+      </div>
+
+      <!-- Right middle part -->
+      <div class="flex gap-16">
+        <!-- Site links -->
+        <nav class="flex flex-col gap-2">
+          <p
+            class="text-main font-bold"
+            routerLink="/about"
+            routerLinkActive="router-link-active"
+          >
+            Company
+          </p>
+          <a
+            href="#"
+            class="text-gray-0 hover:text-primary-100"
+            routerLink="/services"
+            routerLinkActive="router-link-active"
+            >Services</a
+          >
+          <a
+            href="#"
+            class="text-gray-0 hover:text-primary-100"
+            routerLink="/expertise"
+            routerLinkActive="router-link-active"
+            >Expertise</a
+          >
+          <a
+            href="#"
+            class="text-gray-0 hover:text-primary-100"
+            routerLink="/cases"
+            routerLinkActive="router-link-active"
+            >Cases</a
+          >
+          <a
+            href="#"
+            class="text-gray-0 hover:text-primary-100"
+            routerLink="/contacts"
+            routerLinkActive="router-link-active"
+            >Contacts</a
+          >
+        </nav>
+
+        <!-- Contact info -->
+        <div class="flex flex-col gap-8">
+          <div class="flex flex-col gap-2">
+            <span class="text-gray-50 text-sm"
+              >Mail <app-icon name="mail" color="secondary"></app-icon
+            ></span>
+            <a
+              href="mailto:info@intresmartsolution.com"
+              class="text-gray-0 text-main hover:text-primary-100"
+              >info&#64;intresmartsolution.com</a
+            >
+          </div>
+          <div class="flex flex-col gap-2">
+            <span class="text-gray-50 text-sm"
+              >Call us <app-icon name="phone" color="secondary"></app-icon>
+            </span>
+            <a
+              href="tel:+1234567890"
+              class="text-gray-0 text-main hover:text-primary-100"
+              >+ 1 (234) 567 89 00</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom section -->
+    <div class="flex justify-between items-center pt-14 max-w-[800px] mx-auto">
+      <span class="text-gray-50 text-sm">© 2024 Intresmart</span>
+      <div class="flex gap-6">
+        <a href="#" class="text-gray-50"
+          ><app-icon name="instagram" size="medium"></app-icon
+        ></a>
+        <a href="#" class="text-gray-50"
+          ><app-icon name="linkedin" size="medium"></app-icon
+        ></a>
+        <a href="#" class="text-gray-50"
+          ><app-icon name="facebook" size="medium"></app-icon
+        ></a>
+        <a href="#" class="text-gray-50"
+          ><app-icon name="youtube" size="medium"></app-icon>
+        </a>
+      </div>
+      <div class="flex gap-4">
+        <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
+          >Terms and Conditions</a
+        >
+        <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
+          >Privacy Policy</a
+        >
+      </div>
+    </div>
+  </div>
+</div>
