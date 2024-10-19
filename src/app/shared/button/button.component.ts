@@ -5,7 +5,11 @@ import { CommonModule } from '@angular/common';
   selector: 'app-button',
   standalone: true,
   imports: [CommonModule],
-  template: ` <button [ngClass]="buttonClasses" [disabled]="disabled">
+  template: ` <button
+    [ngClass]="buttonClasses"
+    [disabled]="disabled"
+    [type]="submit ? 'submit' : ''"
+  >
     <ng-content></ng-content>
   </button>`,
   styles: `
@@ -27,6 +31,7 @@ export class ButtonComponent {
   @Input() type: 'default' | 'green' = 'default';
   @Input() disabled: boolean = false;
   @Input() width: string = '208px';
+  @Input() submit: boolean = false;
 
   get buttonClasses(): string {
     const baseClasses =

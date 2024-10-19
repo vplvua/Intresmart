@@ -1,0 +1,66 @@
+<div class="container mx-auto max-w-[1200px] mt-32">
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+    <div class="flex flex-col justify-between">
+      <h2>Let's Discuss New Project</h2>
+      <app-arrow-button></app-arrow-button>
+    </div>
+    <div>
+      <form class="flex flex-col gap-10 text-main" action="#" method="POST">
+        <fieldset class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 gap-6">
+          <legend class="sr-only">Personal Information</legend>
+          <div class="flex flex-col">
+            <label for="name" class="text-gray-0">Full name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              required
+              class="w-full border-b border-gray-40 text-gray-50 mt-2"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="company" class="text-gray-0">Company</label>
+            <input
+              type="text"
+              id="company"
+              name="company"
+              class="w-full border-b border-gray-40 text-gray-50 mt-2"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="phone" class="text-gray-0">Phone</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              class="w-full border-b border-gray-40 text-gray-50 mt-2"
+            />
+          </div>
+          <div class="flex flex-col">
+            <label for="email" class="text-gray-0">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              required
+              class="w-full border-b border-gray-40 text-gray-50 mt-2"
+            />
+          </div>
+        </fieldset>
+        <div class="flex flex-col">
+          <label for="message" class="text-gray-0">Message</label>
+          <textarea
+            id="message"
+            name="message"
+            required
+            class="w-full border-b border-gray-40 text-base text-gray-50 mt-4 h-48"
+            placeholder="Type your message here..."
+          ></textarea>
+        </div>
+        <div>
+          <app-button type="green" [submit]="true"> Send message </app-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

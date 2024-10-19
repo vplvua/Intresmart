@@ -117,5 +117,12 @@
         </div>
       </div>
     </section>
+    @defer (on viewport) {
+    <section id="cases" class="mt-32">
+      <app-cases-widget></app-cases-widget>
+    </section>
+    } @placeholder {
+    <div class="text-center">Loading...</div>
+    }
   </div>
 </div>

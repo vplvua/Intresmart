@@ -113,8 +113,21 @@ input {
   padding: 16px 24px;
 }
 
+textarea {
+  border-radius: 24px;
+  border: 1px solid var(--Gray-0, #f8f9fa);
+  background: var(
+    --linear,
+    linear-gradient(
+      95deg,
+      rgba(217, 217, 217, 0.1) 19.1%,
+      rgba(217, 217, 217, 0) 93.23%
+    )
+  );
+  padding: 16px 24px;
+}
+
 .decorator {
-  width: 177px;
   height: 18px;
   background: var(--primary-100, #018f51);
 }
