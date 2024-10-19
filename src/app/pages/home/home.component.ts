@@ -5,11 +5,17 @@ import { FirebaseService } from '../../services/firebase.service';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { ArrowButtonComponent } from '../../shared/arrow-button/arrow-button.component';
+import { CasesWidgetComponent } from './cases-widget/cases-widget.component';
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [IconComponent, ButtonComponent, ArrowButtonComponent],
+  imports: [
+    IconComponent,
+    ButtonComponent,
+    ArrowButtonComponent,
+    CasesWidgetComponent,
+  ],
   providers: [FirebaseService],
   templateUrl: './home.component.html',
   styleUrl: './home.component.scss',

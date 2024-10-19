@@ -1,29 +1,26 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
-import { FirebaseService } from '../../services/firebase.service';
-import { Subject, takeUntil } from 'rxjs';
+import { CasesService } from '../../services/cases.service';
+import { ButtonComponent } from '../../shared/button/button.component';
+import { DiscussNewProjectComponent } from '../../components/forms/discuss-new-project/discuss-new-project.component';
+import { Case } from '../../models/models';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-cases',
   standalone: true,
-  imports: [],
+  imports: [
+    CommonModule,
+    ButtonComponent,
+    RouterLink,
+    DiscussNewProjectComponent,
+  ],
   templateUrl: './cases.component.html',
-  styleUrl: './cases.component.scss',
 })
 export class CasesComponent {
-  firebaseService = inject(FirebaseService);
-  destroy$ = new Subject<void>();
+  casesService = inject(CasesService);
 
-  ngOnInit() {
-    this.firebaseService.cases$
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((cases) => {
-        console.log(cases);
-      });
-  }
-
-  ngOnDestroy() {
-    this.destroy$.next();
-    this.destroy$.complete();
-  }
+  cases$: Observable<Case[]> = this.casesService.cases$;
 }

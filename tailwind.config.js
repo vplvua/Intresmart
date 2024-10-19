@@ -10,8 +10,8 @@ module.exports = {
         gray: {
           100: "#020002",
           80: "#0A0A0A",
-          70: "#0D0D0D",
           75: "#495057",
+          70: "#0D0D0D",
           60: "#868E96",
           50: "#ADB5BD",
           40: "#CED4DA",
@@ -123,6 +123,43 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [
+    function ({ addComponents }) {
+      addComponents({
+        ".case-card": {
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "flex-start",
+          height: "100%",
+        },
+        ".case-card-svg-container": {
+          width: "100%",
+          height: "100%",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          backgroundColor: "#018F51",
+        },
+        ".hover-block": {
+          display: "flex",
+          width: "100%",
+          padding: "24px",
+          justifyContent: "space-between",
+          alignItems: "center",
+          borderRadius: "0 0 30px 30px",
+          backgroundColor: "rgba(10, 10, 10, 0.5)",
+          backdropFilter: "blur(13px)",
+          position: "absolute",
+          bottom: 0,
+          left: 0,
+          transform: "translateY(100%)",
+          transition: "transform 0.3s ease-in-out",
+        },
+        ".case-card:hover .hover-block": {
+          transform: "translateY(0)",
+        },
+      });
+    },
+  ],
   safelist: [],
 };
