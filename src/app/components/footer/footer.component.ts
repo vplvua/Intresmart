@@ -16,7 +16,6 @@ export class FooterComponent {
   constructor(private router: Router) {}
 
   onUpperButtonClick() {
-    console.log('Upper button clicked');
     this.router.navigate(['/contacts']);
   }
 
