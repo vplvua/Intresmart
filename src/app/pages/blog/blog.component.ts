@@ -15,12 +15,12 @@ export class BlogComponent {
   destroy$ = new Subject<void>();
 
   ngOnInit() {
-    this.firebaseService
-      .fetchArticles()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe((articles: any) => {
-        console.log(articles);
-      });
+    // this.firebaseService
+    //   .fetchArticles()
+    //   .pipe(takeUntil(this.destroy$))
+    //   .subscribe((articles: any) => {
+    //     console.log(articles);
+    //   });
   }
 
   ngOnDestroy() {
