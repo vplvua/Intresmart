@@ -1,5 +1,5 @@
-<div class="px-11 py-6 bg-gray-100">
-  <div class="container mx-auto max-w-[1200px] px-4">
+<div class="px-4 sm:px-11 py-6 bg-gray-100">
+  <div class="container mx-auto max-w-[1200px]">
     <!-- Upper section -->
     <div class="flex justify-between items-center mb-12">
       <h2 class="text-gray-0 text-h3 font-normal">Get in touch</h2>
@@ -7,9 +7,13 @@
     </div>
 
     <!-- Middle section -->
-    <div class="flex justify-between items-start">
+    <div
+      class="flex flex-col gap-7 lg:flex-row sm:gap-8 md:gap-20 justify-between items-start"
+    >
       <!-- Left middle part -->
-      <div class="flex flex-col items-start gap-8 max-w-[580px]">
+      <div
+        class="flex flex-col items-start gap-8 max-w-[580px] w-full mb-8 sm:mb-0"
+      >
         <h6 class="text-gray-40 text-[32px] font-bold leading-[117.333%]">
           Subscribe to stay in touch.
         </h6>
@@ -17,7 +21,7 @@
           <input
             type="email"
             placeholder="Your email address"
-            class="w-[379px]"
+            class="w-full sm:w-[379px]"
             name="email"
             autocomplete="email"
           />
@@ -29,41 +33,43 @@
       </div>
 
       <!-- Right middle part -->
-      <div class="flex gap-16">
+      <div
+        class="flex flex-col sm:flex-row gap-8 sm:gap-16 w-full sm:justify-between"
+      >
         <!-- Site links -->
         <nav class="flex flex-col gap-2">
-          <p
+          <a
             class="text-main font-bold"
-            routerLink="/about"
+            [routerLink]="['/about']"
             routerLinkActive="router-link-active"
           >
             Company
-          </p>
+          </a>
           <a
             href="#"
-            class="text-gray-0 hover:text-primary-100"
-            routerLink="/services"
+            class="text-base text-gray-0 hover:text-primary-100"
+            [routerLink]="['/services']"
             routerLinkActive="router-link-active"
             >Services</a
           >
           <a
             href="#"
-            class="text-gray-0 hover:text-primary-100"
-            routerLink="/expertise"
+            class="text-base text-gray-0 hover:text-primary-100"
+            [routerLink]="['/expertise']"
             routerLinkActive="router-link-active"
             >Expertise</a
           >
           <a
             href="#"
-            class="text-gray-0 hover:text-primary-100"
-            routerLink="/cases"
+            class="text-base text-gray-0 hover:text-primary-100"
+            [routerLink]="['/cases']"
             routerLinkActive="router-link-active"
             >Cases</a
           >
           <a
             href="#"
-            class="text-gray-0 hover:text-primary-100"
-            routerLink="/contacts"
+            class="text-base text-gray-0 hover:text-primary-100"
+            [routerLink]="['/contacts']"
             routerLinkActive="router-link-active"
             >Contacts</a
           >
@@ -72,8 +78,9 @@
         <!-- Contact info -->
         <div class="flex flex-col gap-8">
           <div class="flex flex-col gap-2">
-            <span class="text-gray-50 text-sm"
-              >Mail <app-icon name="mail" color="secondary"></app-icon
+            <span class="text-main font-bold flex items-center"
+              >Mail
+              <app-icon name="mail" color="secondary" class="pl-2"></app-icon
             ></span>
             <a
               href="mailto:info@intresmartsolution.com"
@@ -82,8 +89,9 @@
             >
           </div>
           <div class="flex flex-col gap-2">
-            <span class="text-gray-50 text-sm"
-              >Call us <app-icon name="phone" color="secondary"></app-icon>
+            <span class="text-main font-bold flex items-center"
+              >Call us
+              <app-icon name="phone" color="secondary" class="pl-2"></app-icon>
             </span>
             <a
               href="tel:+1234567890"
@@ -96,29 +104,37 @@
     </div>
 
     <!-- Bottom section -->
-    <div class="flex justify-between items-center pt-14 max-w-[800px] mx-auto">
-      <span class="text-gray-50 text-sm">© 2024 Intresmart</span>
-      <div class="flex gap-6">
-        <a href="#" class="text-gray-50"
-          ><app-icon name="instagram" size="medium"></app-icon
-        ></a>
-        <a href="#" class="text-gray-50"
-          ><app-icon name="linkedin" size="medium"></app-icon
-        ></a>
-        <a href="#" class="text-gray-50"
-          ><app-icon name="facebook" size="medium"></app-icon
-        ></a>
-        <a href="#" class="text-gray-50"
-          ><app-icon name="youtube" size="medium"></app-icon>
-        </a>
-      </div>
-      <div class="flex gap-4">
-        <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
-          >Terms and Conditions</a
+    <div
+      class="flex flex-col sm:flex-row justify-between items-center pt-14 max-w-[800px] mx-auto text-center sm:text-left"
+    >
+      <div
+        class="flex flex-col sm:flex-row gap-6 sm:gap-0 w-full justify-between items-center mb-6 sm:mb-0 order-2 sm:order-none"
+      >
+        <span class="text-gray-50 text-sm order-3 sm:order-none"
+          >© 2024 Intresmart</span
         >
-        <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
-          >Privacy Policy</a
-        >
+        <div class="flex gap-6 order-1 sm:order-none mb-6 sm:mb-0">
+          <a href="#" class="text-gray-50"
+            ><app-icon name="instagram" size="medium"></app-icon
+          ></a>
+          <a href="#" class="text-gray-50"
+            ><app-icon name="linkedin" size="medium"></app-icon
+          ></a>
+          <a href="#" class="text-gray-50"
+            ><app-icon name="facebook" size="medium"></app-icon
+          ></a>
+          <a href="#" class="text-gray-50"
+            ><app-icon name="youtube" size="medium"></app-icon>
+          </a>
+        </div>
+        <div class="flex gap-4 order-2 sm:order-none">
+          <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
+            >Terms and Conditions</a
+          >
+          <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
+            >Privacy Policy</a
+          >
+        </div>
       </div>
     </div>
   </div>

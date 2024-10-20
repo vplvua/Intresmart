@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { FirebaseService } from '../../services/firebase.service';
 
 import { IconComponent } from '../../shared/icon/icon.component';
@@ -15,6 +15,7 @@ import { CasesWidgetComponent } from './cases-widget/cases-widget.component';
     ButtonComponent,
     ArrowButtonComponent,
     CasesWidgetComponent,
+    RouterLink,
   ],
   providers: [FirebaseService],
   templateUrl: './home.component.html',

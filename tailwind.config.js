@@ -121,6 +121,19 @@ module.exports = {
         "gradient-focus":
           "linear-gradient(180deg, rgba(79, 255, 117, 0.80) 0%, rgba(132, 224, 237, 0.55) 80.5%)",
       },
+      keyframes: {
+        "fade-in": {
+          "0%": {
+            opacity: "0",
+          },
+          "100%": {
+            opacity: "1",
+          },
+        },
+      },
+      animation: {
+        "fade-in": "fade-in 2s ease-out forwards",
+      },
     },
   },
   plugins: [
