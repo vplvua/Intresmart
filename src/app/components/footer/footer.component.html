@@ -1,8 +1,8 @@
-<div class="px-4 sm:px-11 py-6 bg-gray-100">
+<div class="px-4 sm:px-6 md:px-8 lg:px-11 py-6 bg-gray-100">
   <div class="container mx-auto max-w-[1200px]">
     <!-- Upper section -->
     <div class="flex justify-between items-center mb-12">
-      <h2 class="text-gray-0 text-h3 font-normal">Get in touch</h2>
+      <h2 class="text-h5 text-gray-0 lg:text-h3 font-normal">Get in touch</h2>
       <app-arrow-button (click)="onUpperButtonClick()"></app-arrow-button>
     </div>
 
@@ -14,7 +14,9 @@
       <div
         class="flex flex-col items-start gap-8 max-w-[580px] w-full mb-8 sm:mb-0"
       >
-        <h6 class="text-gray-40 text-[32px] font-bold leading-[117.333%]">
+        <h6
+          class="text-gray-40 text-main lg:text-[32px] font-normal lg:font-bold leading-[117.333%]"
+        >
           Subscribe to stay in touch.
         </h6>
         <div class="flex items-center w-full">
@@ -113,7 +115,7 @@
         <span class="text-gray-50 text-sm order-3 sm:order-none"
           >© 2024 Intresmart</span
         >
-        <div class="flex gap-6 order-1 sm:order-none mb-6 sm:mb-0">
+        <div class="flex gap-6 order-1 sm:order-none mb-0 lg:mb-6 sm:mb-0">
           <a href="#" class="text-gray-50"
             ><app-icon name="instagram" size="medium"></app-icon
           ></a>
@@ -127,7 +129,7 @@
             ><app-icon name="youtube" size="medium"></app-icon>
           </a>
         </div>
-        <div class="flex gap-4 order-2 sm:order-none">
+        <div class="flex flex-col lg:flex-row gap-4 order-2 sm:order-none">
           <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
             >Terms and Conditions</a
           >

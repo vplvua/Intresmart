@@ -127,9 +127,21 @@ textarea {
   padding: 16px 24px;
 }
 
-.decorator {
-  height: 18px;
+.decorator,
+.decorator-sm {
   background: var(--primary-100, #018f51);
+}
+
+.decorator {
+  height: 8px;
+
+  @media (min-width: 768px) {
+    height: 12px;
+  }
+
+  @media (min-width: 1024px) {
+    height: 18px;
+  }
 }
 
 .dot {

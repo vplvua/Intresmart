@@ -1,49 +1,45 @@
-<div class="px-11 py-6 mt-20">
-  <div class="container mx-auto max-w-[1200px] px-4 mb-32">
-    <h2>Admin Login</h2>
-    <div class="mt-14 w-1/2">
-      <form (ngSubmit)="onLogIn()">
-        <p>
-          Email address
-          <input
-            type="email"
-            class="w-full mt-2"
-            [(ngModel)]="email"
-            name="email"
-            autocomplete="email"
-            required
-          />
-        </p>
-        <p class="mt-6">
-          Password
-          <input
-            type="password"
-            class="w-full mt-2"
-            [(ngModel)]="password"
-            name="password"
-            required
-          />
-        </p>
-        <p class="mt-2 text-gray-50 text-sm">Forgot password?</p>
-        <app-button class="mt-10 mb-10" type="green" (click)="onLogout()"
-          >Log in</app-button
-        >
-        <p class="text-gray-50 text-sm">
-          If you need assistance or have forgotten your login credentials,
-          please contact the site administrator.
-        </p>
-        <p *ngIf="error" class="text-red-500 mt-4">{{ error }}</p>
-      </form>
-    </div>
-    @if (user$ | async) {
-    <div class="mt-10">
-      <p class="text-gray-50 text-sm">
-        You are logged in as {{ (user$ | async)?.email }}.
-      </p>
-      <app-button class="mt-10" type="green" (click)="onLogout()"
-        >Log out</app-button
-      >
-    </div>
-    }
-  </div>
+<h2>Admin Login</h2>
+<div class="mt-14 w-1/2">
+  <form (ngSubmit)="onLogIn()">
+    <p>
+      Email address
+      <input
+        type="email"
+        class="w-full mt-2"
+        [(ngModel)]="email"
+        name="email"
+        autocomplete="email"
+        required
+      />
+    </p>
+    <p class="mt-6">
+      Password
+      <input
+        type="password"
+        class="w-full mt-2"
+        [(ngModel)]="password"
+        name="password"
+        required
+      />
+    </p>
+    <p class="mt-2 text-gray-50 text-sm">Forgot password?</p>
+    <app-button class="mt-10 mb-10" type="green" (click)="onLogout()"
+      >Log in</app-button
+    >
+    <p class="text-gray-50 text-sm">
+      If you need assistance or have forgotten your login credentials, please
+      contact the site administrator.
+    </p>
+    <p *ngIf="error" class="text-red-500 mt-4">{{ error }}</p>
+  </form>
 </div>
+@if (user$ | async) {
+<div class="mt-10">
+  <p class="text-gray-50 text-sm">
+    You are logged in as {{ (user$ | async)?.email }}.
+  </p>
+  <app-button class="mt-10" type="green" (click)="onLogout()"
+    >Log out</app-button
+  >
+</div>
+}
