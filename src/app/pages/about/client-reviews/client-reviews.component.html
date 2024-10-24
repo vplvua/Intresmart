@@ -1,0 +1,58 @@
+<section class="reviews-section mt-4">
+  <div class="carousel-container">
+    <div class="carousel-wrapper" #carouselWrapper>
+      <article class="review-card" *ngFor="let review of reviews">
+        <header>
+          <figure class="flex flex-row gap-4">
+            <div class="flex flex-col justify-end">
+              <img
+                class="w-11 h-11 rounded-full border-2 border-gray-0"
+                [src]="review.avatarUrl"
+                [alt]="review.author + '\'s profile picture'"
+              />
+            </div>
+            <figcaption class="flex flex-col">
+              <cite class="text-h6 not-italic">{{ review.author }}</cite>
+              <small class="text-sm">{{ review.projectName }}</small>
+            </figcaption>
+          </figure>
+        </header>
+        <blockquote class="text-main">
+          <p>{{ review.content }}</p>
+        </blockquote>
+      </article>
+    </div>
+
+    <div class="carousel-controls">
+      <div class="flex h-full items-center px-2">
+        <button
+          (click)="scrollLeft()"
+          class="carousel-button transition-transform duration-200 rotate-[-135deg] flex justify-center items-center w-11 h-11 md:w-14 md:h-14 rounded-full border border-gray-0 bg-gradient-custom hover:bg-gradient-hover focus:bg-gradient-focus active:bg-gradient-focus"
+        >
+          <svg
+            class="inline-block w-6 h-6 md:w-8 md:h-8 text-gray-0 fill-current"
+          >
+            <use
+              [attr.xlink:href]="'assets/icons/sprite.svg#arrow-up-right'"
+            ></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex h-full items-center px-2">
+        <button
+          (click)="scrollRight()"
+          class="carousel-button transition-transform duration-200 rotate-[45deg] flex justify-center items-center w-11 h-11 md:w-14 md:h-14 rounded-full border border-gray-0 bg-gradient-custom hover:bg-gradient-hover focus:bg-gradient-focus active:bg-gradient-focus"
+        >
+          <svg
+            class="inline-block w-6 h-6 md:w-8 md:h-8 text-gray-0 fill-current"
+          >
+            <use
+              [attr.xlink:href]="'assets/icons/sprite.svg#arrow-up-right'"
+            ></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
