@@ -15,12 +15,14 @@ import { provideAuth, getAuth } from '@angular/fire/auth';
 import { signInWithCustomToken } from 'firebase/auth';
 import { environment } from '../environments/environment';
 import { DOCUMENT } from '@angular/common';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
     provideRouter(routes),
     provideClientHydration(),
+    provideAnimations(),
     provideFirebaseApp(() => {
       const platformId = inject(PLATFORM_ID);
       if (isPlatformBrowser(platformId)) {
