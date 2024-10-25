@@ -16,44 +16,71 @@
           <a
             [routerLink]="['/about']"
             routerLinkActive="router-link-active"
-            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
             >About us</a
           >
           <div class="relative group">
             <a
-              class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
-              (click)="toggleServicesSubmenu()"
+              [routerLink]="['/services']"
+              routerLinkActive="router-link-active"
+              class="text-gray-0 group-hover:text-primary-100 whitespace-nowrap group transition-colors duration-200"
               >Services
-              <app-icon
-                [name]="isServicesSubmenuOpen ? 'chevron-up' : 'chevron-down'"
-                size="medium"
-                [color]="isServicesSubmenuOpen ? 'primary' : 'secondary'"
-              ></app-icon
-            ></a>
-            <div class="absolute left-0 top-full pt-2 w-max">
-              <div
-                [class.hidden]="!isServicesSubmenuOpen"
-                class="transition duration-150 ease-in-out"
+              <svg
+                class="w-6 h-6 mx-auto inline-block stroke-current group-hover:stroke-primary-100 transition-colors duration-200"
               >
+                <use xlink:href="assets/icons/sprite.svg#chevron-down"></use>
+              </svg>
+            </a>
+            <div
+              class="absolute left-0 top-full pt-2 w-max opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+            >
+              <div class="transition duration-150 ease-in-out">
                 <div
                   class="bg-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 overflow-hidden"
                 >
-                  <div class="py-1">
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap"
-                      >Automotive Software Development</a
-                    >
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap"
-                      >Fintech Software Development</a
-                    >
-                    <a
-                      href="#"
-                      class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap"
-                      >Neobank Solution</a
-                    >
+                  <div class="py-1 pl-4 flex flex-col">
+                    <div class="flex flex-row items-center">
+                      <div class="">
+                        <svg class="w-4 h-4 mx-auto">
+                          <use
+                            xlink:href="assets/icons/sprite.svg#triangle"
+                          ></use>
+                        </svg>
+                      </div>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
+                        >Automotive Software Development</a
+                      >
+                    </div>
+                    <div class="flex flex-row items-center">
+                      <div class="">
+                        <svg class="w-4 h-4 mx-auto">
+                          <use
+                            xlink:href="assets/icons/sprite.svg#triangle"
+                          ></use>
+                        </svg>
+                      </div>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
+                        >Fintech Software Development</a
+                      >
+                    </div>
+                    <div class="flex flex-row items-center">
+                      <div class="">
+                        <svg class="w-4 h-4 mx-auto">
+                          <use
+                            xlink:href="assets/icons/sprite.svg#triangle"
+                          ></use>
+                        </svg>
+                      </div>
+                      <a
+                        href="#"
+                        class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
+                        >Neobank Solution</a
+                      >
+                    </div>
                   </div>
                 </div>
               </div>
@@ -62,29 +89,29 @@
           <a
             routerLink="/expertise"
             routerLinkActive="router-link-active"
-            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
             >Expertise</a
           >
           <a
             routerLink="/cases"
             routerLinkActive="router-link-active"
-            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
             >Cases</a
           >
           <a
             routerLink="/blog"
-            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
             >Blog</a
           >
           <a
             routerLink="/contacts"
-            class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+            class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
             >Contacts</a
           >
           <ng-container *ngIf="user$ | async as user">
             <a
               (click)="onLogout()"
-              class="text-gray-0 hover:text-primary-100 whitespace-nowrap"
+              class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
               >Log out</a
             >
           </ng-container>
@@ -110,68 +137,93 @@
   <!-- Mobile menu -->
   <div
     [class.hidden]="!isMobileMenuOpen"
-    class="fixed inset-0 bg-gray-100 z-40 md:hidden flex flex-col justify-center items-center"
+    class="fixed inset-0 bg-gray-100 z-40 md:hidden overflow-hidden"
   >
-    <div class="w-full px-11 space-y-8">
-      <a
-        [routerLink]="['/about']"
-        routerLinkActive="router-link-active"
-        class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
-        >About us</a
-      >
-      <div>
-        <button
-          (click)="toggleMobileServicesSubmenu()"
-          class="flex items-start w-full text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
-        >
-          Services
-          <app-icon
-            [name]="isMobileServicesSubmenuOpen ? 'chevron-up' : 'chevron-down'"
-            size="medium"
-          ></app-icon>
-        </button>
-        <div
-          [class.hidden]="!isMobileServicesSubmenuOpen"
-          class="mt-2 ml-6 space-y-2"
-        >
-          <a
-            href="#"
-            class="block text-main text-gray-0 hover:text-primary-100 py-1"
-            >Automotive Software Development</a
-          >
-          <a
-            href="#"
-            class="block text-main text-gray-0 hover:text-primary-100 py-1"
-            >Fintech Software Development</a
-          >
-          <a
-            href="#"
-            class="block text-main text-gray-0 hover:text-primary-100 py-1"
-            >Neobank Solution</a
-          >
-        </div>
-      </div>
-      <a
-        routerLink="/expertise"
-        routerLinkActive="router-link-active"
-        class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
-        >Expertise</a
-      >
-      <a
-        routerLink="/cases"
-        routerLinkActive="router-link-active"
-        class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
-        >Cases</a
-      >
-      <ng-container *ngIf="user$ | async as user">
+    <div class="h-full w-full flex items-center">
+      <div class="w-full px-11 space-y-6">
         <a
-          (click)="onLogout()"
+          [routerLink]="['/about']"
+          routerLinkActive="router-link-active"
+          (click)="closeMobileMenu()"
           class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
-          >Log out</a
+          >About us</a
         >
-      </ng-container>
-      <div class="pt-4 text-center" routerLink="/contacts">
-        <app-button type="green">Contact us</app-button>
+        <div>
+          <a
+            [routerLink]="['/services']"
+            (click)="closeMobileMenu()"
+            class="flex items-start w-full text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+          >
+            Services
+          </a>
+          <div class="mt-2 ml-6 space-y-2">
+            <div class="flex flex-row items-center gap-4">
+              <div>
+                <svg class="w-4 h-4 mx-auto">
+                  <use xlink:href="assets/icons/sprite.svg#triangle"></use>
+                </svg>
+              </div>
+              <a
+                href="#"
+                (click)="closeMobileMenu()"
+                class="block text-main text-gray-0 hover:text-primary-100 py-1"
+                >Automotive Software Development</a
+              >
+            </div>
+            <div class="flex flex-row items-center gap-4">
+              <div class="">
+                <svg class="w-4 h-4 mx-auto">
+                  <use xlink:href="assets/icons/sprite.svg#triangle"></use>
+                </svg>
+              </div>
+              <a
+                href="#"
+                (click)="closeMobileMenu()"
+                class="block text-main text-gray-0 hover:text-primary-100 py-1"
+                >Fintech Software Development</a
+              >
+            </div>
+            <div class="flex flex-row items-center gap-4">
+              <div class="">
+                <svg class="w-4 h-4 mx-auto">
+                  <use xlink:href="assets/icons/sprite.svg#triangle"></use>
+                </svg>
+              </div>
+              <a
+                href="#"
+                (click)="closeMobileMenu()"
+                class="block text-main text-gray-0 hover:text-primary-100 py-1"
+                >Neobank Solution</a
+              >
+            </div>
+          </div>
+        </div>
+        <a
+          routerLink="/expertise"
+          (click)="closeMobileMenu()"
+          class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+          >Expertise</a
+        >
+        <a
+          routerLink="/cases"
+          (click)="closeMobileMenu()"
+          class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+          >Cases</a
+        >
+        <ng-container *ngIf="user$ | async as user">
+          <a
+            (click)="onLogout()"
+            class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+            >Log out</a
+          >
+        </ng-container>
+        <div
+          class="pt-4 text-center"
+          routerLink="/contacts"
+          (click)="closeMobileMenu()"
+        >
+          <app-button type="green">Contact us</app-button>
+        </div>
       </div>
     </div>
   </div>

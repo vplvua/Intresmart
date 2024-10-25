@@ -152,3 +152,15 @@ textarea {
   vertical-align: middle;
   margin: 0 8px;
 }
+
+// Mobile menu
+html.mobile-menu-open {
+  overflow: hidden;
+  position: fixed;
+  width: 100%;
+  height: 100%;
+}
+
+body.mobile-menu-open {
+  overflow: hidden;
+}
