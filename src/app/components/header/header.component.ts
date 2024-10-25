@@ -1,9 +1,15 @@
-import { Component, HostListener, Inject } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import {
+  Component,
+  HostListener,
+  Renderer2,
+  Inject,
+  PLATFORM_ID,
+} from '@angular/core';
+import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { NavigationEnd, Router } from '@angular/router';
 import { RouterLink } from '@angular/router';
 import { Subject } from 'rxjs';
-import { catchError, takeUntil, tap } from 'rxjs/operators';
+import { catchError, filter, takeUntil, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { AuthService } from '../../services/auth.service';
 
@@ -19,32 +25,60 @@ import { ButtonComponent } from '../../shared/button/button.component';
 })
 export class HeaderComponent {
   isMobileMenuOpen: boolean = false;
-  isServicesSubmenuOpen: boolean = false;
-  isMobileServicesSubmenuOpen: boolean = false;
   destroy$ = new Subject<void>();
   error: string = '';
   user$;
+  isBrowser: boolean;
 
-  constructor(private authService: AuthService, private router: Router) {
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {
     this.user$ = this.authService.user$;
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
+  ngOnInit() {
+    // Close mobile menu on route change
+    this.router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.closeMobileMenu();
+      });
   }
 
   toggleMobileMenu() {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
+    if (this.isBrowser) {
+      if (this.isMobileMenuOpen) {
+        this.renderer.addClass(document.documentElement, 'mobile-menu-open');
+      } else {
+        this.renderer.removeClass(document.documentElement, 'mobile-menu-open');
+      }
+    }
   }
 
-  toggleServicesSubmenu() {
-    this.isServicesSubmenuOpen = !this.isServicesSubmenuOpen;
+  closeMobileMenu() {
+    this.isMobileMenuOpen = false;
+    if (this.isBrowser) {
+      this.renderer.removeClass(document.documentElement, 'mobile-menu-open');
+    }
   }
 
-  toggleMobileServicesSubmenu() {
-    this.isMobileServicesSubmenuOpen = !this.isMobileServicesSubmenuOpen;
+  onLogoutAndCloseMobileMenu() {
+    this.closeMobileMenu();
+    this.onLogout();
   }
 
   @HostListener('window:resize', ['$event'])
   onResize(event: Event) {
-    if (window.innerWidth >= 768) {
-      this.isMobileMenuOpen = false;
+    if (this.isBrowser && window.innerWidth >= 768) {
+      this.closeMobileMenu();
     }
   }
 
@@ -64,7 +98,10 @@ export class HeaderComponent {
       .subscribe();
   }
 
-  ngOnDelete() {
+  ngOnDestroy() {
+    if (this.isBrowser) {
+      this.renderer.removeClass(document.documentElement, 'mobile-menu-open');
+    }
     this.destroy$.next();
     this.destroy$.complete();
   }
