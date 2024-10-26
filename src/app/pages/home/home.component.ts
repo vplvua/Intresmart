@@ -6,6 +6,7 @@ import { IconComponent } from '../../shared/icon/icon.component';
 import { ButtonComponent } from '../../shared/button/button.component';
 import { ArrowButtonComponent } from '../../shared/arrow-button/arrow-button.component';
 import { CasesWidgetComponent } from './cases-widget/cases-widget.component';
+import { LearnMoreComponent } from '../../shared/learn-more/learn-more.component';
 
 @Component({
   selector: 'app-home',
@@ -16,6 +17,7 @@ import { CasesWidgetComponent } from './cases-widget/cases-widget.component';
     ArrowButtonComponent,
     CasesWidgetComponent,
     RouterLink,
+    LearnMoreComponent,
   ],
   providers: [FirebaseService],
   templateUrl: './home.component.html',
