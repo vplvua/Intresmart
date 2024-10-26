@@ -9,6 +9,7 @@ import { ExpertiseComponent } from './pages/expertise/expertise.component';
 import { ServicesComponent } from './pages/services/services.component';
 import { VacanciesComponent } from './pages/vacancies/vacancies.component';
 import { LoginComponent } from './pages/login/login.component';
+import { FintechComponent } from './pages/services/fintech/fintech.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'contacts', component: ContactsComponent },
   { path: 'expertise', component: ExpertiseComponent },
   { path: 'services', component: ServicesComponent },
+  { path: 'services/fintech', component: FintechComponent },
   { path: 'vacancies', component: VacanciesComponent },
   { path: 'blog/:id', component: BlogComponent },
   { path: 'login', component: LoginComponent },
