@@ -1,61 +1,89 @@
-<div class="text-center">
-  <h2>Contact Us</h2>
+<div class="text-center mt-6">
+  <h2 class="text-h4 md:text-h3 lg:text-h2">Contact Us</h2>
 </div>
 
-<div class="form">
-  <div class="container mx-auto max-w-[1200px] px-4">
-    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-      <div>
-        <h3>Let's Talk</h3>
-        <p class="text-h6 text-gray-50 mt-6">
-          Let's create something awesome together!
-        </p>
-        <div class="mt-8">
-          <div class="flex items -center gap-4">
-            <a href="tel:+380123456789" class="text-h6 text-gray-50"
-              >+380 12 345 67 89</a
-            >
-          </div>
+<div
+  class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 md:mt-16 lg:mt-20 mb-14 md:mb-20 lg:mb-32"
+>
+  <div class="flex flex-col justify-between">
+    <div>
+      <h3 class="text-h6 md:text-h6 lg:text-h3">Let's Talk</h3>
+      <p class="text-main lg:text-h6 text-gray-50 mt-2 lg:mt-6">
+        Let's create something awesome together!
+      </p>
+      <div class="mt-8">
+        <div class="flex flex-col gap-2 lg:gap-4">
+          <a
+            href="mailto:info@intresmartsolution.com"
+            class="text-gray-50 text-main lg:text-h6 hover:text-primary-100"
+            >info&#64;intresmartsolution.com</a
+          >
+          <a href="tel:+380123456789" class="text-main lg:text-h6 text-gray-50"
+            >+380 12 345 67 89</a
+          >
         </div>
       </div>
-      <div>
-        <form>
-          <div class="grid grid-cols-1 gap-6">
-            <div>
-              <label for="name" class="text-h6 text-gray-50">Name</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                class="w-full border-b border-gray-50 text-h6 text-gray-50 mt-2"
-                placeholder="Enter your name"
-              />
-            </div>
-            <div>
-              <label for="email" class="text-h6 text-gray-50">Email</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                class="w-full border-b border-gray-50 text-h6 text-gray-50 mt-2"
-                placeholder="Enter your email"
-              />
-            </div>
-            <div>
-              <label for="message" class="text-h6 text-gray-50">Message</label>
-              <textarea
-                id="message"
-                name="message"
-                class="w-full border-b border-gray-50 text-h6 text-gray-50 mt-2"
-                placeholder="Enter your message"
-              ></textarea>
-            </div>
-            <div>
-              <app-button type="green"> Send message </app-button>
-            </div>
-          </div>
-        </form>
-      </div>
     </div>
+    <div class="invisible md:visible">
+      <app-arrow-button></app-arrow-button>
+    </div>
+  </div>
+  <div>
+    <form class="flex flex-col gap-10 text-main" action="#" method="POST">
+      <fieldset class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 gap-6">
+        <legend class="sr-only">Personal Information</legend>
+        <div class="flex flex-col">
+          <label for="name" class="text-gray-0">Full name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="company" class="text-gray-0">Company</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="phone" class="text-gray-0">Phone</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="email" class="text-gray-0">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+          />
+        </div>
+      </fieldset>
+      <div class="flex flex-col">
+        <label for="message" class="text-gray-0">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          class="w-full border-b border-gray-40 text-base text-gray-50 mt-4 h-48 bg-gray-70"
+          placeholder="Type your message here..."
+        ></textarea>
+      </div>
+      <div class="max-w-48">
+        <app-button type="green" [submit]="true"> Send message </app-button>
+      </div>
+    </form>
   </div>
 </div>

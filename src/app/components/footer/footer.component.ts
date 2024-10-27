@@ -10,7 +10,6 @@ import { ArrowButtonComponent } from '../../shared/arrow-button/arrow-button.com
   standalone: true,
   imports: [IconComponent, ArrowButtonComponent, RouterLink],
   templateUrl: './footer.component.html',
-  styleUrl: './footer.component.scss',
 })
 export class FooterComponent {
   constructor(private router: Router) {}
