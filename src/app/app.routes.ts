@@ -11,6 +11,7 @@ import { VacanciesComponent } from './pages/vacancies/vacancies.component';
 import { LoginComponent } from './pages/login/login.component';
 import { FintechComponent } from './pages/services/fintech/fintech.component';
 import { AutomotiveComponent } from './pages/services/automotive/automotive.component';
+import { ArtificialIntelligenceComponent } from './pages/services/artificial-intelligence/artificial-intelligence.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -23,6 +24,10 @@ export const routes: Routes = [
   { path: 'services', component: ServicesComponent },
   { path: 'services/fintech', component: FintechComponent },
   { path: 'services/automotive', component: AutomotiveComponent },
+  {
+    path: 'services/artificial-intelligence',
+    component: ArtificialIntelligenceComponent,
+  },
   { path: 'vacancies', component: VacanciesComponent },
   { path: 'blog/:id', component: BlogComponent },
   { path: 'login', component: LoginComponent },

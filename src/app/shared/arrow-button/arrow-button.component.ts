@@ -19,6 +19,9 @@ import { IconComponent } from '../icon/icon.component';
     button {
       border: 1px solid #EAEAEA;
     }
+    button:hover {
+      transform: scale(1.10);
+    }
     button:disabled {
       transition: all 0.3s ease;
       border: 1px solid #565656;
@@ -27,6 +30,7 @@ import { IconComponent } from '../icon/icon.component';
 export class ArrowButtonComponent {
   @Input() disabled: boolean = false;
   @Input() onClick: () => void = () => {};
+  @Input() type: 'transparent' | 'green' = 'transparent';
 
   get buttonClasses(): string {
     const baseClasses =
@@ -34,6 +38,10 @@ export class ArrowButtonComponent {
 
     if (this.disabled) {
       return `${baseClasses} border-gray-75 bg-gradient-custom cursor-not-allowed opacity-50`;
+    }
+
+    if (this.type === 'green') {
+      return `${baseClasses} ${baseClasses} border-gray-0 bg-gradient-focus`;
     }
 
     return `${baseClasses} border-gray-0 bg-gradient-custom 

@@ -31,6 +31,9 @@ import { CommonModule } from '@angular/common';
         line-height: 135%;
       }
     }
+    button:hover {
+      transform: scale(1.05);
+    }
     button:disabled {
       border: 1px solid #565656;
     }`,
