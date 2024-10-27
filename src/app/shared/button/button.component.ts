@@ -15,13 +15,24 @@ import { CommonModule } from '@angular/common';
   styles: `
     :host {
       display: inline-block;
+      width: 100%;
+      @media (min-width: 768px) {
+        height: 56px;
+      }
     }
     button {
       font-family: 'Helvetica', sans-serif;
       font-size: 16px;
-      line-height: 135%;
+      line-height: 117%;
       font-weight: 400;
       border: 1px solid #EAEAEA;
+      width: 100%;
+      @media (min-width: 768px) {
+        line-height: 135%;
+      }
+    }
+    button:hover {
+      transform: scale(1.05);
     }
     button:disabled {
       border: 1px solid #565656;
@@ -30,18 +41,17 @@ import { CommonModule } from '@angular/common';
 export class ButtonComponent {
   @Input() type: 'default' | 'green' = 'default';
   @Input() disabled: boolean = false;
-  @Input() width: string = '208px';
   @Input() submit: boolean = false;
 
   get buttonClasses(): string {
     const baseClasses =
-      'flex justify-center items-center gap-2 px-4 py-4 rounded-full transition duration-300 ease-in-out';
+      'flex justify-center items-center px-4 py-4 rounded-full transition duration-300 ease-in-out';
 
     if (this.type === 'green') {
-      return `${baseClasses} w-[181px] h-[56px] bg-gradient-focus`;
+      return `${baseClasses} bg-gradient-focus`;
     }
 
-    const defaultClasses = `${baseClasses} w-[196px] h-[56px]`;
+    const defaultClasses = `${baseClasses}`;
 
     if (this.disabled) {
       return `${defaultClasses} text-[#363636] border-[#565656] bg-gradient-custom cursor-not-allowed`;

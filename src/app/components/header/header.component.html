@@ -48,7 +48,7 @@
                         </svg>
                       </div>
                       <a
-                        href="#"
+                        [routerLink]="['/services/automotive']"
                         class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
                         >Automotive Software Development</a
                       >
@@ -62,7 +62,7 @@
                         </svg>
                       </div>
                       <a
-                        href="#"
+                        [routerLink]="['/services/fintech']"
                         class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
                         >Fintech Software Development</a
                       >
@@ -76,9 +76,9 @@
                         </svg>
                       </div>
                       <a
-                        href="#"
+                        [routerLink]="['/services/artificial-intelligence']"
                         class="block px-4 py-2 text-sm text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
-                        >Neobank Solution</a
+                        >AI & ML Consulting</a
                       >
                     </div>
                   </div>
@@ -139,8 +139,8 @@
     [class.hidden]="!isMobileMenuOpen"
     class="fixed inset-0 bg-gray-100 z-40 md:hidden overflow-hidden"
   >
-    <div class="h-full w-full flex items-center">
-      <div class="w-full px-11 space-y-6">
+    <div class="h-full w-full flex items-start mt-32">
+      <div class="w-full px-11 space-y-4">
         <a
           [routerLink]="['/about']"
           routerLinkActive="router-link-active"
@@ -164,7 +164,7 @@
                 </svg>
               </div>
               <a
-                href="#"
+                [routerLink]="['/services/automotive']"
                 (click)="closeMobileMenu()"
                 class="block text-main text-gray-0 hover:text-primary-100 py-1"
                 >Automotive Software Development</a
@@ -177,7 +177,7 @@
                 </svg>
               </div>
               <a
-                href="#"
+                [routerLink]="['/services/fintech']"
                 (click)="closeMobileMenu()"
                 class="block text-main text-gray-0 hover:text-primary-100 py-1"
                 >Fintech Software Development</a
@@ -190,10 +190,10 @@
                 </svg>
               </div>
               <a
-                href="#"
+                [routerLink]="['/services/artificial-intelligence']"
                 (click)="closeMobileMenu()"
                 class="block text-main text-gray-0 hover:text-primary-100 py-1"
-                >Neobank Solution</a
+                >AI & ML Consulting</a
               >
             </div>
           </div>

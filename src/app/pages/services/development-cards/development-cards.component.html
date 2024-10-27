@@ -1,0 +1,55 @@
+<section class="reviews-section mt-4">
+  <div class="carousel-container">
+    <div class="carousel-wrapper" #carouselWrapper>
+      <article class="review-card" *ngFor="let step of development">
+        <div
+          class="flex flex-row items-center w-72 md:w-[479px] gap-2 md:gap-6 p-4 md:p-6"
+        >
+          <div class="flex items-center">
+            <svg class="w-12 h-12 lg:w-16 lg:h-16 mx-auto">
+              <use [attr.xlink:href]="step.imageUrl"></use>
+            </svg>
+          </div>
+          <div class="flex flex-col">
+            <h6 class="text-main md:text-h6">{{ step.domen }}</h6>
+            <blockquote class="mt-2 md:mt-4">
+              <p class="text-main md:text-h6">{{ step.content }}</p>
+            </blockquote>
+          </div>
+        </div>
+      </article>
+    </div>
+
+    <div class="carousel-controls">
+      <div class="flex h-full items-center px-2">
+        <button
+          (click)="scrollLeft()"
+          class="carousel-button transition-transform duration-200 rotate-[-135deg] flex justify-center items-center w-11 h-11 md:w-14 md:h-14 rounded-full border border-gray-0 bg-gradient-custom hover:bg-gradient-hover focus:bg-gradient-focus active:bg-gradient-focus"
+        >
+          <svg
+            class="inline-block w-6 h-6 md:w-8 md:h-8 text-gray-0 fill-current"
+          >
+            <use
+              [attr.xlink:href]="'assets/icons/sprite.svg#arrow-up-right'"
+            ></use>
+          </svg>
+        </button>
+      </div>
+
+      <div class="flex h-full items-center px-2">
+        <button
+          (click)="scrollRight()"
+          class="carousel-button transition-transform duration-200 rotate-[45deg] flex justify-center items-center w-11 h-11 md:w-14 md:h-14 rounded-full border border-gray-0 bg-gradient-custom hover:bg-gradient-hover focus:bg-gradient-focus active:bg-gradient-focus"
+        >
+          <svg
+            class="inline-block w-6 h-6 md:w-8 md:h-8 text-gray-0 fill-current"
+          >
+            <use
+              [attr.xlink:href]="'assets/icons/sprite.svg#arrow-up-right'"
+            ></use>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
