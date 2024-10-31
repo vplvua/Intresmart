@@ -1,0 +1,50 @@
+<div class="relative">
+  <button
+    (click)="toggleMenu($event)"
+    class="p-2 rounded-full bg-white/90 hover:bg-white shadow-md"
+  >
+    <app-icon name="dots" size="large" color="secondary"></app-icon>
+  </button>
+
+  @if (isMenuOpen) {
+  <div
+    class="absolute right-0 mt-2 w-44 py-4 px-2 rounded-lg shadow-lg bg-gray-5 ring-1 ring-black ring-opacity-5 z-20"
+    appClickOutside
+    (appClickOutside)="onClickOutside()"
+  >
+    <div class="py-1">
+      <button
+        (click)="edit()"
+        class="w-full px-2 py-1 text-base text-gray-80 hover:bg-gray-50 flex items-start gap-4 rounded"
+      >
+        <app-icon name="pencil" size="medium" color="tertiary"></app-icon>
+        Edit
+      </button>
+      <button
+        (click)="archive()"
+        class="w-full mt-2 px-2 py-1 text-base text-gray-80 hover:bg-gray-50 flex items-start gap-4 rounded"
+      >
+        <app-icon name="archive" size="medium" color="tertiary"></app-icon>
+        Archive
+      </button>
+      <button
+        (click)="delete()"
+        class="w-full mt-2 px-2 py-1 text-base text-gray-80 hover:bg-gray-50 flex items-start gap-4 rounded"
+      >
+        <app-icon name="x" size="medium" color="tertiary"></app-icon>
+        Delete
+      </button>
+    </div>
+  </div>
+  } @if (showDeleteConfirmation) {
+  <app-confirmation-popup
+    title="Delete"
+    message="Are you sure you want to delete this?"
+    articleTitle="{{ item.title }}"
+    confirmText="Delete"
+    cancelText="Cancel"
+    (onConfirm)="confirmDelete()"
+    (onCancel)="cancelDelete()"
+  />
+  }
+</div>

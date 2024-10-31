@@ -1,54 +1,74 @@
 <div *ngIf="cases$ | async as cases">
   <header class="flex flex-col items-center gap-20">
     <h2>Our cases</h2>
+    @if (isLoggedIn$ | async) {
+    <a [routerLink]="['/cases/new']"
+      >Add new case
+      <img [src]="'assets/icons/sprite.svg#dot'" class="w-4 h-4 text-gray-10"
+    /></a>
+    }
   </header>
   <main class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-14 mt-20">
     @for(case of cases; track case.id) {
-    <article class="case-card group">
-      <div class="relative w-full h-[370px] rounded-[30px] overflow-hidden">
-        @if(case.videoUrl) {
-        <video
-          [src]="case.videoUrl"
-          class="w-full h-full object-cover object-left"
-          controls
-          preload="metadata"
-          poster="{{ case.imageCardUrl }}"
-          muted
-        >
-          Your browser does not support the video tag.
-        </video>
-        } @else if (case.imageCardSvg) {
-        <div class="case-card-svg-container">
-          <img
-            [src]="case.imageCardSvg"
-            alt="{{ case.title }}"
-            class="w-3/5 h-auto"
-          />
-        </div>
-        } @else {
-        <img
-          src="{{ case.imageCardUrl }}"
-          alt="{{ case.title }}"
-          class="w-full h-full object-cover object-left"
+    <article class="group">
+      <div class="relative flex flex-col items-end">
+        @if (isLoggedIn$ | async) {
+        <app-edit-menu
+          [item]="case"
+          class="relative pt-4 right-6 top-14 z-10"
+          (onEdit)="onEditCase($event)"
+          (onDelete)="onDeleteCase($event)"
+          (onArchive)="onArchiveCase($event)"
         />
         }
-        <div class="hover-block">
-          <div class="flex justify-between items-center w-full">
-            <div class="flex flex-col items-start gap-4">
-              <h6>Build to launch</h6>
-              <p>{{ case.launch }}</p>
-            </div>
-            <app-button
-              class="hover-button"
-              type="green"
-              [routerLink]="['/cases', case.id]"
-              >View case</app-button
+        <div class="case-card flex-grow">
+          <div class="relative w-full h-[370px] rounded-[30px] overflow-hidden">
+            @if(case.videoUrl) {
+            <video
+              [src]="case.videoUrl"
+              class="w-full h-full object-cover object-left"
+              controls
+              preload="metadata"
+              poster="{{ case.imageCardUrl }}"
+              muted
             >
+              Your browser does not support the video tag.
+            </video>
+            } @else if (case.imageCardSvg) {
+            <div class="case-card-svg-container">
+              <img
+                [src]="case.imageCardSvg"
+                alt="{{ case.title }}"
+                class="w-3/5 h-auto"
+              />
+            </div>
+            } @else {
+            <img
+              src="{{ case.imageCardUrl }}"
+              alt="{{ case.title }}"
+              class="w-full h-full object-cover object-left"
+            />
+            }
+            <div class="hover-block">
+              <div class="flex justify-between items-center w-full">
+                <div class="flex flex-col items-start gap-4">
+                  <h6>Build to launch</h6>
+                  <p>{{ case.launch }}</p>
+                </div>
+                <app-button
+                  class="hover-button"
+                  type="green"
+                  [routerLink]="['/cases', case.id]"
+                  >View case</app-button
+                >
+              </div>
+            </div>
           </div>
+
+          <h4 class="mt-8">{{ case.title }}</h4>
+          <p class="text=h6 mt-2">{{ case.tag }}</p>
         </div>
       </div>
-      <h4 class="mt-8">{{ case.title }}</h4>
-      <p class="text=h6 mt-2">{{ case.tag }}</p>
     </article>
     }
   </main>

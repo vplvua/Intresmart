@@ -99,16 +99,21 @@
             >Cases</a
           >
           <a
-            routerLink="/blog"
-            class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
-            >Blog</a
-          >
-          <a
             routerLink="/contacts"
             class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
             >Contacts</a
           >
           <ng-container *ngIf="user$ | async as user">
+            <a
+              routerLink="/blog"
+              class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
+              >Blog</a
+            >
+            <a
+              routerLink="/vacancies"
+              class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
+              >Vacancies</a
+            >
             <a
               (click)="onLogout()"
               class="text-gray-0 hover:text-primary-100 whitespace-nowrap transition-colors duration-200"
@@ -211,6 +216,18 @@
           >Cases</a
         >
         <ng-container *ngIf="user$ | async as user">
+          <a
+            routerLink="/blog"
+            (click)="closeMobileMenu()"
+            class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+            >Blog</a
+          >
+          <a
+            routerLink="/vacancies"
+            (click)="closeMobileMenu()"
+            class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
+            >Vacsncies</a
+          >
           <a
             (click)="onLogout()"
             class="block text-h6 text-gray-0 hover:text-primary-100 px-3 py-2"
