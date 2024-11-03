@@ -1,0 +1,103 @@
+<main class="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-14 mt-20">
+  @for(case of cases; track case.id) {
+  <article class="group cursor-pointer">
+    <div class="relative flex flex-col items-end">
+      @if (isLoggedIn$ | async) {
+      <app-edit-menu
+        [item]="case"
+        class="relative pt-4 right-2 top-14 z-10"
+        (onEdit)="onEdit.emit($event)"
+        (onDelete)="onDelete.emit($event)"
+        (onArchive)="onArchive.emit($event)"
+      />
+      }
+      <!-- Desktop card -->
+      <div class="case-card hidden sm:block sm:flex-grow">
+        <div class="relative w-full h-[370px] rounded-[30px] overflow-hidden">
+          @if(case.videoUrl) {
+          <video
+            [src]="case.videoUrl"
+            class="w-full h-full object-cover object-left"
+            controls
+            preload="metadata"
+            poster="{{ case.imageCardUrl }}"
+            muted
+          >
+            Your browser does not support the video tag.
+          </video>
+          } @else if (case.imageCardSvg) {
+          <div class="case-card-svg-container">
+            <img
+              [src]="case.imageCardSvg"
+              alt="{{ case.title }}"
+              class="w-3/5 h-auto"
+            />
+          </div>
+          } @else {
+          <img
+            src="{{ case.imageCardUrl }}"
+            alt="{{ case.title }}"
+            class="w-full h-full object-cover object-left"
+          />
+          }
+          <div class="hover-block">
+            <div class="flex justify-between items-center w-full">
+              <div class="flex flex-col items-start gap-4">
+                <h6>Build to launch</h6>
+                <p>{{ case.launch }}</p>
+              </div>
+              <app-button
+                class="hover-button"
+                type="green"
+                [routerLink]="['/cases', case.slug]"
+                >View case</app-button
+              >
+            </div>
+          </div>
+        </div>
+
+        <h4 class="mt-8">{{ case.title }}</h4>
+        <p class="text-h6 mt-2">{{ case.tag }}</p>
+      </div>
+
+      <!-- Mobile card -->
+      <div
+        class="case-card flex-grow sm:hidden w-full"
+        (click)="navigateToCase(case.slug)"
+      >
+        <div class="relative w-full h-[209px] rounded-[30px] overflow-hidden">
+          @if(case.videoUrl) {
+          <video
+            [src]="case.videoUrl"
+            class="w-full h-full object-cover object-left"
+            controls
+            preload="metadata"
+            poster="{{ case.imageCardUrl }}"
+            muted
+          >
+            Your browser does not support the video tag.
+          </video>
+          } @else if (case.imageCardSvg) {
+          <div class="case-card-svg-container">
+            <img
+              [src]="case.imageCardSvg"
+              alt="{{ case.title }}"
+              class="w-3/5 h-auto"
+            />
+          </div>
+          } @else {
+          <img
+            src="{{ case.imageCardUrl }}"
+            alt="{{ case.title }}"
+            class="w-full h-full object-cover object-left-top"
+          />
+          }
+        </div>
+
+        <h4 class="mt-6 text-h6">{{ case.title }}</h4>
+        <p class="text-main mt-2">{{ case.tag }}</p>
+      </div>
+    </div>
+  </article>
+  }
+</main>
