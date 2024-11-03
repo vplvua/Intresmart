@@ -12,6 +12,11 @@ import { LoginComponent } from './pages/login/login.component';
 import { FintechComponent } from './pages/services/fintech/fintech.component';
 import { AutomotiveComponent } from './pages/services/automotive/automotive.component';
 import { ArtificialIntelligenceComponent } from './pages/services/artificial-intelligence/artificial-intelligence.component';
+import { AddNewCaseComponent } from './pages/cases/add-new-case/add-new-case.component';
+import { AuthGuard } from './guards/auth.guard';
+import { ArchciveComponent } from './pages/cases/archive/archive.component';
+import { CaseComponent } from './pages/cases/case/case.component';
+import { EditCaseComponent } from './pages/cases/edit-case/edit-case.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -19,6 +24,18 @@ export const routes: Routes = [
   { path: 'about', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
   { path: 'cases', component: CasesComponent },
+  {
+    path: 'cases/add',
+    component: AddNewCaseComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'cases/archive', component: ArchciveComponent },
+  { path: 'cases/:slug', component: CaseComponent },
+  {
+    path: 'cases/:slug/edit',
+    component: EditCaseComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'contacts', component: ContactsComponent },
   { path: 'expertise', component: ExpertiseComponent },
   { path: 'services', component: ServicesComponent },

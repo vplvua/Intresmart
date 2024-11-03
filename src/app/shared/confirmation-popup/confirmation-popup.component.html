@@ -1,0 +1,24 @@
+<div class="fixed inset-0 bg-black/50 z-40 flex items-center justify-center">
+  <div class="relative bg-gray-70 rounded-lg p-10 max-w-[778px] w-full mx-4">
+    <button
+      (click)="onCancel.emit()"
+      class="absolute right-4 top-4 text-gray-400 hover:text-gray-600"
+    >
+      <app-icon name="close" size="medium" color="secondary"></app-icon>
+    </button>
+
+    <div class="mt-8">
+      <p class="text-h5">{{ message }}</p>
+      <p class="text-main text-gray-50 mt-2">{{ articleTitle }}</p>
+    </div>
+
+    <div class="flex justify-between gap-6 mt-10">
+      <app-button (click)="onCancel.emit()">
+        {{ cancelText }}
+      </app-button>
+      <app-button (click)="onConfirm.emit()">
+        {{ confirmText }}
+      </app-button>
+    </div>
+  </div>
+</div>

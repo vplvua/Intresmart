@@ -1,0 +1,234 @@
+<div class="flex flex-col mt-6 md:mt-10 lg:mt-20">
+  <a
+    class="text-base md:ext-main lg:text-h6 text-decoration: underline text-gray-40"
+    [routerLink]="['/cases']"
+    >Back to cases</a
+  >
+  <h3 class="text-h6 md:text-h5 lg:text-h3">Edit Case</h3>
+</div>
+<div class="flex my-6 md:my-14 lg:my-24">
+  <form [formGroup]="caseForm" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="flex flex-col md:flex-row justify-between">
+      <!-- Left side -->
+      <div class="flex w-full lg:w-1/2">
+        <div class="flex flex-col w-full gap-4">
+          <div class="flex flex-col gap-2">
+            <label for="title">Title</label>
+            <input
+              type="text"
+              id="title"
+              formControlName="title"
+              class="input"
+              [ngClass]="{
+                'border-red-500':
+                  caseForm.get('title')?.invalid &&
+                  caseForm.get('title')?.touched
+              }"
+            />
+            <span
+              class="text-red-500 text-sm"
+              *ngIf="
+                caseForm.get('title')?.invalid && caseForm.get('title')?.touched
+              "
+            >
+              Title is required
+            </span>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="launch">Launch</label>
+            <input
+              type="text"
+              id="launch"
+              formControlName="launch"
+              class="input"
+              [ngClass]="{
+                'border-red-500':
+                  caseForm.get('launch')?.invalid &&
+                  caseForm.get('launch')?.touched
+              }"
+            />
+            <span
+              class="text-red-500 text-sm"
+              *ngIf="
+                caseForm.get('launch')?.invalid &&
+                caseForm.get('launch')?.touched
+              "
+            >
+              Launch is required
+            </span>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="tag">Business</label>
+            <input
+              type="text"
+              id="tag"
+              formControlName="tag"
+              class="input"
+              [ngClass]="{
+                'border-red-500':
+                  caseForm.get('tag')?.invalid && caseForm.get('tag')?.touched
+              }"
+            />
+            <span
+              class="text-red-500 text-sm"
+              *ngIf="
+                caseForm.get('tag')?.invalid && caseForm.get('tag')?.touched
+              "
+            >
+              Business tag is required
+            </span>
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <p class="text-main">Paragraphs</p>
+
+            <div formArrayName="textFields">
+              <div *ngFor="let field of textFields.controls; let i = index">
+                <textarea
+                  [formControlName]="i"
+                  class="input w-full h-auto mt-4"
+                  [ngClass]="{
+                    'border-red-500': field.invalid && field.touched
+                  }"
+                ></textarea>
+                <div class="flex justify-between items-center mt-2">
+                  <div class="w-1/3">
+                    <span
+                      class="text-red-500 text-sm"
+                      *ngIf="field.invalid && field.touched"
+                    >
+                      Paragraph is required
+                    </span>
+                  </div>
+                  <a
+                    (click)="removeTextField(i)"
+                    *ngIf="textFields.length > 1"
+                    class="text-red-500 hover:text-red-700 text-decoration: underline cursor-pointer"
+                    aria-label="Remove paragraph"
+                    role="button"
+                  >
+                    Remove
+                  </a>
+                </div>
+              </div>
+            </div>
+
+            <a
+              (click)="addTextField()"
+              class="text-main text-decoration: underline cursor-pointer"
+              aria-label="Add new paragraph"
+              role="button"
+            >
+              Add Paragraph
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right side -->
+      <div class="flex mt-6 md:mt-0 md:pl-6 lg:pl-0 lg:w-1/3">
+        <div class="flex flex-col gap-4">
+          <h5>Page images</h5>
+
+          <div class="flex flex-col gap-2">
+            <label for="mainImg">Main image</label>
+
+            <input
+              type="file"
+              id="mainImg"
+              (change)="onFileSelected($event, 'mainImg')"
+              accept="image/*"
+              class="input"
+              [class.opacity-50]="isLoading"
+              [ngClass]="{
+                'border-red-500':
+                  caseForm.get('mainImg')?.invalid &&
+                  caseForm.get('mainImg')?.touched
+              }"
+            />
+            <img
+              *ngIf="currentCase?.page?.mainImgUrl"
+              [src]="currentCase?.page?.mainImgUrl"
+              alt="Current main image"
+              class="mt-2 max-w-xs rounded"
+            />
+          </div>
+
+          <div class="flex flex-col gap-2">
+            <label for="sideImg">Side image</label>
+            <input
+              type="file"
+              id="sideImg"
+              (change)="onFileSelected($event, 'sideImg')"
+              accept="image/*"
+              class="input"
+              [class.opacity-50]="isLoading"
+              [ngClass]="{
+                'border-red-500':
+                  caseForm.get('sideImg')?.invalid &&
+                  caseForm.get('sideImg')?.touched
+              }"
+            />
+            <img
+              *ngIf="currentCase?.page?.sideImgUrl"
+              [src]="currentCase?.page?.sideImgUrl"
+              alt="Current side image"
+              class="mt-2 max-w-xs rounded"
+            />
+          </div>
+
+          <h5>List images</h5>
+          <div class="flex flex-col gap-2">
+            <label for="imageCard">Image</label>
+            <input
+              type="file"
+              id="imageCard"
+              (change)="onFileSelected($event, 'imageCard')"
+              accept="image/*"
+              class="input"
+              [class.opacity-50]="isLoading"
+              [ngClass]="{
+                'border-red-500':
+                  caseForm.get('imageCard')?.invalid &&
+                  caseForm.get('imageCard')?.touched
+              }"
+            />
+            <img
+              *ngIf="currentCase?.imageCardUrl"
+              [src]="currentCase?.imageCardUrl"
+              alt="Current card image"
+              class="mt-2 max-w-xs rounded"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="w-44 mt-10">
+      <app-button
+        [submit]="true"
+        [disabled]="!caseForm.valid || isLoading"
+        color="green"
+      >
+        {{ isLoading ? "Saving..." : "Save case" }}
+      </app-button>
+    </div>
+
+    <!-- Progress bar -->
+    <div *ngIf="uploadProgress$ | async as progress" class="mt-4">
+      <div class="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+        <div
+          class="bg-blue-600 h-2.5 rounded-full transition-all duration-300"
+          [style.width.%]="progress"
+        ></div>
+      </div>
+      <div class="text-sm text-gray-500 mt-1">
+        Upload progress: {{ progress | number : "1.0-0" }}%
+      </div>
+    </div>
+  </form>
+</div>
+
+<app-error-toast></app-error-toast>

@@ -27,6 +27,7 @@ import { CommonModule } from '@angular/common';
       font-weight: 400;
       border: 1px solid #EAEAEA;
       width: 100%;
+      align-items: center;
       @media (min-width: 768px) {
         line-height: 135%;
       }

@@ -12,17 +12,17 @@ import {
   tap,
 } from 'rxjs';
 
-import { CasesService } from '../../services/cases.service';
-import { ButtonComponent } from '../../shared/button/button.component';
-import { DiscussNewProjectComponent } from '../../components/forms/discuss-new-project/discuss-new-project.component';
-import { Case } from '../../models/models';
-import { AuthService } from '../../services/auth.service';
-import { EditMenuComponent } from '../../shared/edit-menu/edit-menu.component';
-import { IconComponent } from '../../shared/icon/icon.component';
-import { ListCasesComponent } from './list-cases/list-cases.component';
+import { CasesService } from '../../../services/cases.service';
+import { ButtonComponent } from '../../../shared/button/button.component';
+import { DiscussNewProjectComponent } from '../../../components/forms/discuss-new-project/discuss-new-project.component';
+import { Case } from '../../../models/models';
+import { AuthService } from '../../../services/auth.service';
+import { EditMenuComponent } from '../../../shared/edit-menu/edit-menu.component';
+import { IconComponent } from '../../../shared/icon/icon.component';
+import { ListCasesComponent } from '../list-cases/list-cases.component';
 
 @Component({
-  selector: 'app-cases',
+  selector: 'app-archive',
   standalone: true,
   imports: [
     CommonModule,
@@ -33,7 +33,7 @@ import { ListCasesComponent } from './list-cases/list-cases.component';
     IconComponent,
     ListCasesComponent,
   ],
-  templateUrl: './cases.component.html',
+  templateUrl: './archive.component.html',
   styles: [
     `
       :host {
@@ -47,7 +47,7 @@ import { ListCasesComponent } from './list-cases/list-cases.component';
     `,
   ],
 })
-export class CasesComponent {
+export class ArchciveComponent {
   private casesService = inject(CasesService);
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -55,13 +55,13 @@ export class CasesComponent {
 
   cases$ = this.casesService.cases$.pipe(
     takeUntil(this.destroy$),
-    map((cases) => cases.filter((caseItem) => !caseItem.archive))
+    map((cases) => cases.filter((caseItem) => caseItem.archive))
   );
   isLoggedIn$ = this.authService.user$;
   isLoading$ = this.casesService.loading$;
 
   onEditCase(caseItem: Case): void {
-    this.router.navigate(['/cases', caseItem.slug, 'edit']);
+    this.router.navigate(['/cases', caseItem.id, 'edit']);
   }
 
   onDeleteCase(caseItem: Case): void {
@@ -73,11 +73,9 @@ export class CasesComponent {
 
   onArchiveCase(caseItem: Case): void {
     this.casesService
-      .archiveCase(caseItem)
+      .unArchiveCase(caseItem)
       .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.router.navigate(['/cases']);
-      });
+      .subscribe();
   }
 
   ngOnDestroy(): void {
