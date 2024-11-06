@@ -32,7 +32,12 @@ import {
   take,
 } from 'rxjs';
 
-import { Case, CaseFileUrls } from '../models/models';
+import {
+  BlogPost,
+  BlogPostFileUrls,
+  Case,
+  CaseFileUrls,
+} from '../models/models';
 import { isPlatformBrowser } from '@angular/common';
 
 interface DeleteFileResult {
@@ -320,23 +325,116 @@ export class FirebaseService {
     });
   }
 
-  fetchArticles() {
+  // Blog post operations
+
+  fetchPosts(): Observable<BlogPost[]> {
+    if (!this.checkPlatform()) {
+      return of([]);
+    }
+
     const articlesRef = collection(this.firestore, 'blog');
-    return collectionData(articlesRef, { idField: 'id' });
+    return collectionData(articlesRef, { idField: 'id' }) as Observable<
+      BlogPost[]
+    >;
   }
 
-  createArticle(data: any) {
+  createPost(data: any) {
     const articlesRef = collection(this.firestore, 'blog');
     return addDoc(articlesRef, data);
   }
 
-  updateArticle(id: string, data: any) {
+  updatePost(id: string, data: any) {
     const articleRef = doc(this.firestore, 'blog', id);
     return updateDoc(articleRef, data);
   }
 
-  deleteArticle(id: string) {
-    const articleRef = doc(this.firestore, 'blog', id);
-    return deleteDoc(articleRef);
+  deletePost(post: BlogPost): Observable<void> {
+    if (!post.id) {
+      return throwError(() => new Error('BlogPost ID is required'));
+    }
+
+    const fileUrls = [post.content?.mainImgUrl, post.cardImgUrl].filter(
+      (url) => url && url.includes('firebase')
+    ) as string[];
+
+    const deleteFileObservables = fileUrls.map((url) =>
+      this.deleteFileByUrl(url)
+    );
+
+    if (deleteFileObservables.length === 0) {
+      return from(deleteDoc(doc(this.firestore, 'blog', post.id)));
+    }
+
+    return forkJoin([
+      ...deleteFileObservables,
+      from(deleteDoc(doc(this.firestore, 'blog', post.id))),
+    ]).pipe(
+      map((results) => {
+        const fileResults = results.slice(0, -1) as DeleteFileResult[];
+        const realErrors = fileResults.filter(
+          (r) => !r.success && r.error?.code !== 'storage/object-not-found'
+        );
+
+        if (realErrors.length > 0) {
+          console.warn('Some files failed to delete:', realErrors);
+        }
+        return void 0;
+      }),
+      catchError((error) => {
+        if (error.code === 'storage/object-not-found') {
+          return of(void 0);
+        }
+        console.error('Error deleting blog post:', error);
+        return throwError(() => error);
+      })
+    );
+  }
+
+  uploadBlogPostFiles(files: {
+    mainImg?: File;
+    imageCard?: File;
+  }): Observable<BlogPostFileUrls> {
+    if (!this.checkPlatform()) {
+      return throwError(
+        () => new Error('File upload not available during SSR')
+      );
+    }
+
+    const uploadTasks: Observable<Partial<BlogPostFileUrls>>[] = [];
+    const totalFiles = Object.values(files).filter(Boolean).length;
+    let completedFiles = 0;
+
+    if (files.mainImg) {
+      uploadTasks.push(
+        this.uploadFile(files.mainImg, 'mainImages').pipe(
+          tap(() => {
+            completedFiles++;
+          }),
+          map((url): Partial<BlogPostFileUrls> => ({ mainImgUrl: url }))
+        )
+      );
+    }
+
+    if (files.imageCard) {
+      uploadTasks.push(
+        this.uploadFile(files.imageCard, 'cardImages').pipe(
+          tap(() => {
+            completedFiles++;
+          }),
+          map((url): Partial<BlogPostFileUrls> => ({ cardImgUrl: url }))
+        )
+      );
+    }
+
+    return uploadTasks.length
+      ? forkJoin(uploadTasks).pipe(
+          map((results) =>
+            results.reduce(
+              (acc, curr) => ({ ...acc, ...curr }),
+              {} as BlogPostFileUrls
+            )
+          )
+        )
+      : of({} as BlogPostFileUrls);
   }
 }

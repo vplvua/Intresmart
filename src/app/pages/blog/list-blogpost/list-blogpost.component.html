@@ -1,0 +1,64 @@
+<section
+  id="from-the-blog"
+  class="mt-10 mb-14 md:mt-16 lg:mt-24 animate-fade-in"
+>
+  @if (isLoading) {
+  <div class="flex justify-center items-center h-96">
+    <!-- Add your loader component here -->
+    <p>Loading...</p>
+  </div>
+  } @else { @if (isBrowser && !posts.length) {
+  <div class="flex justify-center items-center h-96">
+    <p class="text-gray-40">No blog posts available</p>
+  </div>
+  } @else {
+  <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+    @for (post of posts; track post.id) {
+    <article class="group flex flex-col gap-6 relative">
+      @if (isLoggedIn$ | async) {
+      <app-edit-menu
+        [item]="post"
+        class="absolute top-4 right-4 z-10"
+        (onEdit)="onEdit.emit($event)"
+        (onDelete)="onDelete.emit($event)"
+        (onArchive)="onArchive.emit($event)"
+      />
+      } @if (post.cardImgUrl) {
+      <img
+        [src]="post.cardImgUrl"
+        [alt]="post.title"
+        class="w-full h-[370px] object-cover object-left rounded-3xl"
+        (click)="navigateToCase(post.slug)"
+      />
+      }
+
+      <div class="flex flex-col gap-4">
+        <div class="flex justify-between items-center">
+          <!-- <span class="text-sm text-gray-40">{{
+            post.date | date : "mediumDate"
+          }}</span> -->
+          <span class="text-sm text-gray-40">by {{ post.author }}</span>
+        </div>
+
+        <h4
+          class="text-h6 md:text-h5 lg:text-h4 cursor-pointer hover:text-primary transition-colors"
+          (click)="navigateToCase(post.slug)"
+        >
+          {{ post.title }}
+        </h4>
+
+        <p class="text-main text-gray-40 lg:text-h6">
+          {{ post.subtitle }}
+        </p>
+
+        <div class="w-full sm:w-48">
+          <app-button type="green" (click)="navigateToCase(post.slug)">
+            Read more
+          </app-button>
+        </div>
+      </div>
+    </article>
+    }
+  </div>
+  } }
+</section>

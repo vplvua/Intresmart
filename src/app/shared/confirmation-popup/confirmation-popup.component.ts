@@ -11,7 +11,7 @@ import { ButtonComponent } from '../button/button.component';
 })
 export class ConfirmationPopupComponent {
   @Input() message = 'Are you sure you want to proceed?';
-  @Input() articleTitle = '';
+  @Input() title = '';
   @Input() confirmText = 'Confirm';
   @Input() cancelText = 'Cancel';
 

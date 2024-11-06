@@ -82,15 +82,6 @@ export class CasesService {
 
     this.loadingSubject.next(true);
 
-    const fileUrls = [
-      caseItem.homePage?.imageUrl,
-      caseItem.imageCardUrl,
-      caseItem.imageCardSvg,
-      caseItem.videoUrl,
-      caseItem.page?.mainImgUrl,
-      caseItem.page?.sideImgUrl,
-    ].filter(Boolean) as string[];
-
     return this.firebaseService.deleteCase(caseItem).pipe(
       take(1),
       tap(() => this.refreshCases()),

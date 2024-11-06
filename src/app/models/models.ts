@@ -21,6 +21,7 @@ export interface Case {
     mainImgUrl: string;
     sideImgUrl: string;
     textField: string[];
+    videoUrl?: string;
   };
   archive?: boolean;
 }
@@ -56,3 +57,28 @@ export type CaseFormGroup = FormGroup<{
   video: FormControl<File | null>;
   svg: FormControl<File | null>;
 }>;
+
+export interface BlogPost {
+  id?: string;
+  title: string;
+  subtitle: string;
+  slug: string;
+  date: string;
+  content: {
+    article: Article[];
+    mainImgUrl?: string;
+  };
+  cardImgUrl: string;
+  author: string;
+  archive?: boolean;
+}
+
+export interface Article {
+  header?: string;
+  text?: string;
+}
+
+export interface BlogPostFileUrls {
+  mainImgUrl?: string;
+  cardImgUrl?: string;
+}
