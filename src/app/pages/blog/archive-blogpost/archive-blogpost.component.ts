@@ -1,30 +1,28 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { map, Subject, take, takeUntil, tap } from 'rxjs';
 import { Router, RouterLink } from '@angular/router';
 
-import { BlogService } from '../../services/blog.service';
-import { AuthService } from '../../services/auth.service';
-import { BlogPost } from '../../models/models';
-import { WantToWorkComponent } from '../../shared/want-to-work/want-to-work.component';
-import { ListBlogpostComponent } from './list-blogpost/list-blogpost.component';
-import { ButtonComponent } from '../../shared/button/button.component';
-import { IconComponent } from '../../shared/icon/icon.component';
+import { ListBlogpostComponent } from '../list-blogpost/list-blogpost.component';
+import { ButtonComponent } from '../../../shared/button/button.component';
+import { IconComponent } from '../../../shared/icon/icon.component';
+import { BlogService } from '../../../services/blog.service';
+import { AuthService } from '../../../services/auth.service';
+import { map, Subject, take, takeUntil } from 'rxjs';
+import { BlogPost } from '../../../models/models';
 
 @Component({
-  selector: 'app-blog',
+  selector: 'app-archive-blogpost',
   standalone: true,
   imports: [
     CommonModule,
-    WantToWorkComponent,
     ListBlogpostComponent,
     ButtonComponent,
-    RouterLink,
     IconComponent,
+    RouterLink,
   ],
-  templateUrl: './blog.component.html',
+  templateUrl: './archive-blogpost.component.html',
 })
-export class BlogComponent {
+export class ArchiveBlogpostComponent {
   private blogService = inject(BlogService);
   private authService = inject(AuthService);
   private router = inject(Router);
@@ -32,7 +30,7 @@ export class BlogComponent {
 
   posts$ = this.blogService.posts$.pipe(
     takeUntil(this.destroy$),
-    map((posts) => posts.filter((post) => !post.archive))
+    map((posts) => posts.filter((post) => post.archive))
   );
 
   isLoggedIn$ = this.authService.user$;
@@ -50,11 +48,9 @@ export class BlogComponent {
 
   onArchivePost(post: BlogPost): void {
     this.blogService
-      .archivePost(post)
+      .unArchivePost(post)
       .pipe(take(1), takeUntil(this.destroy$))
-      .subscribe(() => {
-        this.router.navigate(['/blog']);
-      });
+      .subscribe();
   }
 
   ngOnDestroy() {

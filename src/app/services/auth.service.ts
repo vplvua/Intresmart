@@ -10,6 +10,8 @@ import {
 import {
   BehaviorSubject,
   catchError,
+  distinctUntilChanged,
+  filter,
   from,
   Observable,
   of,
@@ -17,16 +19,23 @@ import {
   tap,
   throwError,
 } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
   private userSubject = new BehaviorSubject<User | null>(null);
-  user$ = this.userSubject.asObservable();
+  private authInitialized = false;
+  user$ = this.userSubject.asObservable().pipe(
+    filter(() => this.authInitialized),
+    distinctUntilChanged()
+  );
+  redirectUrl: string | null = null;
 
-  constructor(private auth: Auth) {
+  constructor(private auth: Auth, private router: Router) {
     this.auth.onAuthStateChanged((user) => {
+      this.authInitialized = true;
       this.userSubject.next(user);
     });
   }
@@ -34,7 +43,10 @@ export class AuthService {
   signInWithGoogle(): Observable<User> {
     const provider = new GoogleAuthProvider();
     return from(signInWithPopup(this.auth, provider)).pipe(
-      switchMap((result) => of(result.user)),
+      switchMap((result) => {
+        this.handleRedirect();
+        return of(result.user);
+      }),
       catchError((error) => {
         console.error('Authentication failed:', error);
         return throwError(() => new Error('Authentication failed'));
@@ -47,7 +59,10 @@ export class AuthService {
     password: string
   ): Observable<User> {
     return from(signInWithEmailAndPassword(this.auth, email, password)).pipe(
-      switchMap((result) => of(result.user)),
+      switchMap((result) => {
+        this.handleRedirect();
+        return of(result.user);
+      }),
       catchError((error) => {
         console.error('Email/Password authentication failed:', error);
         return throwError(
@@ -55,6 +70,15 @@ export class AuthService {
         );
       })
     );
+  }
+
+  private handleRedirect() {
+    if (this.redirectUrl) {
+      this.router.navigate([this.redirectUrl]);
+      this.redirectUrl = null;
+    } else {
+      this.router.navigate(['/']);
+    }
   }
 
   signUp(email: string, password: string): Observable<User> {

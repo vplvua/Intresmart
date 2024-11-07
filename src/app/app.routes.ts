@@ -18,6 +18,7 @@ import { ArchciveComponent } from './pages/cases/archive/archive.component';
 import { CaseComponent } from './pages/cases/case/case.component';
 import { EditCaseComponent } from './pages/cases/edit-case/edit-case.component';
 import { AddNewPostComponent } from './pages/blog/add-new-post/add-new-post.component';
+import { ArchiveBlogpostComponent } from './pages/blog/archive-blogpost/archive-blogpost.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -29,11 +30,11 @@ export const routes: Routes = [
     component: AddNewPostComponent,
     canActivate: [AuthGuard],
   },
-  // {
-  //   path: 'blog/archive',
-  //   component: ArchivePostComponent,
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: 'blog/archive',
+    component: ArchiveBlogpostComponent,
+    canActivate: [AuthGuard],
+  },
   // { path: 'blog/:slug', component: PostComponent },
   // {
   //   path: 'blog/:slug/edit',

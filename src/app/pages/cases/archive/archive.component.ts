@@ -58,7 +58,6 @@ export class ArchciveComponent {
     map((cases) => cases.filter((caseItem) => caseItem.archive))
   );
   isLoggedIn$ = this.authService.user$;
-  isLoading$ = this.casesService.loading$;
 
   onEditCase(caseItem: Case): void {
     this.router.navigate(['/cases', caseItem.id, 'edit']);

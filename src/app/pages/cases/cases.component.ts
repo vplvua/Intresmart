@@ -57,6 +57,7 @@ export class CasesComponent {
     takeUntil(this.destroy$),
     map((cases) => cases.filter((caseItem) => !caseItem.archive))
   );
+
   isLoggedIn$ = this.authService.user$;
   isLoading$ = this.casesService.loading$;
 

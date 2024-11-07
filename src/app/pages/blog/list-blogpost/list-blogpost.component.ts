@@ -13,16 +13,16 @@ import { ButtonComponent } from '../../../shared/button/button.component';
 import { BlogPost } from '../../../models/models';
 import { AuthService } from '../../../services/auth.service';
 import { EditMenuComponent } from '../../../shared/edit-menu/edit-menu.component';
+import { LoaderComponent } from '../../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-list-blogpost',
   standalone: true,
-  imports: [CommonModule, ButtonComponent, EditMenuComponent],
+  imports: [CommonModule, ButtonComponent, EditMenuComponent, LoaderComponent],
   templateUrl: './list-blogpost.component.html',
 })
 export class ListBlogpostComponent {
   @Input() posts: BlogPost[] = [];
-  @Input() isLoading: boolean | null = false;
 
   @Output() onEdit = new EventEmitter<BlogPost>();
   @Output() onDelete = new EventEmitter<BlogPost>();

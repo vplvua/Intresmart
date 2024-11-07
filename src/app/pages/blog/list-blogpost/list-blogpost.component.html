@@ -2,12 +2,7 @@
   id="from-the-blog"
   class="mt-10 mb-14 md:mt-16 lg:mt-24 animate-fade-in"
 >
-  @if (isLoading) {
-  <div class="flex justify-center items-center h-96">
-    <!-- Add your loader component here -->
-    <p>Loading...</p>
-  </div>
-  } @else { @if (isBrowser && !posts.length) {
+  @defer { @if (isBrowser && !posts.length) {
   <div class="flex justify-center items-center h-96">
     <p class="text-gray-40">No blog posts available</p>
   </div>
@@ -60,5 +55,7 @@
     </article>
     }
   </div>
-  } }
+  } } @loading (minimum 2s) {
+  <app-loader></app-loader>
+  }
 </section>
