@@ -17,7 +17,7 @@ import {
 import { isPlatformBrowser } from '@angular/common';
 
 import { FirebaseService } from './firebase.service';
-import { BlogPost } from '../models/models';
+import { BlogPost, BlogPostFileUrls } from '../models/models';
 import { ErrorHandlingService } from './error-handling.service';
 import { SlugService } from './slug.service';
 
@@ -177,6 +177,21 @@ export class BlogService {
     }
 
     return this.updatePost(post.id, { ...post, archive: false }).pipe(take(1));
+  }
+
+  uploadFiles(files: {
+    mainImg?: File;
+    imageCard?: File;
+  }): Observable<BlogPostFileUrls> {
+    this.loadingSubject.next(true);
+
+    return this.firebaseService.uploadBlogPostFiles(files).pipe(
+      catchError((error) => {
+        this.errorService.handleError('Failed to upload files');
+        return throwError(() => error);
+      }),
+      finalize(() => this.loadingSubject.next(false))
+    );
   }
 
   ngOnDestroy() {
