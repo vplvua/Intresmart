@@ -20,6 +20,7 @@ import { EditCaseComponent } from './pages/cases/edit-case/edit-case.component';
 import { AddNewPostComponent } from './pages/blog/add-new-post/add-new-post.component';
 import { ArchiveBlogpostComponent } from './pages/blog/archive-blogpost/archive-blogpost.component';
 import { PostComponent } from './pages/blog/post/post.component';
+import { EditPostComponent } from './pages/blog/edit-post/edit-post.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -37,11 +38,11 @@ export const routes: Routes = [
     canActivate: [AuthGuard],
   },
   { path: 'blog/:slug', component: PostComponent },
-  // {
-  //   path: 'blog/:slug/edit',
-  //   component: EditPostComponent,
-  //   canActivate: [AuthGuard],
-  // },
+  {
+    path: 'blog/:slug/edit',
+    component: EditPostComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'cases', component: CasesComponent },
   {
     path: 'cases/add',

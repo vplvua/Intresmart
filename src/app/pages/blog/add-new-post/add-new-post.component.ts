@@ -196,12 +196,13 @@ export class AddNewPostComponent {
             }
             return this.blogService.createPost(postData).pipe(
               take(1),
-              tap((docRef) => {
-                const slug = this.slugService.createBlogSlug(
-                  postData.title || ''
-                );
-                this.uploadProgress$.next(100);
-                this.router.navigate(['/blog', slug]);
+              switchMap(() => this.blogService.posts$),
+              map((posts) => posts.find((p) => p.title === postData.title)),
+              tap((newPost) => {
+                if (newPost?.slug) {
+                  this.uploadProgress$.next(100);
+                  this.router.navigate(['/blog', newPost.slug]);
+                }
               })
             );
           }),

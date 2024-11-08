@@ -236,7 +236,7 @@ export class FirebaseService {
 
     if (files.mainImg) {
       uploadTasks.push(
-        this.uploadFile(files.mainImg, 'mainImages').pipe(
+        this.uploadFile(files.mainImg, 'mainImages', 'cases').pipe(
           tap(() => {
             completedFiles++;
           }),
@@ -247,7 +247,7 @@ export class FirebaseService {
 
     if (files.sideImg) {
       uploadTasks.push(
-        this.uploadFile(files.sideImg, 'sideImages').pipe(
+        this.uploadFile(files.sideImg, 'sideImages', 'cases').pipe(
           tap(() => {
             completedFiles++;
           }),
@@ -258,7 +258,7 @@ export class FirebaseService {
 
     if (files.imageCard) {
       uploadTasks.push(
-        this.uploadFile(files.imageCard, 'cardImages').pipe(
+        this.uploadFile(files.imageCard, 'cardImages', 'cases').pipe(
           tap(() => {
             completedFiles++;
           }),
@@ -269,7 +269,7 @@ export class FirebaseService {
 
     if (files.video) {
       uploadTasks.push(
-        this.uploadFile(files.video, 'videos').pipe(
+        this.uploadFile(files.video, 'videos', 'cases').pipe(
           tap(() => {
             completedFiles++;
           }),
@@ -280,7 +280,7 @@ export class FirebaseService {
 
     if (files.svg) {
       uploadTasks.push(
-        this.uploadFile(files.svg, 'svgs').pipe(
+        this.uploadFile(files.svg, 'svgs', 'cases').pipe(
           tap(() => {
             completedFiles++;
           }),
@@ -301,8 +301,12 @@ export class FirebaseService {
       : of({} as CaseFileUrls);
   }
 
-  private uploadFile(file: File, path: string): Observable<string> {
-    const storageRef = ref(this.storage, `cases/${path}/${file.name}`);
+  private uploadFile(
+    file: File,
+    path: string,
+    rootFolder: 'cases' | 'blog'
+  ): Observable<string> {
+    const storageRef = ref(this.storage, `${rootFolder}/${path}/${file.name}`);
     const uploadTask = uploadBytesResumable(storageRef, file);
 
     return new Observable<string>((observer) => {
@@ -406,7 +410,7 @@ export class FirebaseService {
 
     if (files.mainImg) {
       uploadTasks.push(
-        this.uploadFile(files.mainImg, 'mainImages').pipe(
+        this.uploadFile(files.mainImg, 'mainImages', 'blog').pipe(
           tap(() => {
             completedFiles++;
           }),
@@ -417,7 +421,7 @@ export class FirebaseService {
 
     if (files.imageCard) {
       uploadTasks.push(
-        this.uploadFile(files.imageCard, 'cardImages').pipe(
+        this.uploadFile(files.imageCard, 'cardImages', 'blog').pipe(
           tap(() => {
             completedFiles++;
           }),
