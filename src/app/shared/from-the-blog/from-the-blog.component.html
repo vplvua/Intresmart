@@ -3,42 +3,44 @@
   class="mt-12 mb-14 md:mt-32 lg:mt-44 animate-fade-in"
 >
   <h3 class="text-h5 md:text-h4 lg:text-h3">From the blog</h3>
-  <div class="flex flex-col lg:flex-row lg:gap-6">
-    <article class="mt-6 group flex flex-col gap-6">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/cases%2Fpage%2Fin-car-ar-platform.png?alt=media&token=57979fab-1351-4c02-81ee-6ab3c518b50c"
-        alt=""
-        class="w-full h-[370px] object-cover object-center rounded-3xl"
-      />
-      <h4 class="text-h6 md:text-h5 lg:text-h4">
-        How Does Color Influence Our Decisions?
-      </h4>
-      <p class="text-main lg:text-h6">
-        Our HR Director shares his experience on how to fill positions with the
-        best candidates, where to find talents, and how to attract professionals
-        to your business.
-      </p>
-      <div class="w-full sm:w-48">
-        <app-button type="green">Read more</app-button>
-      </div>
-    </article>
-    <article class="mt-6 group flex flex-col gap-6">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/cases%2Fpage%2Fhmi-visual-design.png?alt=media&token=f321afba-2e9c-4396-9e3a-d5e43ba45096"
-        alt=""
-        class="w-full h-[203px] lg:h-[370px] object-cover object-left rounded-3xl"
-      />
-      <h4 class="text-h6 md:text-h5 lg:text-h4">
-        The Importance of Integrated Web Teams
-      </h4>
-      <p class="text-main lg:text-h6">
-        Do you want to achieve higher profits this year? Our new product will
-        help you get what you want. In this article, you will find out how to
-        use it to get more benefits.
-      </p>
-      <div class="w-full sm:w-48">
-        <app-button type="green">Read more</app-button>
-      </div>
-    </article>
+
+  @defer { @if (posts$ | async; as posts) { @if (!posts.length) {
+  <div class="flex justify-center items-center h-96">
+    <p class="text-gray-40">No blog posts available</p>
   </div>
+  } @else {
+  <div class="flex flex-col lg:flex-row lg:gap-6">
+    @for (post of posts; track post.id) {
+    <article class="mt-6 group flex flex-col gap-6">
+      @if (post.cardImgUrl) {
+      <img
+        [src]="post.cardImgUrl"
+        [alt]="post.title"
+        class="w-full h-[370px] object-cover object-left rounded-3xl"
+        (click)="navigateToPost(post.slug)"
+      />
+      }
+
+      <h4
+        class="text-h6 md:text-h5 lg:text-h4 cursor-pointer hover:text-primary transition-colors"
+        (click)="navigateToPost(post.slug)"
+      >
+        {{ post.title }}
+      </h4>
+
+      <p class="text-main text-gray-40 lg:text-h6">
+        {{ post.subtitle }}
+      </p>
+
+      <div class="w-full sm:w-48">
+        <app-button type="green" (click)="navigateToPost(post.slug)">
+          Read more
+        </app-button>
+      </div>
+    </article>
+    }
+  </div>
+  } } } @loading (minimum 2s) {
+  <app-loader></app-loader>
+  }
 </section>

@@ -1,32 +1,20 @@
 <div *ngIf="cases$ | async as cases">
   <header class="flex flex-col items-center gap-20">
-    <h2>Our cases</h2>
+    <h2 class="text-h4 md:text-h3 lg:text-h2">Our cases</h2>
     @if (isLoggedIn$ | async) {
     <div class="flex justify-between w-full items-center">
-      <div class="w-72"></div>
-      <a [routerLink]="['/cases']" style="text-decoration: underline">Cases</a>
+      <div class="w-72">
+        <app-button [routerLink]="['/cases']">Back to case </app-button>
+      </div>
     </div>
     }
   </header>
   <div class="relative">
-    @if(isLoading$ | async) {
-    <div
-      class="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center"
-    >
-      <div class="loader">Loading...</div>
-    </div>
-    }
-
     <app-list-cases
       [cases]="cases"
-      [isLoading]="isLoading$ | async"
       (onEdit)="onEditCase($event)"
       (onDelete)="onDeleteCase($event)"
       (onArchive)="onArchiveCase($event)"
     />
   </div>
-
-  <section id="discuss-new-project">
-    <app-discuss-new-project></app-discuss-new-project>
-  </section>
 </div>

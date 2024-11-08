@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, map, Observable, of } from 'rxjs';
-import { Case } from '../models/models';
+import { BlogPost, Case } from '../models/models';
 
 @Injectable({
   providedIn: 'root',
@@ -9,6 +9,9 @@ export class SlugService {
   private slugCache = new Map<string, string>(); // slug -> id
   private idCache = new Map<string, string>(); // id -> slug
   private casesSubject = new BehaviorSubject<Case[]>([]);
+  private blogPostsSubject = new BehaviorSubject<BlogPost[]>([]);
+
+  // Cases
 
   updateCases(cases: Case[]): void {
     const currentCases = this.casesSubject.getValue();
@@ -84,6 +87,61 @@ export class SlugService {
       map((newSlug) => {
         this.idCache.set(id, newSlug);
         this.slugCache.set(newSlug, id);
+        return newSlug;
+      })
+    );
+  }
+
+  // Blog posts
+
+  updateBlogPosts(posts: BlogPost[]): void {
+    const currentPosts = this.blogPostsSubject.getValue();
+    if (JSON.stringify(currentPosts) !== JSON.stringify(posts)) {
+      this.blogPostsSubject.next(posts);
+      this.updateBlogCache(posts);
+    }
+  }
+
+  private updateBlogCache(posts: BlogPost[]): void {
+    posts.forEach((post) => {
+      if (post.id && post.slug) {
+        this.slugCache.set(`blog-${post.slug}`, post.id);
+        this.idCache.set(`blog-${post.id}`, post.slug);
+      }
+    });
+  }
+
+  createBlogSlug(title: string): Observable<string> {
+    const baseSlug = this.slugify(title);
+
+    return this.blogPostsSubject.pipe(
+      map((posts) => {
+        const existingSlugs = posts.map((p) => p.slug);
+        return this.makeUniqueSlug(baseSlug, existingSlugs);
+      })
+    );
+  }
+
+  getBlogIdFromSlug(slug: string): string | undefined {
+    return this.slugCache.get(`blog-${slug}`);
+  }
+
+  getBlogSlugFromId(id: string): string | undefined {
+    return this.idCache.get(`blog-${id}`);
+  }
+
+  updateBlogSlug(id: string, newTitle: string): Observable<string> {
+    const currentSlug = this.getBlogSlugFromId(id);
+    const newSlug = this.slugify(newTitle);
+
+    if (currentSlug === newSlug) {
+      return of(currentSlug);
+    }
+
+    return this.createBlogSlug(newTitle).pipe(
+      map((newSlug) => {
+        this.idCache.set(`blog-${id}`, newSlug);
+        this.slugCache.set(`blog-${newSlug}`, id);
         return newSlug;
       })
     );

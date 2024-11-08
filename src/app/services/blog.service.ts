@@ -3,8 +3,8 @@ import { DocumentData, DocumentReference } from '@angular/fire/firestore';
 import {
   BehaviorSubject,
   catchError,
-  filter,
   finalize,
+  from,
   map,
   Observable,
   Subject,
@@ -14,17 +14,17 @@ import {
   tap,
   throwError,
 } from 'rxjs';
+import { isPlatformBrowser } from '@angular/common';
 
 import { FirebaseService } from './firebase.service';
-import { Case, CaseFileUrls } from '../models/models';
+import { BlogPost, BlogPostFileUrls } from '../models/models';
 import { ErrorHandlingService } from './error-handling.service';
-import { isPlatformBrowser } from '@angular/common';
 import { SlugService } from './slug.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CasesService {
+export class BlogService {
   private firebaseService = inject(FirebaseService);
   private errorService = inject(ErrorHandlingService);
   private slugService = inject(SlugService);
@@ -32,21 +32,21 @@ export class CasesService {
   private loadingSubject = new BehaviorSubject<boolean>(false);
   private platformId = inject(PLATFORM_ID);
 
-  private casesSubject = new BehaviorSubject<Case[]>([]);
-  cases$: Observable<Case[]> = this.casesSubject.asObservable();
+  private postsSubject = new BehaviorSubject<BlogPost[]>([]);
+  posts$ = this.postsSubject.asObservable();
   loading$ = this.loadingSubject.asObservable();
 
   constructor() {
     if (isPlatformBrowser(this.platformId)) {
-      this.loadCases();
+      this.loadPosts();
     }
   }
 
-  private refreshCases(): void {
-    this.loadCases();
+  private refreshPosts(): void {
+    this.loadPosts();
   }
 
-  private loadCases() {
+  private loadPosts() {
     if (!isPlatformBrowser(this.platformId)) {
       return;
     }
@@ -54,61 +54,61 @@ export class CasesService {
     this.loadingSubject.next(true);
 
     this.firebaseService
-      .fetchCases()
+      .fetchPosts()
       .pipe(
         take(1),
         takeUntil(this.destroy$),
-        tap((cases) => {
-          this.slugService.updateCases(cases);
-          this.casesSubject.next(cases);
+        tap((posts: BlogPost[]) => {
+          this.slugService.updateBlogPosts(posts);
+          this.postsSubject.next(posts as BlogPost[]);
           this.loadingSubject.next(false);
         }),
         catchError((error) => {
-          this.errorService.handleError('Failed to load cases');
+          this.errorService.handleError('Failed to load blog posts');
           this.loadingSubject.next(false);
           return throwError(() => error);
         })
       )
       .subscribe({
-        error: (error) => console.error('Subscription error:', error),
+        error: (error: any) => console.error('Subscription error:', error),
         complete: () => {},
       });
   }
 
-  deleteCase(caseItem: Case): Observable<void> {
-    if (!caseItem.id) {
-      return throwError(() => new Error('Case ID is required'));
+  deletePost(post: BlogPost): Observable<void> {
+    if (!post.id) {
+      return throwError(() => new Error('Post ID is required'));
     }
 
     this.loadingSubject.next(true);
 
-    return this.firebaseService.deleteCase(caseItem).pipe(
+    return this.firebaseService.deletePost(post).pipe(
       take(1),
-      tap(() => this.refreshCases()),
+      tap(() => this.refreshPosts()),
       catchError((error) => {
-        this.errorService.handleError('Failed to delete case');
+        this.errorService.handleError('Failed to delete blog post');
         return throwError(() => error);
       }),
       finalize(() => this.loadingSubject.next(false))
     );
   }
 
-  updateCase(id: string, data: Partial<Case>): Observable<void> {
+  updatePost(id: string, data: Partial<BlogPost>): Observable<void> {
     this.loadingSubject.next(true);
 
     if (data.title) {
-      return this.slugService.updateSlug(id, data.title).pipe(
+      return this.slugService.updateBlogSlug(id, data.title).pipe(
         take(1),
         switchMap((slug) => {
           const updateData = { ...data, slug };
 
-          return this.firebaseService.updateCase(id, updateData).pipe(
+          return from(this.firebaseService.updatePost(id, updateData)).pipe(
             take(1),
             tap(() => {
-              this.refreshCases();
+              this.refreshPosts();
             }),
             catchError((error) => {
-              this.errorService.handleError('Failed to update case');
+              this.errorService.handleError('Failed to update blog post');
               return throwError(() => error);
             }),
             finalize(() => {
@@ -119,13 +119,13 @@ export class CasesService {
       );
     }
 
-    return this.firebaseService.updateCase(id, data).pipe(
+    return from(this.firebaseService.updatePost(id, data)).pipe(
       take(1),
       tap(() => {
-        this.refreshCases();
+        this.refreshPosts();
       }),
       catchError((error) => {
-        this.errorService.handleError('Failed to update case');
+        this.errorService.handleError('Failed to update blog post');
         return throwError(() => error);
       }),
       finalize(() => {
@@ -134,63 +134,58 @@ export class CasesService {
     );
   }
 
-  getCaseBySlug(slug: string): Observable<Case | undefined> {
-    return this.cases$.pipe(map((cases) => cases.find((c) => c.slug === slug)));
-  }
-
-  createCase(
-    caseData: Partial<Case>
+  createPost(
+    postData: Partial<BlogPost>
   ): Observable<DocumentReference<DocumentData>> {
     this.loadingSubject.next(true);
 
-    return this.slugService.createSlug(caseData.title || '').pipe(
+    return this.slugService.createBlogSlug(postData.title || '').pipe(
       take(1),
       switchMap((slug) => {
-        const data = { ...caseData, slug };
+        const data = { ...postData, slug };
 
-        return this.firebaseService.createCase(data).pipe(take(1));
+        return from(this.firebaseService.createPost(data)).pipe(take(1));
       }),
       tap(() => {
-        this.refreshCases();
+        this.refreshPosts();
       }),
       catchError((error) => {
-        this.errorService.handleError('Failed to create case');
+        this.errorService.handleError('Failed to create blog post');
         return throwError(() => error);
       }),
       finalize(() => this.loadingSubject.next(false))
     );
   }
 
-  archiveCase(caseItem: Case): Observable<void> {
-    if (!caseItem.id) {
-      return throwError(() => new Error('Case ID is required'));
-    }
-
-    return this.updateCase(caseItem.id, { ...caseItem, archive: true }).pipe(
-      take(1)
+  getPostBySlug(slug: string): Observable<BlogPost | undefined> {
+    return this.posts$.pipe(
+      map((posts) => posts.find((post) => post.slug === slug))
     );
   }
 
-  unArchiveCase(caseItem: Case): Observable<void> {
-    if (!caseItem.id) {
-      return throwError(() => new Error('Case ID is required'));
+  archivePost(post: BlogPost): Observable<void> {
+    if (!post.id) {
+      return throwError(() => new Error('Post ID is required'));
     }
 
-    return this.updateCase(caseItem.id, { ...caseItem, archive: false }).pipe(
-      take(1)
-    );
+    return this.updatePost(post.id, { ...post, archive: true }).pipe(take(1));
+  }
+
+  unArchivePost(post: BlogPost): Observable<void> {
+    if (!post.id) {
+      return throwError(() => new Error('Post ID is required'));
+    }
+
+    return this.updatePost(post.id, { ...post, archive: false }).pipe(take(1));
   }
 
   uploadFiles(files: {
     mainImg?: File;
-    sideImg?: File;
     imageCard?: File;
-    video?: File;
-    svg?: File;
-  }): Observable<CaseFileUrls> {
+  }): Observable<BlogPostFileUrls> {
     this.loadingSubject.next(true);
 
-    return this.firebaseService.uploadCaseFiles(files).pipe(
+    return this.firebaseService.uploadBlogPostFiles(files).pipe(
       catchError((error) => {
         this.errorService.handleError('Failed to upload files');
         return throwError(() => error);

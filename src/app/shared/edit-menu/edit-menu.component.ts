@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { Case } from '../../models/models';
 import { ClickOutsideDirective } from '../../shared/directives/click-outside.directive';
 import { ConfirmationPopupComponent } from '../confirmation-popup/confirmation-popup.component';
 import { IconComponent } from '../icon/icon.component';
@@ -22,11 +21,11 @@ import { IconComponent } from '../icon/icon.component';
     }
   `,
 })
-export class EditMenuComponent {
-  @Input() item!: Case;
-  @Output() onEdit = new EventEmitter<Case>();
-  @Output() onDelete = new EventEmitter<Case>();
-  @Output() onArchive = new EventEmitter<Case>();
+export class EditMenuComponent<T extends { id?: string; title: string }> {
+  @Input() item!: T;
+  @Output() onEdit = new EventEmitter<T>();
+  @Output() onDelete = new EventEmitter<T>();
+  @Output() onArchive = new EventEmitter<T>();
 
   isMenuOpen = false;
   showDeleteConfirmation = false;

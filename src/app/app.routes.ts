@@ -17,19 +17,43 @@ import { AuthGuard } from './guards/auth.guard';
 import { ArchciveComponent } from './pages/cases/archive/archive.component';
 import { CaseComponent } from './pages/cases/case/case.component';
 import { EditCaseComponent } from './pages/cases/edit-case/edit-case.component';
+import { AddNewPostComponent } from './pages/blog/add-new-post/add-new-post.component';
+import { ArchiveBlogpostComponent } from './pages/blog/archive-blogpost/archive-blogpost.component';
+import { PostComponent } from './pages/blog/post/post.component';
+import { EditPostComponent } from './pages/blog/edit-post/edit-post.component';
 
 export const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'blog', component: BlogComponent },
+  {
+    path: 'blog/add',
+    component: AddNewPostComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'blog/archive',
+    component: ArchiveBlogpostComponent,
+    canActivate: [AuthGuard],
+  },
+  { path: 'blog/:slug', component: PostComponent },
+  {
+    path: 'blog/:slug/edit',
+    component: EditPostComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'cases', component: CasesComponent },
   {
     path: 'cases/add',
     component: AddNewCaseComponent,
     canActivate: [AuthGuard],
   },
-  { path: 'cases/archive', component: ArchciveComponent },
+  {
+    path: 'cases/archive',
+    component: ArchciveComponent,
+    canActivate: [AuthGuard],
+  },
   { path: 'cases/:slug', component: CaseComponent },
   {
     path: 'cases/:slug/edit',
