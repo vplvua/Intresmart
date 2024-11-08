@@ -6,9 +6,9 @@ import { Subject, takeUntil, switchMap, map, take } from 'rxjs';
 import { CasesService } from '../../../services/cases.service';
 import { Case } from '../../../models/models';
 import { ButtonComponent } from '../../../shared/button/button.component';
-import { IconComponent } from '../../../shared/icon/icon.component';
 import { AuthService } from '../../../services/auth.service';
 import { WantToWorkComponent } from '../../../shared/want-to-work/want-to-work.component';
+import { LoaderComponent } from '../../../shared/loader/loader.component';
 
 @Component({
   selector: 'app-case',
@@ -17,8 +17,8 @@ import { WantToWorkComponent } from '../../../shared/want-to-work/want-to-work.c
     CommonModule,
     RouterLink,
     ButtonComponent,
-    IconComponent,
     WantToWorkComponent,
+    LoaderComponent,
   ],
   templateUrl: './case.component.html',
 })
