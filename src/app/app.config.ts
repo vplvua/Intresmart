@@ -5,23 +5,36 @@ import {
   provideZoneChangeDetection,
 } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
+import {
+  provideRouter,
+  withInMemoryScrolling,
+  withRouterConfig,
+  withViewTransitions,
+} from '@angular/router';
 import { provideClientHydration } from '@angular/platform-browser';
-
 import { provideFirebaseApp, initializeApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAuth, getAuth } from '@angular/fire/auth';
-import { signInWithCustomToken } from 'firebase/auth';
-import { environment } from '../environments/environment';
-import { DOCUMENT } from '@angular/common';
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideStorage, getStorage } from '@angular/fire/storage';
+
+import { routes } from './app.routes';
+import { environment } from '../environments/environment';
 
 export const appConfig: ApplicationConfig = {
   providers: [
     provideZoneChangeDetection({ eventCoalescing: true }),
-    provideRouter(routes),
+    provideRouter(
+      routes,
+      withViewTransitions(),
+      withInMemoryScrolling({
+        scrollPositionRestoration: 'enabled',
+        anchorScrolling: 'enabled',
+      }),
+      withRouterConfig({
+        paramsInheritanceStrategy: 'always',
+      })
+    ),
     provideClientHydration(),
     provideAnimations(),
     provideFirebaseApp(() => {
