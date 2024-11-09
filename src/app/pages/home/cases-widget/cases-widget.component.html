@@ -1,52 +1,60 @@
 <div class="mt-8 lg:mt-20" *ngIf="cases$ | async as cases">
   <div class="grid grid-cols-1 md:grid-cols-2 gap-x-6">
     @if(cases && cases.length > 0) {
-    <article class="flex flex-col gap-4 lg:gap-6 items-center w-full h-full">
-      <p
-        class="text-main text-gray-10 lg:text-gray-5 md:text-h6 lg:text-[38px]"
-      >
-        {{ cases[0].homePage.title }}
-      </p>
-      <img
-        src="{{ cases[0].homePage.imageUrl }}"
-        alt="{{ cases[0].homePage.title }}"
-        class="w-56 md:w-4/5 lg:w-auto rounded-lg"
-      />
-    </article>
-    <div class="sm:w-4/5 sm:m-auto md:w-full flex flex-col gap-4 md:gap-6">
+    <a [routerLink]="['/cases', cases[0].slug]">
+      <article class="flex flex-col gap-4 lg:gap-6 items-center w-full h-full">
+        <p
+          class="text-main text-gray-10 lg:text-gray-5 md:text-h6 lg:text-[38px]"
+        >
+          {{ cases[0].homePage.title }}
+        </p>
+        <img
+          src="{{ cases[0].homePage.imageUrl }}"
+          alt="{{ cases[0].homePage.title }}"
+          class="w-56 md:w-4/5 lg:w-auto rounded-lg"
+        />
+      </article>
+    </a>
+    <div
+      class="sm:w-4/5 mt-6 mx-auto md:m-auto md:w-full flex flex-col gap-4 md:gap-6"
+    >
       <div class="flex flex-row flex-wrap gap-4 md:flex-col">
-        <article
-          class="w-[calc(50%-0.5rem)] md:w-full flex flex-col gap-2 md:gap-6"
-        >
-          <p
-            class="text-base text-gray-10 lg:text-gray-5 md:text-h6 lg:text-[38px]"
+        <a [routerLink]="['/cases', cases[1].slug]">
+          <article
+            class="w-[calc(50%-0.5rem)] md:w-full flex flex-col gap-2 md:gap-6"
           >
-            {{ cases[1].homePage.title }}
-          </p>
-          <div class="relative h-60 overflow-hidden rounded-lg">
-            <img
-              [src]="cases[1].homePage.imageUrl"
-              [alt]="cases[1].homePage.title"
-              class="absolute right-0 top-0 h-full w-full object-cover object-left"
-            />
-          </div>
-        </article>
-        <article
-          class="w-[calc(50%-0.5rem)] md:w-full flex flex-col gap-2 md:gap-6"
-        >
-          <p
-            class="text-base text-gray-10 lg:text-gray-5 md:text-h6 lg:text-[38px]"
+            <p
+              class="text-base text-gray-10 lg:text-gray-5 md:text-h6 lg:text-[38px]"
+            >
+              {{ cases[1].homePage.title }}
+            </p>
+            <div class="relative h-60 overflow-hidden rounded-lg">
+              <img
+                [src]="cases[1].homePage.imageUrl"
+                [alt]="cases[1].homePage.title"
+                class="absolute right-0 top-0 h-full w-full object-cover object-left"
+              />
+            </div>
+          </article>
+        </a>
+        <a [routerLink]="['/cases', cases[2].slug]">
+          <article
+            class="w-[calc(50%-0.5rem)] md:w-full flex flex-col gap-2 md:gap-6"
           >
-            {{ cases[2].homePage.title }}
-          </p>
-          <div class="relative h-60 overflow-hidden rounded-lg">
-            <img
-              [src]="cases[2].homePage.imageUrl"
-              [alt]="cases[2].homePage.title"
-              class="absolute right-0 top-0 h-full w-full object-cover object-right"
-            />
-          </div>
-        </article>
+            <p
+              class="text-base text-gray-10 lg:text-gray-5 md:text-h6 lg:text-[38px]"
+            >
+              {{ cases[2].homePage.title }}
+            </p>
+            <div class="relative h-60 overflow-hidden rounded-lg">
+              <img
+                [src]="cases[2].homePage.imageUrl"
+                [alt]="cases[2].homePage.title"
+                class="absolute right-0 top-0 h-full w-full object-cover object-right"
+              />
+            </div>
+          </article>
+        </a>
       </div>
       <div class="flex flex-col gap-8 w-full">
         <p

@@ -13,8 +13,10 @@
     solution design and delivery excellence.
   </h6>
   <div class="flex flex-row gap-4 items-start mt-2 md:mt-4 lg:mt-6">
-    <div class="w-72"><app-button>Request a quote</app-button></div>
-    <app-arrow-button></app-arrow-button>
+    <div class="w-72">
+      <app-button [routerLink]="['/contacts']">Request a quote</app-button>
+    </div>
+    <app-arrow-button [routerLink]="['/contacts']"></app-arrow-button>
   </div>
 </section>
 

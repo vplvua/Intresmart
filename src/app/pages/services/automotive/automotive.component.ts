@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { ArrowButtonComponent } from '../../../shared/arrow-button/arrow-button.component';
 import { WantToWorkComponent } from '../../../shared/want-to-work/want-to-work.component';
@@ -14,6 +16,7 @@ import { LearnMoreComponent } from '../../../shared/learn-more/learn-more.compon
     WantToWorkComponent,
     FromTheBlogComponent,
     LearnMoreComponent,
+    RouterLink,
   ],
   templateUrl: './automotive.component.html',
 })

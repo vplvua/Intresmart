@@ -133,6 +133,8 @@ module.exports = {
       },
       animation: {
         "fade-in": "fade-in 2s ease-out forwards",
+        "fade-in-1s": "fade-in 1s ease-out forwards",
+        "fade-in-500": "fade-in 500ms ease-out forwards",
       },
       borderRadius: {
         "button-sm": "100%",

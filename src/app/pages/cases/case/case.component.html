@@ -30,19 +30,15 @@
   >
     Your browser does not support the video tag.
   </video>
-  } @else {
-  <div
-    *ngIf="case.page?.mainImgUrl"
-    class="w-full h-auto rounded-3xl overflow-hidden"
-  >
+  } @else { @if (case.page.mainImgUrl) {
+  <div class="w-full h-auto rounded-3xl overflow-hidden">
     <img
-      *ngIf="case.page?.mainImgUrl"
       [src]="case.page.mainImgUrl"
       [alt]="case.title"
       class="w-full h-full object-cover object-left"
     />
   </div>
-  }
+  } }
 </header>
 
 <article class="mt-10 md:mt-20 lg:mt-32">

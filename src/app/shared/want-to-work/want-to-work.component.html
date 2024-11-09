@@ -1,8 +1,10 @@
 <section
   id="work-with-us"
-  class="mt-12 md:mt-32 lg:mt-44 lg:py-8 animate-fade-in"
+  class="my-12 md:my-32 lg:my-44 lg:py-8 animate-fade-in"
 >
-  <h2 class="text-h6 md:text-h4 lg:text-h2">Want to work with us?</h2>
+  <h2 class="text-h6 md:text-h4 lg:text-h2 text-center">
+    Want to work with us?
+  </h2>
   <h4 class="text-main md:text-h6 lg:text-h4 mt-4 md:mt-6 lg:mt-8 text-center">
     Get a full-scale analysis of your business and recommended solutions to
     increase your profits.
@@ -11,10 +13,14 @@
     class="flex flex-col sm:flex-row sm:justify-center gap-4 mt-4 md:mt-6 lg:mt-8"
   >
     <div class="w-full md:w-52">
-      <app-button type="green">Request a quote</app-button>
+      <app-button type="green" [routerLink]="['/contacts']"
+        >Request a quote</app-button
+      >
     </div>
     <div class="w-full md:w-52">
-      <app-button class="w-full md:w-52 h-12">Learn more</app-button>
+      <app-button class="w-full md:w-52 h-12" [routerLink]="['/cases']"
+        >Learn more</app-button
+      >
     </div>
   </div>
 </section>

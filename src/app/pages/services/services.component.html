@@ -5,8 +5,10 @@
     Human- centrad design: Behavior inteligence made visible
   </h6>
   <div class="flex justify-between items-center w-[283px] mt-6 lg:mt-9">
-    <div class="w-52"><app-button>Request a quote</app-button></div>
-    <app-arrow-button></app-arrow-button>
+    <div class="w-52">
+      <app-button [routerLink]="['/contacts']">Request a quote</app-button>
+    </div>
+    <app-arrow-button [routerLink]="['/contacts']"></app-arrow-button>
   </div>
 </section>
 
