@@ -21,7 +21,11 @@ import { ButtonComponent } from '../../shared/button/button.component';
   standalone: true,
   imports: [CommonModule, RouterLink, IconComponent, ButtonComponent],
   templateUrl: './header.component.html',
-  styleUrl: './header.component.scss',
+  styles: `
+    :host {
+      display: block;
+    }
+  `,
 })
 export class HeaderComponent {
   isMobileMenuOpen: boolean = false;

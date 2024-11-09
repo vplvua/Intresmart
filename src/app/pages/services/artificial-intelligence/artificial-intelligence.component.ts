@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { ArrowButtonComponent } from '../../../shared/arrow-button/arrow-button.component';
@@ -15,6 +16,7 @@ import { ClientReviewsComponent } from '../development-cards/development-cards.c
     FromTheBlogComponent,
     LearnMoreComponent,
     ClientReviewsComponent,
+    RouterLink,
   ],
   templateUrl: './artificial-intelligence.component.html',
 })

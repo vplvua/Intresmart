@@ -11,7 +11,6 @@ import { catchError, of, Subject, takeUntil, tap } from 'rxjs';
   standalone: true,
   imports: [ButtonComponent, FormsModule, CommonModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss',
 })
 export class LoginComponent {
   email: string = '';

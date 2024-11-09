@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 import { ButtonComponent } from '../../shared/button/button.component';
 import { ArrowButtonComponent } from '../../shared/arrow-button/arrow-button.component';
@@ -15,8 +16,8 @@ import { WantToWorkComponent } from '../../shared/want-to-work/want-to-work.comp
     LearnMoreComponent,
     FromTheBlogComponent,
     WantToWorkComponent,
+    RouterLink,
   ],
   templateUrl: './services.component.html',
-  styleUrl: './services.component.scss',
 })
 export class ServicesComponent {}

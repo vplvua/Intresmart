@@ -9,8 +9,12 @@
     White-label Mobile-first bank solution
   </h6>
   <div class="flex flex-row gap-4 items-start mt-2 md:mt-4 lg:mt-6">
-    <div class="w-80"><app-button>Let`s discuss your project</app-button></div>
-    <app-arrow-button></app-arrow-button>
+    <div class="w-80">
+      <app-button [routerLink]="['/contacts']"
+        >Let`s discuss your project</app-button
+      >
+    </div>
+    <app-arrow-button [routerLink]="['/contacts']"></app-arrow-button>
   </div>
 </section>
 
@@ -94,7 +98,9 @@
   </div>
   <div class="w-full mt-4 md:mt-6 lg:mt-10">
     <div class="max-w-72 mx-auto">
-      <app-button type="green">Start collaboration with us</app-button>
+      <app-button type="green" [routerLink]="['/contacts']"
+        >Start collaboration with us</app-button
+      >
     </div>
   </div>
 </section>
@@ -113,7 +119,7 @@
     get digital without heavy upfront investment.
   </h6>
   <div class="max-w-72 mt-2 md:mt-6 lg:mt-6">
-    <app-button>Learn more</app-button>
+    <app-button [routerLink]="['/cases']">Learn more</app-button>
   </div>
 </section>
 
