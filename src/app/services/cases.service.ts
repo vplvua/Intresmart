@@ -3,7 +3,6 @@ import { DocumentData, DocumentReference } from '@angular/fire/firestore';
 import {
   BehaviorSubject,
   catchError,
-  filter,
   finalize,
   map,
   Observable,

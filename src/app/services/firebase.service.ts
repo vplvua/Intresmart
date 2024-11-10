@@ -37,6 +37,7 @@ import {
   BlogPostFileUrls,
   Case,
   CaseFileUrls,
+  Vacancy,
 } from '../models/models';
 import { isPlatformBrowser } from '@angular/common';
 
@@ -440,5 +441,66 @@ export class FirebaseService {
           )
         )
       : of({} as BlogPostFileUrls);
+  }
+
+  // Vacancies operations
+
+  fetchVacancies(): Observable<Vacancy[]> {
+    if (!this.checkPlatform()) {
+      return of([]);
+    }
+
+    const vacanciesRef = collection(this.firestore, 'vacancies');
+    return collectionData(vacanciesRef, { idField: 'id' }) as Observable<
+      Vacancy[]
+    >;
+  }
+
+  createVacancy(data: Partial<Vacancy>): Observable<DocumentReference> {
+    const vacanciesRef = collection(this.firestore, 'vacancies');
+    return from(addDoc(vacanciesRef, data)).pipe(take(1));
+  }
+
+  updateVacancy(id: string, data: Partial<Vacancy>): Observable<void> {
+    return new Observable<void>((observer) => {
+      const vacancyRef = doc(this.firestore, 'vacancies', id);
+      const cleanData = Object.entries(data).reduce((acc, [key, value]) => {
+        if (value !== undefined) {
+          acc[key] = value;
+        }
+        return acc;
+      }, {} as Record<string, any>);
+
+      updateDoc(vacancyRef, cleanData)
+        .then(() => {
+          observer.next();
+          observer.complete();
+        })
+        .catch((error) => {
+          observer.error(error);
+        });
+
+      return () => {};
+    }).pipe(
+      take(1),
+      tap({
+        next: () => {},
+        complete: () => {},
+        error: (error) => console.log('Firebase pipe error:', error),
+      })
+    );
+  }
+
+  deleteVacancy(vacancyId: string): Observable<void> {
+    if (!vacancyId) {
+      return throwError(() => new Error('Vacancy ID is required'));
+    }
+
+    return from(deleteDoc(doc(this.firestore, 'vacancies', vacancyId))).pipe(
+      catchError((error) => {
+        console.error('Error deleting vacancy:', error);
+        return throwError(() => error);
+      })
+    );
   }
 }

@@ -1,0 +1,196 @@
+<div class="flex flex-col mt-6 md:mt-10 lg:mt-20">
+  <a
+    class="text-base md:text-main lg:text-h6 text-decoration: underline text-gray-40"
+    [routerLink]="['/vacancies']"
+    >Back to vacancies</a
+  >
+  <h3 class="text-h6 md:text-h5 lg:text-h3">Add new vacancy</h3>
+</div>
+
+<div class="flex my-6 md:my-14 lg:my-24">
+  <form [formGroup]="vacancyForm" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="flex flex-col w-full gap-6">
+      <!-- Basic Info -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <!-- Title -->
+        <div class="flex flex-col gap-2">
+          <label for="title">Title</label>
+          <input
+            type="text"
+            id="title"
+            formControlName="title"
+            class="input"
+            [ngClass]="{
+              'border-red-500':
+                vacancyForm.get('title')?.invalid &&
+                vacancyForm.get('title')?.touched
+            }"
+          />
+          <span
+            class="text-red-500 text-sm"
+            *ngIf="
+              vacancyForm.get('title')?.invalid &&
+              vacancyForm.get('title')?.touched
+            "
+          >
+            Title is required
+          </span>
+        </div>
+
+        <!-- Department -->
+        <div class="flex flex-col gap-2">
+          <label for="department">Department</label>
+          <input
+            type="text"
+            id="department"
+            formControlName="department"
+            class="input"
+            [ngClass]="{
+              'border-red-500':
+                vacancyForm.get('department')?.invalid &&
+                vacancyForm.get('department')?.touched
+            }"
+          />
+          <span
+            class="text-red-500 text-sm"
+            *ngIf="
+              vacancyForm.get('department')?.invalid &&
+              vacancyForm.get('department')?.touched
+            "
+          >
+            Department is required
+          </span>
+        </div>
+
+        <!-- Date -->
+        <div class="flex flex-col gap-2">
+          <label for="date">Date</label>
+          <input
+            type="date"
+            id="date"
+            formControlName="date"
+            class="input"
+            [ngClass]="{
+              'border-red-500':
+                vacancyForm.get('date')?.invalid &&
+                vacancyForm.get('date')?.touched
+            }"
+          />
+          <span
+            class="text-red-500 text-sm"
+            *ngIf="
+              vacancyForm.get('date')?.invalid &&
+              vacancyForm.get('date')?.touched
+            "
+          >
+            Date is required
+          </span>
+        </div>
+      </div>
+
+      <!-- Description -->
+      <div class="flex flex-col gap-4" formGroupName="description">
+        <!-- Responsibilities -->
+        <div class="flex flex-col gap-4">
+          <div class="flex justify-between items-center">
+            <h4 class="text-lg font-medium">Responsibilities</h4>
+            <button
+              type="button"
+              (click)="addResponsibility()"
+              class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+            >
+              Add Responsibility
+            </button>
+          </div>
+
+          <div formArrayName="responsibilities" class="flex flex-col gap-4">
+            @for (responsibility of responsibilities.controls; track $index) {
+            <div class="flex items-center gap-4">
+              <input
+                [formControlName]="$index"
+                type="text"
+                class="input flex-grow"
+                placeholder="Enter responsibility"
+              />
+              <button
+                type="button"
+                (click)="removeResponsibility($index)"
+                class="text-red-500 hover:text-red-700"
+              >
+                Remove
+              </button>
+            </div>
+            }
+          </div>
+        </div>
+
+        <!-- Requirements -->
+        <div class="flex flex-col gap-4">
+          <div class="flex justify-between items-center">
+            <h4 class="text-lg font-medium">Requirements</h4>
+            <button
+              type="button"
+              (click)="addRequirement()"
+              class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600"
+            >
+              Add Requirement
+            </button>
+          </div>
+
+          <div formArrayName="requirements" class="flex flex-col gap-4">
+            @for (requirement of requirements.controls; track $index) {
+            <div class="flex items-center gap-4">
+              <input
+                [formControlName]="$index"
+                type="text"
+                class="input flex-grow"
+                placeholder="Enter requirement"
+              />
+              <button
+                type="button"
+                (click)="removeRequirement($index)"
+                class="text-red-500 hover:text-red-700"
+              >
+                Remove
+              </button>
+            </div>
+            }
+          </div>
+        </div>
+
+        <!-- Description Text -->
+        <div class="flex flex-col gap-2">
+          <label for="description">Description</label>
+          <textarea
+            id="description"
+            formControlName="description"
+            class="input h-32"
+            placeholder="Enter detailed description"
+          ></textarea>
+          <span
+            class="text-red-500 text-sm"
+            *ngIf="
+              vacancyForm.get('description.description')?.invalid &&
+              vacancyForm.get('description.description')?.touched
+            "
+          >
+            Description is required
+          </span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Submit Button -->
+    <div class="w-44 mt-10">
+      <app-button
+        [submit]="true"
+        [disabled]="!vacancyForm.valid || isLoading"
+        type="green"
+      >
+        {{ isLoading ? "Saving..." : "Save vacancy" }}
+      </app-button>
+    </div>
+  </form>
+</div>
+
+<app-error-toast></app-error-toast>
