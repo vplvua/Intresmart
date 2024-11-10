@@ -31,7 +31,13 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./pages/services/services.routes').then((m) => m.SERVICES_ROUTES),
   },
-  { path: 'vacancies', component: VacanciesComponent },
+  {
+    path: 'vacancies',
+    loadChildren: () =>
+      import('./pages/vacancies/vacancies.routes').then(
+        (m) => m.VACANCIES_ROUTES
+      ),
+  },
   { path: 'blog/:id', component: BlogComponent },
   { path: 'login', component: LoginComponent },
   { path: '**', redirectTo: 'home' },

@@ -90,4 +90,10 @@
       <app-button [routerLink]="['/contacts']">Let`s call us</app-button>
     </div>
   </section>
+
+  @defer (on viewport) {
+  <app-vacancies-widget></app-vacancies-widget>
+  } @placeholder (minimum 1s) {
+  <app-loader></app-loader>
+  }
 </div>

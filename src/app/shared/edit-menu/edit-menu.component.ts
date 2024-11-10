@@ -23,6 +23,7 @@ import { IconComponent } from '../icon/icon.component';
 })
 export class EditMenuComponent<T extends { id?: string; title: string }> {
   @Input() item!: T;
+  @Input() archiveText = 'Archive';
   @Output() onEdit = new EventEmitter<T>();
   @Output() onDelete = new EventEmitter<T>();
   @Output() onArchive = new EventEmitter<T>();

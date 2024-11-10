@@ -111,3 +111,19 @@ export interface ContentField {
   type: 'header' | 'text';
   value: string;
 }
+
+// Vacancies
+
+export interface Vacancy {
+  id?: string;
+  title: string;
+  date: string;
+  department: string;
+  description: {
+    responsibilities: string[];
+    requirements: string[];
+    description: string;
+  };
+  archive?: boolean;
+  slug: string;
+}

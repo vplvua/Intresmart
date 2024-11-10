@@ -17,6 +17,7 @@
         (onEdit)="onEdit.emit($event)"
         (onDelete)="onDelete.emit($event)"
         (onArchive)="onArchive.emit($event)"
+        [archiveText]="post.archive ? 'Unarchive' : 'Archive'"
       />
       } @if (post.cardImgUrl) {
       <img

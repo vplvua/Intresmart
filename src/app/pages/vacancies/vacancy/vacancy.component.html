@@ -1,0 +1,126 @@
+@if (vacancy$ | async; as vacancy) {
+<div class="mt-6">
+  <h2 class="text-h4 md:text-h3 lg:text-h2">{{ vacancy.title }}</h2>
+  <h5 class="text-main md:text-h6 lg:text-h5 mt-2 md:mt-4 lg:mt-6">
+    Vacancy at {{ vacancy.department }}
+  </h5>
+  @if (isLoggedIn$ | async) {
+  <div class="flex justify-stat items-center my-8">
+    <div class="flex gap-4 w-44">
+      <app-button
+        [routerLink]="['/vacancies', vacancy.slug, 'edit']"
+        variant="secondary"
+      >
+        Edit Vacancy
+      </app-button>
+    </div>
+  </div>
+  }
+</div>
+
+<div
+  class="grid grid-cols-1 md:grid-cols-2 gap-8 mt-10 md:mt-16 lg:mt-20 mb-14 md:mb-20 lg:mb-32"
+>
+  <div class="flex flex-col justify-between">
+    <div>
+      @if (vacancy.description.requirements.length) {
+      <h6 class="text-base md:text-main lg:text-h6">Main requirements</h6>
+      @for (requirement of vacancy.description.requirements; track $index) {
+      <p class="text-base lg:text-main mt-2 md:mt-4 lg:mt-6">
+        <svg class="w-4 h-4 inline-block mr-2">
+          <use xlink:href="assets/icons/sprite.svg#triangle"></use>
+        </svg>
+        {{ requirement }}
+      </p>
+      } } @if (vacancy.description.responsibilities.length) {
+      <h6 class="text-base md:text-main lg:text-h6 mt-4 md:mt-6 lg:mt-8">
+        Responsibilities
+      </h6>
+      @for (responsibility of vacancy.description.responsibilities; track
+      $index) {
+      <p class="text-base lg:text-main mt-2 md:mt-4 lg:mt-6">
+        <svg class="w-4 h-4 inline-block mr-2">
+          <use xlink:href="assets/icons/sprite.svg#triangle"></use>
+        </svg>
+        {{ responsibility }}
+      </p>
+      } } @if (vacancy.description.description) {
+      <h6 class="text-base md:text-main lg:text-h6 mt-4 md:mt-6 lg:mt-8">
+        Description
+      </h6>
+      <p class="text-base lg:text-main mt-2 md:mt-4 lg:mt-6">
+        {{ vacancy.description.description }}
+      </p>
+      }
+    </div>
+  </div>
+
+  <div>
+    <form
+      class="flex flex-col gap-10 text-base lg:text-main"
+      action="#"
+      method="POST"
+    >
+      <fieldset class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 gap-6">
+        <legend class="sr-only">Personal Information</legend>
+        <div class="flex flex-col">
+          <label for="name" class="text-gray-0">Full name</label>
+          <input
+            type="text"
+            id="name"
+            name="name"
+            required
+            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="company" class="text-gray-0">Company</label>
+          <input
+            type="text"
+            id="company"
+            name="company"
+            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="phone" class="text-gray-0">Phone</label>
+          <input
+            type="tel"
+            id="phone"
+            name="phone"
+            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+          />
+        </div>
+        <div class="flex flex-col">
+          <label for="email" class="text-gray-0">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            required
+            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+          />
+        </div>
+      </fieldset>
+      <div class="flex flex-col">
+        <label for="message" class="text-gray-0">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          class="w-full border-b border-gray-40 text-base text-gray-50 mt-4 h-48 bg-gray-70"
+          placeholder="Type your message here..."
+        ></textarea>
+      </div>
+      <div class="max-w-48">
+        <app-button [submit]="true">Upload CV</app-button>
+      </div>
+      <div class="w-full">
+        <app-button type="green" [submit]="true">Send response</app-button>
+      </div>
+    </form>
+  </div>
+</div>
+} @else {
+<app-loader></app-loader>
+}
