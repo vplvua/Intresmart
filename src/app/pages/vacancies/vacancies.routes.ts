@@ -1,5 +1,4 @@
 import { Routes } from '@angular/router';
-import { VacanciesComponent } from './vacancies.component';
 import { AuthGuard } from '../../guards/auth.guard';
 
 export const VACANCIES_ROUTES: Routes = [

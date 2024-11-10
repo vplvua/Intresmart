@@ -1,28 +1,46 @@
 import { Routes } from '@angular/router';
 
-import { BlogComponent } from './blog.component';
-import { AddNewPostComponent } from './add-new-post/add-new-post.component';
-import { ArchiveBlogpostComponent } from './archive-blogpost/archive-blogpost.component';
-import { PostComponent } from './post/post.component';
-import { EditPostComponent } from './edit-post/edit-post.component';
 import { AuthGuard } from '../../guards/auth.guard';
 
 export const BLOG_ROUTES: Routes = [
-  { path: '', component: BlogComponent },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./blog.component').then((m) => m.BlogComponent),
+    title: 'Blog IntreSmart',
+    data: {
+      meta: {
+        description: 'IntreSmart blog with the latest news and updates',
+      },
+    },
+  },
   {
     path: 'add',
-    component: AddNewPostComponent,
     canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./add-new-post/add-new-post.component').then(
+        (m) => m.AddNewPostComponent
+      ),
   },
   {
     path: 'archive',
-    component: ArchiveBlogpostComponent,
     canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./archive-blogpost/archive-blogpost.component').then(
+        (m) => m.ArchiveBlogpostComponent
+      ),
   },
-  { path: ':slug', component: PostComponent },
+  {
+    path: ':slug',
+    loadComponent: () =>
+      import('./post/post.component').then((m) => m.PostComponent),
+  },
   {
     path: ':slug/edit',
-    component: EditPostComponent,
     canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./edit-post/edit-post.component').then(
+        (m) => m.EditPostComponent
+      ),
   },
 ];

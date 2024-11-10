@@ -1,28 +1,44 @@
 import { Routes } from '@angular/router';
 
 import { AuthGuard } from '../../guards/auth.guard';
-import { CasesComponent } from './cases.component';
-import { AddNewCaseComponent } from './add-new-case/add-new-case.component';
-import { ArchciveComponent } from './archive/archive.component';
-import { CaseComponent } from './case/case.component';
-import { EditCaseComponent } from './edit-case/edit-case.component';
 
 export const CASES_ROUTES: Routes = [
-  { path: '', component: CasesComponent },
+  {
+    path: '',
+    loadComponent: () =>
+      import('./cases.component').then((m) => m.CasesComponent),
+    title: 'Cases',
+    data: {
+      meta: {
+        description: 'IntreSmart cases and projects',
+      },
+    },
+  },
   {
     path: 'add',
-    component: AddNewCaseComponent,
     canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./add-new-case/add-new-case.component').then(
+        (m) => m.AddNewCaseComponent
+      ),
   },
   {
     path: 'archive',
-    component: ArchciveComponent,
     canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./archive/archive.component').then((m) => m.ArchciveComponent),
   },
-  { path: ':slug', component: CaseComponent },
+  {
+    path: ':slug',
+    loadComponent: () =>
+      import('./case/case.component').then((m) => m.CaseComponent),
+  },
   {
     path: ':slug/edit',
-    component: EditCaseComponent,
     canActivate: [AuthGuard],
+    loadComponent: () =>
+      import('./edit-case/edit-case.component').then(
+        (m) => m.EditCaseComponent
+      ),
   },
 ];
