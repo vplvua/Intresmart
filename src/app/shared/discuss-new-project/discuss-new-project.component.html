@@ -7,7 +7,11 @@
       </div>
     </div>
     <div>
-      <form class="flex flex-col gap-10 text-main" action="#" method="POST">
+      <form
+        [formGroup]="projectForm"
+        (ngSubmit)="onSubmit()"
+        class="flex flex-col gap-10 text-main"
+      >
         <fieldset class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 gap-6">
           <legend class="sr-only">Personal Information</legend>
           <div class="flex flex-col">
@@ -15,9 +19,13 @@
             <input
               type="text"
               id="name"
-              name="name"
+              formControlName="name"
               required
               class="w-full border-b border-gray-40 text-gray-50 mt-2"
+              [class.border-red-500]="
+                projectForm.get('name')?.invalid &&
+                projectForm.get('name')?.touched
+              "
             />
           </div>
           <div class="flex flex-col">
@@ -25,7 +33,7 @@
             <input
               type="text"
               id="company"
-              name="company"
+              formControlName="company"
               class="w-full border-b border-gray-40 text-gray-50 mt-2"
             />
           </div>
@@ -34,7 +42,7 @@
             <input
               type="tel"
               id="phone"
-              name="phone"
+              formControlName="phone"
               class="w-full border-b border-gray-40 text-gray-50 mt-2"
             />
           </div>
@@ -43,24 +51,46 @@
             <input
               type="email"
               id="email"
-              name="email"
+              formControlName="email"
               required
               class="w-full border-b border-gray-40 text-gray-50 mt-2"
+              [class.border-red-500]="
+                projectForm.get('email')?.invalid &&
+                projectForm.get('email')?.touched
+              "
             />
           </div>
         </fieldset>
+
         <div class="flex flex-col">
           <label for="message" class="text-gray-0">Message</label>
           <textarea
             id="message"
-            name="message"
+            formControlName="message"
             required
             class="w-full border-b border-gray-40 text-base text-gray-50 mt-4 h-48"
+            [class.border-red-500]="
+              projectForm.get('message')?.invalid &&
+              projectForm.get('message')?.touched
+            "
             placeholder="Type your message here..."
           ></textarea>
         </div>
+
+        @if (submitError) {
+        <div class="text-red-500 text-sm">{{ submitError }}</div>
+        } @if (submitSuccess) {
+        <div class="text-green-500 text-sm">Message sent successfully!</div>
+        }
+
         <div>
-          <app-button type="green" [submit]="true"> Send message </app-button>
+          <app-button
+            type="green"
+            [submit]="true"
+            [disabled]="!projectForm.valid || isSubmitting"
+          >
+            {{ isSubmitting ? "Sending..." : "Send message" }}
+          </app-button>
         </div>
       </form>
     </div>

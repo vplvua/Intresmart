@@ -14,7 +14,6 @@ import { ErrorToastComponent } from '../../../shared/error-toast/error-toast.com
 import { ButtonComponent } from '../../../shared/button/button.component';
 import { ErrorHandlingService } from '../../../services/error-handling.service';
 import { VacanciesService } from '../../../services/vacancies.service';
-import { Vacancy } from '../../../models/models';
 
 @Component({
   selector: 'app-add-new-vacancies',

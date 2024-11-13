@@ -10,7 +10,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 
 import { ButtonComponent } from '../../../shared/button/button.component';
-import { DiscussNewProjectComponent } from '../../../components/forms/discuss-new-project/discuss-new-project.component';
+import { DiscussNewProjectComponent } from '../../../shared/discuss-new-project/discuss-new-project.component';
 import { EditMenuComponent } from '../../../shared/edit-menu/edit-menu.component';
 import { IconComponent } from '../../../shared/icon/icon.component';
 import { Case } from '../../../models/models';

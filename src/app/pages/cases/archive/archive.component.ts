@@ -14,7 +14,7 @@ import {
 
 import { CasesService } from '../../../services/cases.service';
 import { ButtonComponent } from '../../../shared/button/button.component';
-import { DiscussNewProjectComponent } from '../../../components/forms/discuss-new-project/discuss-new-project.component';
+import { DiscussNewProjectComponent } from '../../../shared/discuss-new-project/discuss-new-project.component';
 import { Case } from '../../../models/models';
 import { AuthService } from '../../../services/auth.service';
 import { EditMenuComponent } from '../../../shared/edit-menu/edit-menu.component';

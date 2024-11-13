@@ -19,19 +19,40 @@
         >
           Subscribe to stay in touch.
         </h6>
-        <div class="flex items-center w-full">
-          <input
-            type="email"
-            placeholder="Your email address"
-            class="w-full sm:w-[379px]"
-            name="email"
-            autocomplete="email"
-          />
-          <app-arrow-button
-            (onClick)="onSubscribe()"
-            class="ml-4"
-          ></app-arrow-button>
-        </div>
+        <form
+          [formGroup]="subscribeForm"
+          (ngSubmit)="onSubscribe()"
+          class="flex flex-col w-full"
+        >
+          <div class="flex items-center w-full">
+            <input
+              type="email"
+              formControlName="email"
+              placeholder="Your email address"
+              class="w-full sm:w-[379px]"
+              [class.border-red-500]="
+                subscribeForm.get('email')?.invalid &&
+                subscribeForm.get('email')?.touched
+              "
+              autocomplete="email"
+            />
+            <app-arrow-button
+              [disabled]="!subscribeForm.valid || isSubmitting"
+              submit="true"
+              class="ml-4"
+            ></app-arrow-button>
+          </div>
+
+          @if (submitError) {
+          <div class="text-red-500 text-sm mt-2">{{ submitError }}</div>
+          } @if (submitSuccess) {
+          <div class="text-green-500 text-sm mt-2">
+            Successfully subscribed!
+          </div>
+          } @if (isSubmitting) {
+          <div class="text-gray-50 text-sm mt-2">Subscribing...</div>
+          }
+        </form>
       </div>
 
       <!-- Right middle part -->
