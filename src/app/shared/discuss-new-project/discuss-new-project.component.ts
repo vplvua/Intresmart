@@ -1,31 +1,38 @@
-import { Component, inject, Inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
   Validators,
   ReactiveFormsModule,
 } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 
-import { ButtonComponent } from '../../shared/button/button.component';
-import { ArrowButtonComponent } from '../../shared/arrow-button/arrow-button.component';
+import { ButtonComponent } from '../button/button.component';
+import { ArrowButtonComponent } from '../arrow-button/arrow-button.component';
 import { ContactService } from '../../services/contact.service';
 
 @Component({
-  selector: 'app-contacts',
+  selector: 'app-discuss-new-project',
   standalone: true,
-  imports: [ButtonComponent, ArrowButtonComponent, ReactiveFormsModule],
-  templateUrl: './contacts.component.html',
+  imports: [
+    ButtonComponent,
+    ArrowButtonComponent,
+    ReactiveFormsModule,
+    CommonModule,
+  ],
+  templateUrl: './discuss-new-project.component.html',
 })
-export class ContactsComponent {
+export class DiscussNewProjectComponent {
   private contactService = inject(ContactService);
   private fb = inject(FormBuilder);
-  contactForm: FormGroup;
+
+  projectForm: FormGroup;
   isSubmitting = false;
   submitError: string | null = null;
   submitSuccess = false;
 
   constructor() {
-    this.contactForm = this.fb.group({
+    this.projectForm = this.fb.group({
       name: ['', Validators.required],
       company: [''],
       phone: [''],
@@ -35,20 +42,26 @@ export class ContactsComponent {
   }
 
   onSubmit() {
-    if (this.contactForm.valid && !this.isSubmitting) {
+    if (this.projectForm.valid && !this.isSubmitting) {
       this.isSubmitting = true;
       this.submitError = null;
       this.submitSuccess = false;
 
-      this.contactService.sendContactForm(this.contactForm.value).subscribe({
+      this.contactService.sendContactForm(this.projectForm.value).subscribe({
         next: (response) => {
           this.isSubmitting = false;
           this.submitSuccess = true;
-          this.contactForm.reset();
+          this.projectForm.reset();
+          setTimeout(() => {
+            this.submitSuccess = false;
+          }, 3000);
         },
         error: (error) => {
           this.isSubmitting = false;
           this.submitError = error.message;
+          setTimeout(() => {
+            this.submitError = null;
+          }, 3000);
         },
       });
     }

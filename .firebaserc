@@ -1,6 +1,7 @@
 {
   "projects": {
-    "intresmart": "intresmart-cd37f"
+    "intresmart": "intresmart-cd37f",
+    "default": "intresmart-cd37f"
   },
   "targets": {},
   "etags": {}

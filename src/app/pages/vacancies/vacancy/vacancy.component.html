@@ -57,9 +57,9 @@
 
   <div>
     <form
+      [formGroup]="applicationForm"
+      (ngSubmit)="onSubmit()"
       class="flex flex-col gap-10 text-base lg:text-main"
-      action="#"
-      method="POST"
     >
       <fieldset class="grid grid-cols-1 lg:grid-cols-2 lg:grid-rows-2 gap-6">
         <legend class="sr-only">Personal Information</legend>
@@ -68,18 +68,13 @@
           <input
             type="text"
             id="name"
-            name="name"
+            formControlName="name"
             required
             class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
-          />
-        </div>
-        <div class="flex flex-col">
-          <label for="company" class="text-gray-0">Company</label>
-          <input
-            type="text"
-            id="company"
-            name="company"
-            class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+            [class.border-red-500]="
+              applicationForm.get('name')?.invalid &&
+              applicationForm.get('name')?.touched
+            "
           />
         </div>
         <div class="flex flex-col">
@@ -87,7 +82,7 @@
           <input
             type="tel"
             id="phone"
-            name="phone"
+            formControlName="phone"
             class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
           />
         </div>
@@ -96,27 +91,71 @@
           <input
             type="email"
             id="email"
-            name="email"
+            formControlName="email"
             required
             class="w-full border-b border-gray-40 text-gray-50 mt-2 bg-gray-70"
+            [class.border-red-500]="
+              applicationForm.get('email')?.invalid &&
+              applicationForm.get('email')?.touched
+            "
           />
         </div>
       </fieldset>
+
       <div class="flex flex-col">
         <label for="message" class="text-gray-0">Message</label>
         <textarea
           id="message"
-          name="message"
+          formControlName="message"
           required
           class="w-full border-b border-gray-40 text-base text-gray-50 mt-4 h-48 bg-gray-70"
+          [class.border-red-500]="
+            applicationForm.get('message')?.invalid &&
+            applicationForm.get('message')?.touched
+          "
           placeholder="Type your message here..."
         ></textarea>
       </div>
-      <div class="max-w-48">
-        <app-button [submit]="true">Upload CV</app-button>
-      </div>
-      <div class="w-full">
-        <app-button type="green" [submit]="true">Send response</app-button>
+
+      <div class="flex flex-col gap-4">
+        <div>
+          <input
+            type="file"
+            id="cv"
+            (change)="onFileChange($event)"
+            accept=".pdf,.doc,.docx"
+            class="hidden"
+            #fileInput
+          />
+          <div class="max-w-48">
+            <app-button (click)="fileInput.click()">
+              {{ selectedFile ? "Change CV" : "Upload CV" }}
+            </app-button>
+          </div>
+          @if (selectedFile) {
+          <span class="text-sm text-green-500 ml-2">
+            {{ selectedFile.name }}
+          </span>
+          }
+        </div>
+
+        @if (submitError) {
+        <div class="text-red-500 text-sm">{{ submitError }}</div>
+        } @if (submitSuccess) {
+        <div class="text-green-500 text-sm">
+          Application submitted successfully!
+        </div>
+        }
+
+        <div class="w-full">
+          <app-button
+            type="green"
+            [submit]="true"
+            [disabled]="!applicationForm.valid || !selectedFile || isSubmitting"
+          >
+            {{ isSubmitting ? "Sending..." : "Send response" }}
+          </app-button>
+        </div>
       </div>
     </form>
   </div>

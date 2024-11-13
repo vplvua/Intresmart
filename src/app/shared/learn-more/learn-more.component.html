@@ -5,18 +5,40 @@
 >
   <h3 class="text-h6 lg:text-h3">Learn more</h3>
   <p class="mt-6 text-main lg:text-h6 text-gray-50">
-    Subcribe to IntreSmart Group Company to receive news.
+    Subscribe to IntreSmart Group Company to receive news.
   </p>
-  <input
-    type="email"
-    id="email"
-    name="email"
-    autocomplete="email"
-    placeholder="Your email address"
-    required
-    class="w-full max-w-[512px] mt-6 lg:mt-9 text-base"
-  />
-  <div class="w-52">
-    <app-button class="mt-6">Subscribe</app-button>
-  </div>
+
+  <form
+    [formGroup]="subscriptionForm"
+    (ngSubmit)="onSubmit()"
+    class="w-full flex flex-col items-center"
+  >
+    <input
+      type="email"
+      id="email"
+      formControlName="email"
+      placeholder="Your email address"
+      [class.border-red-500]="
+        subscriptionForm.get('email')?.invalid &&
+        subscriptionForm.get('email')?.touched
+      "
+      class="w-full max-w-[512px] mt-6 lg:mt-9 text-base"
+    />
+
+    @if (submitError) {
+    <div class="text-red-500 text-sm mt-2">{{ submitError }}</div>
+    } @if (submitSuccess) {
+    <div class="text-green-500 text-sm mt-2">Successfully subscribed!</div>
+    }
+
+    <div class="w-52">
+      <app-button
+        [submit]="true"
+        [disabled]="!subscriptionForm.valid || isSubmitting"
+        class="mt-6"
+      >
+        {{ isSubmitting ? "Subscribing..." : "Subscribe" }}
+      </app-button>
+    </div>
+  </form>
 </section>
