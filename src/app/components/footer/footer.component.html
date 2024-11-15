@@ -117,9 +117,9 @@
               <app-icon name="phone" color="secondary" class="pl-2"></app-icon>
             </span>
             <a
-              href="tel:+1234567890"
+              href="tel:+380679470846"
               class="text-gray-0 text-main hover:text-primary-100"
-              >+ 1 (234) 567 89 00</a
+              >+38 (067) 947 08 46</a
             >
           </div>
         </div>
@@ -134,21 +134,29 @@
         class="flex flex-col sm:flex-row gap-6 sm:gap-0 w-full justify-between items-center mb-6 sm:mb-0 order-2 sm:order-none"
       >
         <span class="text-gray-50 text-sm order-3 sm:order-none"
-          >© 2024 Intresmart</span
+          >© {{ currentYear }} Intresmart</span
         >
-        <div class="flex gap-6 order-1 sm:order-none mb-0 lg:mb-6 sm:mb-0">
-          <a href="#" class="text-gray-50"
+        <div
+          class="flex flex-row justify-center items-center sm:order-none mb-0 lg:mb-6 sm:mb-0"
+        >
+          <!-- <a href="#" class="text-gray-50"
             ><app-icon name="instagram" size="medium"></app-icon
-          ></a>
-          <a href="#" class="text-gray-50"
-            ><app-icon name="linkedin" size="medium"></app-icon
-          ></a>
-          <a href="#" class="text-gray-50"
+          ></a> -->
+          <a
+            href="https://www.linkedin.com/company/intresmart/"
+            target="_blank"
+            class="text-gray-50"
+          >
+            <div class="pt-6">
+              <app-icon name="linkedin" size="medium"></app-icon>
+            </div>
+          </a>
+          <!-- <a href="#" class="text-gray-50"
             ><app-icon name="facebook" size="medium"></app-icon
           ></a>
           <a href="#" class="text-gray-50"
             ><app-icon name="youtube" size="medium"></app-icon>
-          </a>
+          </a> -->
         </div>
         <div class="flex flex-col lg:flex-row gap-4 order-2 sm:order-none">
           <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
