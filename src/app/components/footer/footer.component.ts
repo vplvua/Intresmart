@@ -29,6 +29,7 @@ export class FooterComponent {
   private newsletterService = inject(NewsletterService);
   private fb = inject(FormBuilder);
 
+  currentYear = new Date().getFullYear();
   subscribeForm: FormGroup;
   isSubmitting = false;
   submitError: string | null = null;
