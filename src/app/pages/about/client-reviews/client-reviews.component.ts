@@ -31,24 +31,24 @@ export class ClientReviewsComponent {
       avatarUrl:
         'https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/about%2Fclient-avatar.png?alt=media&token=077d6994-93c4-47ca-abe2-58c4286c8cc4',
     },
-    {
-      id: 2,
-      author: 'Eric Stohl',
-      projectName: 'AD-ADAS Automotive App',
-      content:
-        'IntreSmart is the best company I have ever worked with. Their expert team has professionally helped us to design and develop a new AD-ADAS app using MI and Computer vision skills for a brand-new EV model. I am extremely satisfied with the final result. These guys never disappoint”',
-      avatarUrl:
-        'https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/about%2Fclient-avatar.png?alt=media&token=077d6994-93c4-47ca-abe2-58c4286c8cc4',
-    },
-    {
-      id: 3,
-      author: 'Eric Stohl',
-      projectName: 'AD-ADAS Automotive App',
-      content:
-        'IntreSmart is the best company I have ever worked with. Their expert team has professionally helped us to design and develop a new AD-ADAS app using MI and Computer vision skills for a brand-new EV model. I am extremely satisfied with the final result. These guys never disappoint”',
-      avatarUrl:
-        'https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/about%2Fclient-avatar.png?alt=media&token=077d6994-93c4-47ca-abe2-58c4286c8cc4',
-    },
+    // {
+    //   id: 2,
+    //   author: 'Eric Stohl',
+    //   projectName: 'AD-ADAS Automotive App',
+    //   content:
+    //     'IntreSmart is the best company I have ever worked with. Their expert team has professionally helped us to design and develop a new AD-ADAS app using MI and Computer vision skills for a brand-new EV model. I am extremely satisfied with the final result. These guys never disappoint”',
+    //   avatarUrl:
+    //     'https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/about%2Fclient-avatar.png?alt=media&token=077d6994-93c4-47ca-abe2-58c4286c8cc4',
+    // },
+    // {
+    //   id: 3,
+    //   author: 'Eric Stohl',
+    //   projectName: 'AD-ADAS Automotive App',
+    //   content:
+    //     'IntreSmart is the best company I have ever worked with. Their expert team has professionally helped us to design and develop a new AD-ADAS app using MI and Computer vision skills for a brand-new EV model. I am extremely satisfied with the final result. These guys never disappoint”',
+    //   avatarUrl:
+    //     'https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/about%2Fclient-avatar.png?alt=media&token=077d6994-93c4-47ca-abe2-58c4286c8cc4',
+    // },
   ];
 
   scrollLeft() {
