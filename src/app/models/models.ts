@@ -26,6 +26,10 @@ export interface Case {
     videoUrl?: string;
   };
   archive?: boolean;
+  publishDate?: string;
+  client?: string;
+  industry?: string;
+  technologies?: string[];
 }
 
 export interface CaseFileUrls {
@@ -75,6 +79,10 @@ export interface BlogPost {
   cardImgUrl: string;
   author: string;
   archive?: boolean;
+  publishDate: string;
+  updateDate?: string;
+  tags?: string[];
+  category?: string;
 }
 
 export interface Article {

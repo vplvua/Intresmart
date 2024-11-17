@@ -9,4 +9,5 @@ export const environment = {
     appId: '${APP_ID}',
     measurementId: '${MEASUREMENT_ID}',
   },
+  siteUrl: 'https://intresmartgroup.com/',
 };

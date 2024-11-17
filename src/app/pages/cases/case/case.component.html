@@ -1,78 +1,102 @@
 @defer { @if (case) {
-<header class="flex flex-col items mt-10 md:mt-14 lg:mt-20">
-  <h2 class="text-h4 md:text-h3 lg:text-h2">{{ case.title }}</h2>
-  <div *ngIf="isLoggedIn$ | async" class="flex justify-end items-center mb-8">
-    <div class="flex gap-4 w-44">
-      <app-button
-        [routerLink]="['/cases', case.slug, 'edit']"
-        variant="secondary"
-      >
-        Edit Case
-      </app-button>
+<main itemscope itemtype="http://schema.org/Article">
+  <meta itemprop="headline" [content]="case.title" />
+  <meta itemprop="datePublished" [content]="case.publishDate" />
+  <meta itemprop="image" [content]="case.page.mainImgUrl" />
+
+  <header class="flex flex-col items mt-10 md:mt-14 lg:mt-20">
+    <h1 itemprop="name" class="text-h4 md:text-h3 lg:text-h2">
+      {{ case.title }}
+    </h1>
+
+    <div *ngIf="isLoggedIn$ | async" class="flex justify-end items-center mb-8">
+      <div class="flex gap-4 w-44">
+        <app-button
+          [routerLink]="['/cases', case.slug, 'edit']"
+          variant="secondary"
+          aria-label="Edit case study"
+        >
+          Edit Case
+        </app-button>
+      </div>
     </div>
-  </div>
 
-  <div
-    class="flex flex-col md:flex-row md:justify-between py-4 md:py-6 lg:py-10 items-start md:items-center"
-  >
-    <h5 class="text-h6 md:text-h5">{{ case.tag }}</h5>
-    <h6 class="text-main md:text-h6 text-gray-50">{{ case.launch }}</h6>
-  </div>
+    <div
+      class="flex flex-col md:flex-row md:justify-between py-4 md:py-6 lg:py-10 items-start md:items-center"
+    >
+      <p class="text-h6 md:text-h5" itemprop="articleSection">{{ case.tag }}</p>
+      <time class="text-main md:text-h6 text-gray-50" itemprop="datePublished">
+        {{ case.launch }}
+      </time>
+    </div>
 
-  @if(case.page.videoUrl) {
-  <video
-    [src]="case.page.videoUrl"
-    class="w-full h-auto rounded-3xl overflow-hidden"
-    controls
-    preload="metadata"
-    poster="{{ case.page.mainImgUrl }}"
-    muted
-  >
-    Your browser does not support the video tag.
-  </video>
-  } @else { @if (case.page.mainImgUrl) {
-  <div class="w-full h-auto rounded-3xl overflow-hidden">
-    <img
-      [src]="case.page.mainImgUrl"
-      [alt]="case.title"
-      class="w-full h-full object-cover object-left"
-    />
-  </div>
-  } }
-</header>
+    <figure class="w-full">
+      @if(case.page.videoUrl) {
+      <video
+        [src]="case.page.videoUrl"
+        class="w-full h-auto rounded-3xl overflow-hidden"
+        controls
+        preload="metadata"
+        poster="{{ case.page.mainImgUrl }}"
+        muted
+        aria-label="Case study video presentation"
+      >
+        <track kind="captions" label="English captions" />
+        Your browser does not support the video tag.
+      </video>
+      } @else { @if (case.page.mainImgUrl) {
+      <img
+        [src]="case.page.mainImgUrl"
+        [alt]="case.title"
+        class="w-full h-auto rounded-3xl overflow-hidden"
+        loading="eager"
+        [width]="1200"
+        [height]="630"
+        itemprop="image"
+      />
+      } }
+    </figure>
+  </header>
 
-<article class="mt-10 md:mt-20 lg:mt-32">
-  <div class="flex flex-col justify-start w-full">
-    <div class="decorator w-20 lg:w-44"></div>
-    <h3 class="text-h6 md:text-h5 lg:text-h3 mt-2">About project</h3>
-  </div>
-  <div class="flex flex-col sm:flex-row justify-between my-6">
-    <div class="flex flex-col sm:w-1/2">
-      <ng-container *ngFor="let text of case.page?.textField">
-        <div class="flex flex-col">
+  <article class="mt-10 md:mt-20 lg:mt-32" itemprop="articleBody">
+    <section class="flex flex-col justify-start w-full">
+      <div class="decorator w-20 lg:w-44" aria-hidden="true"></div>
+      <h2 class="text-h6 md:text-h5 lg:text-h3 mt-2">About project</h2>
+    </section>
+
+    <div class="flex flex-col sm:flex-row justify-between my-6">
+      <div class="flex flex-col sm:w-1/2">
+        <ng-container *ngFor="let text of case.page?.textField">
           <p class="text-base md:text-main lg:text-h6 mt-2 md-mt-4 lg:mt-6">
             {{ text }}
           </p>
-        </div>
-      </ng-container>
-    </div>
-    <div class="sm:w-2/5 flex justify-center">
-      <div
-        *ngIf="case.page?.sideImgUrl"
-        class="w-4/5 sm:w-full h-auto rounded-[30px] overflow-hidden mt-6 sm:mt-0"
-      >
-        <img
-          *ngIf="case.page?.sideImgUrl"
-          [src]="case.page.sideImgUrl"
-          [alt]="case.title"
-          class="w-full h-full object-cover object-left"
-        />
+        </ng-container>
       </div>
+
+      <aside class="sm:w-2/5 flex justify-center pt-6 sm:pt-0">
+        <figure *ngIf="case.page?.sideImgUrl" class="w-4/5 sm:w-full h-auto">
+          <img
+            [src]="case.page.sideImgUrl"
+            [alt]="'Additional image for ' + case.title"
+            class="w-full h-full object-cover object-left rounded-[30px]"
+            loading="lazy"
+          />
+        </figure>
+      </aside>
     </div>
-  </div>
-</article>
+
+    <section class="mt-8" *ngIf="case.technologies?.length">
+      <h3 class="text-h6 md:text-h5 mb-4">Technologies Used</h3>
+      <ul class="flex flex-wrap gap-2">
+        <li *ngFor="let tech of case.technologies" class="tag">{{ tech }}</li>
+      </ul>
+    </section>
+  </article>
+</main>
 } } @loading (minimum 1s) {
 <app-loader></app-loader>
 }
 
-<app-want-to-work></app-want-to-work>
+<aside class="mt-12 md:mt-20 lg:mt-32">
+  <app-want-to-work></app-want-to-work>
+</aside>

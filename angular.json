@@ -24,6 +24,20 @@
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": ["src/assets/favicon/favicon.ico", "src/assets"],
+            "optimization": {
+              "scripts": true,
+              "styles": true,
+              "fonts": true
+            },
+            "sourceMap": false,
+            "namedChunks": false,
+            "budgets": [
+              {
+                "type": "initial",
+                "maximumWarning": "2mb",
+                "maximumError": "5mb"
+              }
+            ],
             "styles": ["src/styles.scss"],
             "scripts": [],
             "server": "src/main.server.ts",

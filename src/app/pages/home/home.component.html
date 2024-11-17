@@ -1,283 +1,346 @@
-<section id="intro" class="animate-fade-in">
-  <h2 class="text-h6 mb-2 md:text-h3 lg:text-h2">Designing</h2>
-  <h1 class="w-full text-h4 md:text-[136px] md:font-bold lg:text-h1">
-    The Future
-  </h1>
-  <p
-    class="text-sm lg:relative lg:-top-64 lg:left-[516px] md:text-h6 lg:w-64 lg:inline-block"
-  >
-    IntreSmart Group Company
-  </p>
-  <p
-    class="max-w-[730px] text-main md:text-h6 text-gray-40 leading-[117.333%] tracking-[0.5px] mt-8 lg:-mt-8"
-  >
-    We are a team of consultants, engineers, and creative minds who tackle
-    corporate obstacles by devising cutting-edge technological solutions.
-  </p>
-  <div class="flex justify-between items-center max-w-[283px] mt-9">
-    <div class="w-52">
-      <app-button [routerLink]="['/contacts']">Request a quote</app-button>
-    </div>
-    <app-arrow-button [routerLink]="['/contacts']"></app-arrow-button>
-  </div>
-</section>
-
-<section id="about" class="mt-12 md:mt-32 lg:mt-44 animate-fade-in">
-  <h3 class="text-h6 md:text-h5 lg:text-h3">About us</h3>
-  <div
-    class="md:mt-6 lg:mt-12 flex flex-col md:flex-row md:justify-between md:gap-16 lg:gap-32"
-  >
-    <div class="flex flex-col items-center mt-6 lg:mt-0 lg:flex-shrink-0">
-      <img
-        src="https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/home%2Fceo.jfif?alt=media&token=d6f1395c-73cc-4a4b-8452-ed4a1e7dce73"
-        alt="CEO"
-        class="w-[128px] sm:w-[182px] h-auto max-w-none rounded-[100%]"
-      />
-    </div>
-    <div class="mt-4 lg:mt-0">
-      <p class="md:text-h6 text-gray-50 mb-6">
-        In 2020, Kyryl Hnapovskyi laid the first stone for launching IntreSmart.
-        IntreSmart was founded during the Covid-19 pandemic. We knew it would be
-        a long road, but our values were evident early on: at IntreSmart, we
-        make social responsibility, trust, transparency, and a sense of beauty
-        the basis for everything we do.
-      </p>
-      <div class="md:w-52">
-        <app-button type="default" [routerLink]="['/about']"
-          >More about us</app-button
+<main itemscope itemtype="http://schema.org/Organization">
+  <section id="intro" class="animate-fade-in" aria-label="Introduction">
+    <h2 class="text-h6 mb-2 md:text-h3 lg:text-h2" itemprop="slogan">
+      Designing
+    </h2>
+    <h1
+      class="w-full text-h4 md:text-[136px] md:font-bold lg:text-h1"
+      itemprop="name"
+    >
+      The Future
+    </h1>
+    <p
+      class="text-sm lg:relative lg:-top-64 lg:left-[516px] md:text-h6 lg:w-64 lg:inline-block"
+      itemprop="legalName"
+    >
+      IntreSmart Group Company
+    </p>
+    <p
+      class="max-w-[730px] text-main md:text-h6 text-gray-40 leading-[117.333%] tracking-[0.5px] mt-8 lg:-mt-8"
+      itemprop="description"
+    >
+      We are a team of consultants, engineers, and creative minds who tackle
+      corporate obstacles by devising cutting-edge technological solutions.
+    </p>
+    <div class="flex justify-between items-center max-w-[283px] mt-9">
+      <div class="w-52">
+        <app-button
+          [routerLink]="['/contacts']"
+          aria-label="Request a project quote"
+          >Request a quote</app-button
         >
       </div>
+      <app-arrow-button
+        [routerLink]="['/contacts']"
+        aria-label="Contact us"
+      ></app-arrow-button>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="services" class="mt-12 md:mt-32 lg:mt-44 animate-fade-in">
-  <div class="flex justify-between items-center">
-    <h3 class="text-h6 md:text-h5 lg:text-h3">Our services</h3>
-    <app-arrow-button
-      (click)="navigateToServices()"
-      style="w-10"
-    ></app-arrow-button>
-  </div>
-  <div
-    class="flex flex-col md:flex-row md:justify-between md:items-end md:content-end md:flex-wrap mt-6 md:mt-11"
+  <section
+    id="about"
+    class="mt-12 md:mt-32 lg:mt-44 animate-fade-in"
+    aria-label="About Us"
   >
-    <div class="flex flex-col md:w-1/2 p-6">
-      <div class="w-full text-center">
-        <svg class="w-20 h-20 md:w-32 md:h-32 lg:w-44 lg:h-44 mx-auto">
-          <use xlink:href="assets/icons/sprite.svg#wave"></use>
-        </svg>
+    <h3 class="text-h6 md:text-h5 lg:text-h3">About us</h3>
+    <div
+      class="md:mt-6 lg:mt-12 flex flex-col md:flex-row md:justify-between md:gap-16 lg:gap-32"
+    >
+      <figure class="flex flex-col items-center mt-6 lg:mt-0 lg:flex-shrink-0">
+        <img
+          src="https://firebasestorage.googleapis.com/v0/b/intresmart-cd37f.appspot.com/o/home%2Fceo.jfif?alt=media&token=d6f1395c-73cc-4a4b-8452-ed4a1e7dce73"
+          alt="CEO Kyryl Hnapovskyi"
+          class="w-[128px] sm:w-[182px] h-auto max-w-none rounded-[100%]"
+          loading="lazy"
+          itemprop="founder"
+        />
+      </figure>
+      <div class="mt-4 lg:mt-0">
+        <p class="md:text-h6 text-gray-50 mb-6" itemprop="foundingDate">
+          In 2020, Kyryl Hnapovskyi laid the first stone for launching
+          IntreSmart. IntreSmart was founded during the Covid-19 pandemic. We
+          knew it would be a long road, but our values were evident early on: at
+          IntreSmart, we make social responsibility, trust, transparency, and a
+          sense of beauty the basis for everything we do.
+        </p>
+        <div class="md:w-52">
+          <app-button
+            type="default"
+            [routerLink]="['/about']"
+            aria-label="Learn more about our company"
+            >More about us</app-button
+          >
+        </div>
       </div>
-      <div class="mt-7">
+    </div>
+  </section>
+
+  <section
+    id="services"
+    class="mt-12 md:mt-32 lg:mt-44 animate-fade-in"
+    aria-label="Our Services"
+  >
+    <div class="flex justify-between items-center">
+      <h3 class="text-h6 md:text-h5 lg:text-h3">Our services</h3>
+      <app-arrow-button
+        (click)="navigateToServices()"
+        style="w-10"
+        aria-label="View all services"
+      ></app-arrow-button>
+    </div>
+    <div
+      class="flex flex-col md:flex-row md:justify-between md:items-end md:content-end md:flex-wrap mt-6 md:mt-11"
+      itemprop="hasOfferCatalog"
+    >
+      <article
+        class="flex flex-col md:w-1/2 p-6"
+        itemscope
+        itemtype="http://schema.org/Service"
+      >
+        <div class="w-full text-center">
+          <svg class="w-20 h-20 md:w-32 md:h-32 lg:w-44 lg:h-44 mx-auto">
+            <use xlink:href="assets/icons/sprite.svg#wave"></use>
+          </svg>
+        </div>
+        <div class="mt-7">
+          <h5
+            class="text-main md:text-h6 lg:text-h5 text-gray-10"
+            itemprop="name"
+          >
+            Tech product engineering
+          </h5>
+          <p class="text-gray-50 mt-4 text-base" itemprop="description">
+            Automotive HMI design
+            <span class="dot" aria-hidden="true"></span> In-car IVI design
+            <span class="dot" aria-hidden="true"></span> UI/UX design
+            <span class="dot" aria-hidden="true"></span> Mobile app design
+            <span class="dot" aria-hidden="true"></span> Motion design
+          </p>
+        </div>
+      </article>
+      <article
+        class="flex flex-col md:w-1/2 p-6"
+        itemscope
+        itemtype="http://schema.org/Service"
+      >
+        <div class="w-full text-center">
+          <svg class="w-20 h-20 md:w-32 md:h-32 lg:w-44 lg:h-44 mx-auto">
+            <use xlink:href="assets/icons/sprite.svg#triangle"></use>
+          </svg>
+        </div>
+        <div class="mt-7">
+          <h5
+            class="text-main md:text-h6 lg:text-h5 text-gray-10"
+            itemprop="name"
+          >
+            All kinds of design services
+          </h5>
+          <p class="text-gray-50 mt-4 text-base" itemprop="description">
+            Automotive HMI design
+            <span class="dot" aria-hidden="true"></span> In-car IVI design
+            <span class="dot" aria-hidden="true"></span> UI/UX design
+            <span class="dot" aria-hidden="true"></span> Mobile app design
+            <span class="dot" aria-hidden="true"></span> Motion design
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <section
+    id="vlaues"
+    class="mt-12 md:mt-32 lg:mt-44 animate-fade-in"
+    aria-label="Our Values"
+  >
+    <h3 class="text-h6 md:text-h5 lg:text-h3">Our values</h3>
+    <div class="flex flex-col md:flex-row mt-6 lg:mt-8 lg:gap-6">
+      <div class="lg:w-1/3 lg:min-w-20 p-6 flex flex-col justify-between">
         <h5 class="text-main md:text-h6 lg:text-h5 text-gray-10">
-          Tech product engineering
+          Be transparent everywhere, always and with everyone
         </h5>
-        <p class="text-gray-50 mt-4 text-base">
-          Automotive HMI design <span class="dot"></span> In-car IVI design
-          <span class="dot"></span> UI/UX design
-          <span class="dot"></span> Mobile app design
-          <span class="dot"></span> Motion design
+        <p class="text-sm text-gray-50 md:text-base mt-4">
+          Be transparent in working with everyone: partners, colleagues,
+          contactors. We strive to build an environment in which comfortable to
+          create and grow.
         </p>
       </div>
-    </div>
-    <div class="flex flex-col md:w-1/2 p-6">
-      <div class="w-full text-center">
-        <svg class="w-20 h-20 md:w-32 md:h-32 lg:w-44 lg:h-44 mx-auto">
-          <use xlink:href="assets/icons/sprite.svg#triangle"></use>
-        </svg>
-      </div>
-      <div class="mt-7">
+      <article class="lg:w-1/3 lg:min-w-20 p-6 flex flex-col justify-between">
         <h5 class="text-main md:text-h6 lg:text-h5 text-gray-10">
-          All kinds of design services
+          Do everything and for everyone with a sense of perfection.
         </h5>
-        <p class="text-gray-50 mt-4 text-base">
-          Automotive HMI design <span class="dot"></span> In-car IVI design
-          <span class="dot"></span> UI/UX design
-          <span class="dot"></span> Mobile app design
-          <span class="dot"></span> Motion design
+        <p class="text-sm text-gray-50 md:text-base mt-4">
+          Have a sense of excellence by creating innovative products. We strive
+          to make technological solutions not only convenient in use, but also
+          aesthetic.
         </p>
-      </div>
+      </article>
+      <article class="lg:w-1/3 lg:min-w-20 p-6 flex flex-col justify-between">
+        <h5 class="text-main md:text-h6 lg:text-h5 text-gray-10">
+          Be socially responsible for everything around
+        </h5>
+        <p class="text-sm text-gray-50 md:text-base mt-4">
+          To be socially responsible for what is around. We believe that thanks
+          to ourresponsibility, we make our city and Ukraine and the whole world
+          better.
+        </p>
+      </article>
     </div>
-  </div>
-</section>
+  </section>
 
-<section id="vlaues" class="mt-12 md:mt-32 lg:mt-44 animate-fade-in">
-  <h3 class="text-h6 md:text-h5 lg:text-h3">Our values</h3>
-  <div class="flex flex-col md:flex-row mt-6 lg:mt-8 lg:gap-6">
-    <div class="lg:w-1/3 lg:min-w-20 p-6 flex flex-col justify-between">
-      <h5 class="text-main md:text-h6 lg:text-h5 text-gray-10">
-        Be transparent everywhere, always and with everyone
-      </h5>
-      <p class="text-sm text-gray-50 md:text-base mt-4">
-        Be transparent in working with everyone: partners, colleagues,
-        contactors. We strive to build an environment in which comfortable to
-        create and grow.
-      </p>
+  <section
+    id="cases"
+    class="mt-12 md:mt-32 lg:mt-44 animate-fade-in"
+    aria-label="Our Cases"
+  >
+    <div class="flex flex-row justify-between items-center">
+      <div class="decorator w-1/4 lg:w-1/5" aria-hidden="true"></div>
+      <h3 class="text-h6 md:text-h5 lg:text-h3 w-1/3 text-center">Our cases</h3>
+      <div class="decorator w-1/4 lg:w-1/5" aria-hidden="true"></div>
     </div>
-    <div class="lg:w-1/3 lg:min-w-20 p-6 flex flex-col justify-between">
-      <h5 class="text-main md:text-h6 lg:text-h5 text-gray-10">
-        Do everything and for everyone with a sense of perfection.
-      </h5>
-      <p class="text-sm text-gray-50 md:text-base mt-4">
-        Have a sense of excellence by creating innovative products. We strive to
-        make technological solutions not only convenient in use, but also
-        aesthetic.
-      </p>
-    </div>
-    <div class="lg:w-1/3 lg:min-w-20 p-6 flex flex-col justify-between">
-      <h5 class="text-main md:text-h6 lg:text-h5 text-gray-10">
-        Be socially responsible for everything around
-      </h5>
-      <p class="text-sm text-gray-50 md:text-base mt-4">
-        To be socially responsible for what is around. We believe that thanks to
-        ourresponsibility, we make our city and Ukraine and the whole world
-        better.
-      </p>
-    </div>
-  </div>
-</section>
+    @defer (on viewport) {
+    <app-cases-widget></app-cases-widget>
+    } @placeholder (minimum 2s) {
+    <app-loader></app-loader>
+    }
+  </section>
 
-<section id="cases" class="mt-12 md:mt-32 lg:mt-44 animate-fade-in">
-  <div class="flex flex-row justify-between items-center">
-    <div class="decorator w-1/4 lg:w-1/5"></div>
-    <h3 class="text-h6 md:text-h5 lg:text-h3 w-1/3 text-center">Our cases</h3>
-    <div class="decorator w-1/4 lg:w-1/5"></div>
-  </div>
-  @defer (on viewport) {
-  <app-cases-widget></app-cases-widget>
-  } @placeholder (minimum 2s) {
-  <app-loader></app-loader>
-  }
-</section>
+  <section
+    id="work-process"
+    class="mt-12 md:mt-32 lg:mt-44 animate-fade-in"
+    aria-label="Our Work Process"
+  >
+    <h3 class="text-h6 md:text-h5 lg:text-h3">Work Process</h3>
+    <div class="flex flex-col mt-7 md:mt-12 lg:mt-20">
+      <div class="flex flex-row group">
+        <div class="flex flex-col items-center">
+          <span
+            class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
+            >01</span
+          >
+          <div
+            class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
+          ></div>
+        </div>
+        <div
+          class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lg:ml-6"
+        >
+          <h4
+            class="text-main md:text-h6 lg:text-h4 text-gray-50 group-hover:text-gray-0 transition-all duration-450"
+          >
+            Research & Dicsovery
+          </h4>
+          <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
+            When we’ve received requirements from your side, we're working with
+            your ideas. Our targer is to take product ownersheep on ourside.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-row group">
+        <div class="flex flex-col items-center">
+          <span
+            class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
+            >02</span
+          >
+          <div
+            class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
+          ></div>
+        </div>
+        <div
+          class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lg:ml-6"
+        >
+          <h4
+            class="text-main md:text-h6 lg:text-h4 text-[45px] text-gray-50 group-hover:text-gray-0 transition-all duration-450"
+          >
+            Conceptualizing
+          </h4>
+          <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
+            We understand that every business is unique, and so are its needs.
+            The conceptualizing stage is where your needs and requirements are
+            articulated. Then our professional team begins the research process,
+            deep solution analysis.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-row group">
+        <div class="flex flex-col items-center">
+          <span
+            class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
+            >03</span
+          >
+          <div
+            class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
+          ></div>
+        </div>
+        <div
+          class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lg:ml-6"
+        >
+          <h4
+            class="text-main md:text-h6 lg:text-h4 text-[45px] text-gray-50 group-hover:text-gray-0 transition-all duration-450"
+          >
+            Strategy & Plan
+          </h4>
+          <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
+            We begin the all processes with well-thought-out strategic planning.
+            Our specialist will define your specific business objectives,
+            organize the content so that to meet the needs of your potential
+            clients, visitors, or buyers.
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-row group">
+        <div class="flex flex-col items-center">
+          <span
+            class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
+            >04</span
+          >
+          <div
+            class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
+          ></div>
+        </div>
+        <div
+          class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lgml-6"
+        >
+          <h4
+            class="text-main md:text-h6 lg:text-h4 text-[45px] text-gray-50 group-hover:text-gray-0 transition-all duration-450"
+          >
+            Managing development & Delivery
+          </h4>
+          <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
+            This is one more crucial stage. Once we approved and conceptualized
+            and idea, made research and built a plan we goona start the
+            development part. We use the latest practice, frameworks, libraries
+            etc. in our work. We take the development management part on our
+            side. Our goal is to deliver a high-quality technological solution
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-row group">
+        <div class="flex flex-col items-center">
+          <span
+            class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
+            >05</span
+          >
+          <div
+            class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
+          ></div>
+        </div>
+        <div
+          class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lgml-6"
+        >
+          <h4
+            class="text-main md:text-h6 lg:text-h4 text-[45px] text-gray-50 group-hover:text-gray-0 transition-all duration-450"
+          >
+            Deploy & Support
+          </h4>
+          <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
+            We know, that to build great spftware it's not enough. It has to be
+            promoted as well. We offer you our proffesional digital marketing
+            services. We know how to attract user and to monetize your product.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
 
-<section id="work-process" class="mt-12 md:mt-32 lg:mt-44 animate-fade-in">
-  <h3 class="text-h6 md:text-h5 lg:text-h3">Work Process</h3>
-  <div class="flex flex-col mt-7 md:mt-12 lg:mt-20">
-    <div class="flex flex-row group">
-      <div class="flex flex-col items-center">
-        <span
-          class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
-          >01</span
-        >
-        <div
-          class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
-        ></div>
-      </div>
-      <div
-        class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lg:ml-6"
-      >
-        <h4
-          class="text-main md:text-h6 lg:text-h4 text-gray-50 group-hover:text-gray-0 transition-all duration-450"
-        >
-          Research & Dicsovery
-        </h4>
-        <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
-          When we’ve received requirements from your side, we're working with
-          your ideas. Our targer is to take product ownersheep on ourside.
-        </p>
-      </div>
-    </div>
-    <div class="flex flex-row group">
-      <div class="flex flex-col items-center">
-        <span
-          class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
-          >02</span
-        >
-        <div
-          class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
-        ></div>
-      </div>
-      <div
-        class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lg:ml-6"
-      >
-        <h4
-          class="text-main md:text-h6 lg:text-h4 text-[45px] text-gray-50 group-hover:text-gray-0 transition-all duration-450"
-        >
-          Conceptualizing
-        </h4>
-        <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
-          We understand that every business is unique, and so are its needs. The
-          conceptualizing stage is where your needs and requirements are
-          articulated. Then our professional team begins the research process,
-          deep solution analysis.
-        </p>
-      </div>
-    </div>
-    <div class="flex flex-row group">
-      <div class="flex flex-col items-center">
-        <span
-          class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
-          >03</span
-        >
-        <div
-          class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
-        ></div>
-      </div>
-      <div
-        class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lg:ml-6"
-      >
-        <h4
-          class="text-main md:text-h6 lg:text-h4 text-[45px] text-gray-50 group-hover:text-gray-0 transition-all duration-450"
-        >
-          Strategy & Plan
-        </h4>
-        <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
-          We begin the all processes with well-thought-out strategic planning.
-          Our specialist will define your specific business objectives, organize
-          the content so that to meet the needs of your potential clients,
-          visitors, or buyers.
-        </p>
-      </div>
-    </div>
-    <div class="flex flex-row group">
-      <div class="flex flex-col items-center">
-        <span
-          class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
-          >04</span
-        >
-        <div
-          class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
-        ></div>
-      </div>
-      <div class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lgml-6">
-        <h4
-          class="text-main md:text-h6 lg:text-h4 text-[45px] text-gray-50 group-hover:text-gray-0 transition-all duration-450"
-        >
-          Managing development & Delivery
-        </h4>
-        <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
-          This is one more crucial stage. Once we approved and conceptualized
-          and idea, made research and built a plan we goona start the
-          development part. We use the latest practice, frameworks, libraries
-          etc. in our work. We take the development management part on our side.
-          Our goal is to deliver a high-quality technological solution
-        </p>
-      </div>
-    </div>
-    <div class="flex flex-row group">
-      <div class="flex flex-col items-center">
-        <span
-          class="py-2 px-4 rounded-[100px] md:w-[68px] md:h-[50px] md:text-[30px] md:leading-[117%] md:px-[15px] md:py-[7px] md:rounded-[94px] text-gray-5 text-center bg-gradient-custom transition-all duration-450 group-hover:bg-primary-100 relative z-10"
-          >05</span
-        >
-        <div
-          class="h-full w-[1px] bg-gray-75 relative top-0 bottom-0 left-0 transform -translate-x-1/2 group-hover:bg-primary-100 transition-all duration-450"
-        ></div>
-      </div>
-      <div class="px-6 pb-6 pt-2 m-0 lg:px-6 md:pb-16 lg:pb-28 lg:mr-14 lgml-6">
-        <h4
-          class="text-main md:text-h6 lg:text-h4 text-[45px] text-gray-50 group-hover:text-gray-0 transition-all duration-450"
-        >
-          Deploy & Support
-        </h4>
-        <p class="text-base md:text-main lg:text-xl text-gray-50 mt-4">
-          We know, that to build great spftware it's not enough. It has to be
-          promoted as well. We offer you our proffesional digital marketing
-          services. We know how to attract user and to monetize your product.
-        </p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<app-learn-more></app-learn-more>
+  <app-learn-more></app-learn-more>
+</main>
