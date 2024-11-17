@@ -1,62 +1,87 @@
 @defer { @if (post) {
-<div class="flex">
-  <app-breadcrumbs
-    [breadcrumbs]="[
-      { title: 'Blog', link: '/blog' },
-      { title: post.title, link: '' }
-    ]"
-  ></app-breadcrumbs>
-</div>
-<header class="flex flex-col items mt-6 md:mt-8 lg:mt-10">
-  <h3 class="text-h5 md:text-h4 lg:text-h3">{{ post.title }}</h3>
-  <div *ngIf="isLoggedIn$ | async" class="flex justify-stat items-center my-8">
-    <div class="flex gap-4 w-44">
-      <app-button
-        [routerLink]="['/blog', post.slug, 'edit']"
-        variant="secondary"
-      >
-        Edit Post
-      </app-button>
-    </div>
-  </div>
+<main>
+  <nav class="flex" aria-label="Breadcrumb">
+    <app-breadcrumbs
+      [breadcrumbs]="[
+        { title: 'Blog', link: '/blog' },
+        { title: post.title, link: '' }
+      ]"
+    ></app-breadcrumbs>
+  </nav>
 
-  @if (post.content.mainImgUrl) {
-  <div class="mt-6 md:mt-12 lg:mt-20">
-    <img
-      [src]="post.content.mainImgUrl"
-      [alt]="post.title"
-      class="w-full h-full object-cover rounded-3xl object-left"
-    />
-  </div>
-  }
-</header>
+  <header class="flex flex-col items mt-6 md:mt-8 lg:mt-10">
+    <h1 class="text-h5 md:text-h4 lg:text-h3">{{ post.title }}</h1>
 
-<div class="flex flex-col mt-6 md:mt-8 lg:mt-12">
-  <p class="text-main text-gray-50">WRITTEN BY</p>
-  <h5 class="text-base">{{ post.author }}</h5>
-</div>
-
-<article class="mt-4 md:mt-6 lg:mt-8">
-  <ng-container *ngFor="let article of post.content.article">
-    <!-- Section header if exists -->
     <div
-      *ngIf="article.header"
-      class="flex w-full mt-6 md:mt-10 lg:mt-14 pb-0 md:pb-1 lg:pb-2"
+      *ngIf="isLoggedIn$ | async"
+      class="flex justify-stat items-center my-8"
     >
-      <h4 class="text-h6 md:text-h5 lg:text-h4">{{ article.header }}</h4>
+      <div class="flex gap-4 w-44">
+        <app-button
+          [routerLink]="['/blog', post.slug, 'edit']"
+          variant="secondary"
+          aria-label="Edit this post"
+        >
+          Edit Post
+        </app-button>
+      </div>
     </div>
 
-    <!-- Article text -->
-    <ng-container *ngIf="article.text">
-      <p class="text-base md:text-main lg:text-h6 mt-4 md:mt-6 lg:mt-8">
-        {{ article.text }}
-      </p>
+    @if (post.content.mainImgUrl) {
+    <figure class="mt-6 md:mt-12 lg:mt-20">
+      <img
+        [src]="post.content.mainImgUrl"
+        [alt]="post.title"
+        class="w-full h-full object-cover rounded-3xl object-left"
+        loading="eager"
+        [width]="1200"
+        [height]="630"
+      />
+    </figure>
+    }
+  </header>
+
+  <div class="flex flex-col mt-6 md:mt-8 lg:mt-12">
+    <address class="not-italic">
+      <p class="text-main text-gray-50" aria-label="Author">WRITTEN BY</p>
+      <p class="text-base font-bold">{{ post.author }}</p>
+    </address>
+  </div>
+
+  <article
+    class="mt-4 md:mt-6 lg:mt-8"
+    itemscope
+    itemtype="http://schema.org/BlogPosting"
+  >
+    <meta itemprop="headline" [content]="post.title" />
+    <meta itemprop="author" [content]="post.author" />
+    <meta itemprop="image" [content]="post.content.mainImgUrl" />
+    <meta itemprop="datePublished" [content]="post.publishDate" />
+
+    <ng-container *ngFor="let article of post.content.article">
+      <section *ngIf="article.header || article.text">
+        <h2
+          *ngIf="article.header"
+          class="text-h6 md:text-h5 lg:text-h4 mt-6 md:mt-10 lg:mt-14 pb-0 md:pb-1 lg:pb-2"
+        >
+          {{ article.header }}
+        </h2>
+
+        <p
+          *ngIf="article.text"
+          class="text-base md:text-main lg:text-h6 mt-4 md:mt-6 lg:mt-8"
+          itemprop="articleBody"
+        >
+          {{ article.text }}
+        </p>
+      </section>
     </ng-container>
-  </ng-container>
-</article>
+  </article>
+</main>
 } } @loading (minimum 1s) {
 <app-loader></app-loader>
 }
-<div class="mb-12 md:mb-32 lg:mb-44">
+
+<aside class="mb-12 md:mb-32 lg:mb-44">
   <app-want-to-work></app-want-to-work>
-</div>
+</aside>
