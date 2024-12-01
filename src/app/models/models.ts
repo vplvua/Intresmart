@@ -135,3 +135,18 @@ export interface Vacancy {
   archive?: boolean;
   slug: string;
 }
+
+export interface ContactInfo {
+  phone: string;
+  email: string;
+  socialLinks: {
+    linkedin?: string;
+    instagram?: string;
+    facebook?: string;
+    youtube?: string;
+  };
+  documents: {
+    termsAndConditions?: string;
+    privacyPolicy?: string;
+  };
+}

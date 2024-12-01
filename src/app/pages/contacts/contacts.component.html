@@ -13,14 +13,141 @@
       </p>
       <div class="mt-8">
         <div class="flex flex-col gap-2 lg:gap-4">
+          @if (isAdmin) {
+          <form [formGroup]="contactInfoForm" class="mb-6">
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-1">Email</label>
+              <input
+                type="email"
+                formControlName="email"
+                class="w-full p-2 border rounded"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-1">Phone</label>
+              <input
+                type="tel"
+                formControlName="phone"
+                class="w-full p-2 border rounded"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-1">LinkedIn URL</label>
+              <input
+                type="url"
+                formControlName="linkedin"
+                class="w-full p-2 border rounded"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-1"
+                >Instagram URL</label
+              >
+              <input
+                type="url"
+                formControlName="instagram"
+                class="w-full p-2 border rounded"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-1">Facebook URL</label>
+              <input
+                type="url"
+                formControlName="facebook"
+                class="w-full p-2 border rounded"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-1">YouTube URL</label>
+              <input
+                type="url"
+                formControlName="youtube"
+                class="w-full p-2 border rounded"
+              />
+            </div>
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-1"
+                >Terms & Conditions PDF</label
+              >
+              <div class="flex items-center gap-2">
+                <input
+                  type="file"
+                  accept=".pdf"
+                  (change)="onTermsFileSelected($event)"
+                  class="w-full p-2"
+                />
+                @if (contactInfo?.documents?.termsAndConditions) {
+                <button
+                  type="button"
+                  class="bg-red-500 text-white px-2 py-1 rounded"
+                  (click)="deleteDocument('termsAndConditions')"
+                >
+                  Delete
+                </button>
+                }
+              </div>
+              @if (contactInfo?.documents?.termsAndConditions) {
+              <a
+                [href]="contactInfo?.documents?.termsAndConditions"
+                target="_blank"
+                class="text-blue-500 hover:underline text-sm"
+              >
+                View current file
+              </a>
+              }
+            </div>
+
+            <div class="mb-4">
+              <label class="block text-sm font-medium mb-1"
+                >Privacy Policy PDF</label
+              >
+              <div class="flex items-center gap-2">
+                <input
+                  type="file"
+                  accept=".pdf"
+                  (change)="onPrivacyFileSelected($event)"
+                  class="w-full p-2"
+                />
+                @if (contactInfo?.documents?.privacyPolicy) {
+                <button
+                  type="button"
+                  class="bg-red-500 text-white px-2 py-1 rounded"
+                  (click)="deleteDocument('privacyPolicy')"
+                >
+                  Delete
+                </button>
+                }
+              </div>
+              @if (contactInfo?.documents?.privacyPolicy) {
+              <a
+                [href]="contactInfo?.documents?.privacyPolicy"
+                target="_blank"
+                class="text-blue-500 hover:underline text-sm"
+              >
+                View current file
+              </a>
+              }
+            </div>
+            <button
+              class="bg-primary-100 text-white px-4 py-2 rounded"
+              (click)="saveContactInfo()"
+            >
+              Save Changes
+            </button>
+          </form>
+          }
           <a
-            href="mailto:info@intresmartsolution.com"
+            [href]="'mailto:' + contactInfo?.email"
             class="text-gray-50 text-main lg:text-h6 hover:text-primary-100"
-            >info&#64;intresmartsolution.com</a
           >
-          <a href="tel:+380679470846" class="text-main lg:text-h6 text-gray-50"
-            >+38 (067) 947 08 46</a
+            {{ contactInfo?.email }}
+          </a>
+          <a
+            [href]="'tel:' + contactInfo?.phone"
+            class="text-main lg:text-h6 text-gray-50"
           >
+            {{ contactInfo?.phone }}
+          </a>
         </div>
       </div>
     </div>

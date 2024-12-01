@@ -100,28 +100,33 @@
 
         <!-- Contact info -->
         <div class="flex flex-col gap-8">
+          @if (contactInfo.email) {
           <div class="flex flex-col gap-2">
-            <span class="text-main font-bold flex items-center"
-              >Mail
-              <app-icon name="mail" color="secondary" class="pl-2"></app-icon
-            ></span>
+            <span class="text-main font-bold flex items-center">
+              Mail
+              <app-icon name="mail" color="secondary" class="pl-2"></app-icon>
+            </span>
             <a
-              href="mailto:info@intresmartsolution.com"
+              [href]="'mailto:' + contactInfo.email"
               class="text-gray-0 text-main hover:text-primary-100"
-              >info&#64;intresmartsolution.com</a
             >
+              {{ contactInfo.email }}
+            </a>
           </div>
+          } @if (contactInfo.phone) {
           <div class="flex flex-col gap-2">
-            <span class="text-main font-bold flex items-center"
-              >Call us
+            <span class="text-main font-bold flex items-center">
+              Call us
               <app-icon name="phone" color="secondary" class="pl-2"></app-icon>
             </span>
             <a
-              href="tel:+380679470846"
+              [href]="'tel:' + contactInfo.phone"
               class="text-gray-0 text-main hover:text-primary-100"
-              >+38 (067) 947 08 46</a
             >
+              {{ contactInfo.phone }}
+            </a>
           </div>
+          }
         </div>
       </div>
     </div>
@@ -136,14 +141,22 @@
         <span class="text-gray-50 text-sm order-3 sm:order-none"
           >© {{ currentYear }} Intresmart</span
         >
+
+        <!-- Social links -->
         <div
-          class="flex flex-row justify-center items-center sm:order-none mb-0 lg:mb-6 sm:mb-0"
+          class="flex flex-row justify-center items-center gap-4 sm:order-none mb-0 lg:mb-6 sm:mb-0"
         >
-          <!-- <a href="#" class="text-gray-50"
-            ><app-icon name="instagram" size="medium"></app-icon
-          ></a> -->
+          @if (hasLink('instagram')) {
           <a
-            href="https://www.linkedin.com/company/intresmart/"
+            [href]="contactInfo.socialLinks.instagram"
+            target="_blank"
+            class="text-gray-50"
+          >
+            <app-icon name="instagram" size="medium"></app-icon>
+          </a>
+          } @if (hasLink('linkedin')) {
+          <a
+            [href]="contactInfo.socialLinks.linkedin"
             target="_blank"
             class="text-gray-50"
           >
@@ -151,20 +164,44 @@
               <app-icon name="linkedin" size="medium"></app-icon>
             </div>
           </a>
-          <!-- <a href="#" class="text-gray-50"
-            ><app-icon name="facebook" size="medium"></app-icon
-          ></a>
-          <a href="#" class="text-gray-50"
-            ><app-icon name="youtube" size="medium"></app-icon>
-          </a> -->
+          } @if (hasLink('facebook')) {
+          <a
+            [href]="contactInfo.socialLinks.facebook"
+            target="_blank"
+            class="text-gray-50"
+          >
+            <app-icon name="facebook" size="medium"></app-icon>
+          </a>
+          } @if (hasLink('youtube')) {
+          <a
+            [href]="contactInfo.socialLinks.youtube"
+            target="_blank"
+            class="text-gray-50"
+          >
+            <app-icon name="youtube" size="medium"></app-icon>
+          </a>
+          }
         </div>
+
+        <!-- Legal links -->
         <div class="flex flex-col lg:flex-row gap-4 order-2 sm:order-none">
-          <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
-            >Terms and Conditions</a
+          @if (contactInfo.documents.termsAndConditions) {
+          <a
+            [href]="contactInfo.documents.termsAndConditions"
+            target="_blank"
+            class="text-gray-50 text-sm hover:text-primary-100"
           >
-          <a href="#" class="text-gray-50 text-sm hover:text-primary-100"
-            >Privacy Policy</a
+            Terms and Conditions
+          </a>
+          } @if (contactInfo.documents.privacyPolicy) {
+          <a
+            [href]="contactInfo.documents.privacyPolicy"
+            target="_blank"
+            class="text-gray-50 text-sm hover:text-primary-100"
           >
+            Privacy Policy
+          </a>
+          }
         </div>
       </div>
     </div>
