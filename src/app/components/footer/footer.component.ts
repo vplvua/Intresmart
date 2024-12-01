@@ -11,6 +11,8 @@ import { CommonModule } from '@angular/common';
 import { IconComponent } from '../../shared/icon/icon.component';
 import { ArrowButtonComponent } from '../../shared/arrow-button/arrow-button.component';
 import { NewsletterService } from '../../services/newsletter.service';
+import { ContactInfoService } from '../../services/contact-info.service';
+import { ContactInfo } from '../../models/models';
 
 @Component({
   selector: 'app-footer',
@@ -27,6 +29,7 @@ import { NewsletterService } from '../../services/newsletter.service';
 export class FooterComponent {
   private router = inject(Router);
   private newsletterService = inject(NewsletterService);
+  private contactInfoService = inject(ContactInfoService);
   private fb = inject(FormBuilder);
 
   currentYear = new Date().getFullYear();
@@ -34,10 +37,41 @@ export class FooterComponent {
   isSubmitting = false;
   submitError: string | null = null;
   submitSuccess = false;
+  contactInfo: ContactInfo = {
+    email: '',
+    phone: '',
+    socialLinks: {
+      facebook: '',
+      instagram: '',
+      linkedin: '',
+      youtube: '',
+    },
+    documents: {
+      privacyPolicy: '',
+      termsAndConditions: '',
+    },
+  };
 
   constructor() {
     this.subscribeForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
+    });
+  }
+
+  ngOnInit() {
+    this.loadContactInfo();
+  }
+
+  private loadContactInfo() {
+    this.contactInfoService.getContactInfo().subscribe({
+      next: (info) => {
+        if (info) {
+          this.contactInfo = info;
+        }
+      },
+      error: (error) => {
+        console.error('Error loading contact info:', error);
+      },
     });
   }
 
@@ -54,7 +88,7 @@ export class FooterComponent {
       const email = this.subscribeForm.get('email')?.value;
 
       this.newsletterService.subscribeToNewsletter(email).subscribe({
-        next: (response) => {
+        next: () => {
           this.isSubmitting = false;
           this.submitSuccess = true;
           this.subscribeForm.reset();
@@ -78,5 +112,9 @@ export class FooterComponent {
         }, 3000);
       }
     }
+  }
+
+  hasLink(network: keyof ContactInfo['socialLinks']): boolean {
+    return !!this.contactInfo?.socialLinks?.[network];
   }
 }
