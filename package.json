@@ -1,0 +1,8 @@
+{
+  "name": "shutdown",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "serve public",
+    "build": "echo \"No build required\""
+  }
+}
